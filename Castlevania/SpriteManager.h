@@ -1,21 +1,9 @@
 #pragma once
 #include "Game.h"
+#include "Constants.h"
 #include "Sprite.h"
 using namespace std;
 
-
-constexpr auto SPRITE_MARIO_FACE_LEFT_1 = 10001;
-constexpr auto SPRITE_MARIO_FACE_LEFT_2 = 10002;
-constexpr auto SPRITE_MARIO_FACE_LEFT_3 = 10003;
-
-constexpr auto SPRITE_MARIO_FACE_RIGHT_1 = 10011;
-constexpr auto SPRITE_MARIO_FACE_RIGHT_2 = 10012;
-constexpr auto SPRITE_MARIO_FACE_RIGHT_3 = 10013;
-
-constexpr auto SPRITE_BRICK = 20001;
-constexpr auto SPRITE_GOOMBA_GO_LEFT = 30001;
-constexpr auto SPRITE_GOOMBA_GO_RIGHT= 30011;
-constexpr auto SPRITE_GOOMBA_DIE= 30021;
 
 class SpriteManager
 {

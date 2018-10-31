@@ -162,6 +162,8 @@ void loadResources() {
 		D3DCOLOR_XRGB(255, 255, 255));
 	textureManager->add(ID_TEX_ENEMY, L"textures\\enemies.png",
 		D3DCOLOR_XRGB(3, 26, 110));
+	textureManager->add(ID_TEX_SIMON, SIMON_SPRITE,
+		D3DCOLOR_XRGB(255,0,255));
 
 
 

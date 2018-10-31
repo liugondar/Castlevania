@@ -4,7 +4,6 @@
 #include <iostream>
 #include <algorithm>
 
-#include "eDirection.h"
 #include "Box.h"
 
 void sweptAABB(
