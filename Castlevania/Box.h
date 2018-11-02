@@ -15,5 +15,5 @@ struct Box
 	float dy;
 	float dt;
 	Box();
-	Box(float x,float y,float w,float h);
+	Box(float left,float top,float right,float bottom);
 };

@@ -3,40 +3,27 @@
 Game* game;
 Mario* mario;
 Goomba* goomba;
+Simon* simon;
 SampleKeyHander * keyHandler;
 
-/// Create keyboard handler for main program
+ //Create keyboard handler for main program
 
 void SampleKeyHander::OnKeyDown(int KeyCode)
 {
 	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-	switch (KeyCode)
-	{
-	case DIK_SPACE:
-		mario->setState(MARIO_STATE_JUMP);
-		break;
-	}
+	simon->handleOnKeyDown(KeyCode);
 }
 
 void SampleKeyHander::OnKeyUp(int KeyCode)
 {
 	DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
 
+	simon->handleOnKeyRelease(KeyCode);
 }
 
 void SampleKeyHander::KeyState(BYTE *states)
 {
-	if (game->isKeyDown(DIK_RIGHT)) {
-
-		mario->setState(MARIO_STATE_WALKING_RIGHT);
-	}
-	else if (game->isKeyDown(DIK_LEFT)) {
-		mario->setState(MARIO_STATE_WALKING_LEFT);
-	}
-	else {
-mario->setState(MARIO_STATE_IDLE);
-
-	}
+	simon->handleOnKeyPress(states);
 }
 
 /// Create a window then display and running until exit message send
@@ -44,7 +31,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
 	HWND hWnd = createGameWindow(hInstance, nCmdShow,
-		320, 240);
+		SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	game = Game::getInstance();
 	game->init(hWnd);
@@ -53,7 +40,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	game->initKeyboard(keyHandler);
 
 	loadResources();
-	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, 
+	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
 		SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 
 	run();
@@ -142,7 +129,7 @@ int run() {
 		if (dt >= tickPerFrame) {
 			frameStart = now;
 			game->processKeyboard();
-			update( dt);
+			update(dt);
 			render();
 		}
 		else Sleep(tickPerFrame - dt);
@@ -152,125 +139,145 @@ int run() {
 
 void loadResources() {
 
+	loadTextures();
+	loadAnimations();
+	loadGameObjects();
+
+}
+
+void loadTextures()
+{
 	TextureManager* textureManager = TextureManager::getInstance();
 
-	textureManager->add(ID_TEX_MARIO, L"textures\\mario.png",
-		D3DCOLOR_XRGB(176, 224, 248));
 	textureManager->add(ID_TEX_MISC, L"textures\\misc.png",
 		D3DCOLOR_XRGB(176, 224, 248));
 	textureManager->add(ID_TEX_BBOX, L"textures\\bbox.png",
 		D3DCOLOR_XRGB(255, 255, 255));
-	textureManager->add(ID_TEX_ENEMY, L"textures\\enemies.png",
-		D3DCOLOR_XRGB(3, 26, 110));
-	textureManager->add(ID_TEX_SIMON, SIMON_SPRITE,
-		D3DCOLOR_XRGB(255,0,255));
-
-
-
-	////textures->Add(ID_ENEMY_TEXTURE, L"textures\\enemies.png", D3DCOLOR_XRGB(156, 219, 239));
-	////textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(156, 219, 239));
+	textureManager->add(ID_TEX_SIMON, TEXTURE_SIMON_PATH,
+		D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_BRICK_2, ENTRANCE_GROUND_BRICK_SCREEN_2);
+	textureManager->add(ID_TEX_BACKGROUND_LV1, TEXTURE_LVL1_BACKGROUND_PATH);
+	textureManager->add(ID_TEX_ENTRANCE_BACKGROUND, TEXTURE_ENTRANCE_BACKGROUND_PATH);
 
 	auto spriteManager = SpriteManager::getInstance();
-	auto animationManager = AnimationManager::getInstance();
+	auto textureSimon = textureManager->get(ID_TEX_SIMON);
+	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_1, 305*2, 9*2, 305*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
+	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_2, 279*2, 9*2, 279*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
+	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_3, 251*2, 9*2, 254*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
+	// spriteManager->add(SPRITE_SIMON_MOVING_LEFT_1, 979, 18, 979+ SIMON_MOVING_WIDTH, 16+ SIMON_MOVING_HEIGHT, textureSimon);
+	// spriteManager->add(SPRITE_SIMON_MOVING_LEFT_2, 1033, 18, 1033+ SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
+	// spriteManager->add(SPRITE_SIMON_MOVING_LEFT_3, 1083, 18, 1083+ SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
 
-	auto textureMario = textureManager->get(ID_TEX_MARIO);
-	spriteManager->add(SPRITE_MARIO_FACE_RIGHT_1, 246, 154, 259, 181, textureMario);
-	spriteManager->add(SPRITE_MARIO_FACE_RIGHT_2, 275, 154, 290, 181, textureMario);
-	spriteManager->add(SPRITE_MARIO_FACE_RIGHT_3, 304, 154, 321, 181, textureMario);
 
-	spriteManager->add(SPRITE_MARIO_FACE_LEFT_1, 186, 154, 199, 181, textureMario);
-	spriteManager->add(SPRITE_MARIO_FACE_LEFT_2, 155, 154, 170, 181, textureMario);
-	spriteManager->add(SPRITE_MARIO_FACE_LEFT_3, 125, 154, 140, 181, textureMario);
+	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_1, 432, 0, 432 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_2, 373, 0, 373 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_3, 311, 0, 311 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
 
-	auto textureEnemies= textureManager->get(ID_TEX_ENEMY);
-	spriteManager->add(SPRITE_GOOMBA_GO_LEFT, 5, 14, 21, 29, textureEnemies);
-	spriteManager->add(SPRITE_GOOMBA_GO_RIGHT, 25, 14, 41, 29, textureEnemies);
-	spriteManager->add(SPRITE_GOOMBA_DIE, 45, 21, 61, 29, textureEnemies);
+	spriteManager->add(SPRITE_SIMON_MOVING_LEFT_1, 491, 0, 491 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_MOVING_LEFT_2, 552, 0, 552 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_MOVING_LEFT_3, 604, 0, 604 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
+
+
+	spriteManager->add(SPRITE_SIMON_SIT_FACE_RIGHT, 194, 16, 194 + SIMON_SITTING_WIDTH, 16 + SIMON_SITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_SIT_FACE_LEFT, 728, 16, 728 + SIMON_SITTING_WIDTH, 16 + SIMON_SITTING_HEIGHT, textureSimon);
+
+	spriteManager->add(SPRITE_SIMON_HITTING_LEFT1, 791, 0, 791 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_LEFT2, 850, 0, 850 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_LEFT3, 898, 0, 898 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT1, 118, 0, 118 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT2, 72, 0, 72 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT3, 14, 0, 10 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+
 
 	auto texMisc = textureManager->get(ID_TEX_MISC);
 	spriteManager->add(SPRITE_BRICK, 408, 225, 424, 241, texMisc);
 
+	auto texBrick2 = textureManager->get(ID_TEX_BRICK_2);
+	spriteManager->add(SPRITE_BRICK_2, 0, 0, BRICK_2_SIZE, BRICK_2_SIZE, texBrick2);
+}
+
+void loadAnimations()
+{
+	auto animationManager = AnimationManager::getInstance();
 	auto animation = new Animation(100);
-	animation->add(SPRITE_MARIO_FACE_LEFT_1);
-	animation->add(SPRITE_MARIO_FACE_LEFT_2);
-	animation->add(SPRITE_MARIO_FACE_LEFT_3);
-
-	animationManager->add(ANIMATION_MARIO_FACE_LEFT,animation);
-
-	animation = new Animation(100);
-	animation->add(SPRITE_MARIO_FACE_RIGHT_1);
-	animation->add(SPRITE_MARIO_FACE_RIGHT_2);
-	animation->add(SPRITE_MARIO_FACE_RIGHT_3);
-	animationManager->add(ANIMATION_MARIO_FACE_RIGHT, animation);
-
-	animation = new Animation(100);
-	animation->add(SPRITE_MARIO_FACE_LEFT_1);
-	animationManager->add(ANIMATION_MARIO_IDLE_LEFT,animation);
-
-	animation = new Animation(100);
-	animation->add(SPRITE_MARIO_FACE_RIGHT_1);
-	animationManager->add(ANIMATION_MARIO_IDLE_RIGHT,animation);
-
-	animation = new Animation(1000);
-	animation->add(SPRITE_GOOMBA_DIE);
-	animationManager->add(ANIMATION_GOOMBA_DEAD, animation);
-
-	animation = new Animation(300);
-	animation->add(SPRITE_GOOMBA_GO_LEFT);
-	animation->add(SPRITE_GOOMBA_GO_RIGHT);
-	animationManager->add(ANIMATION_GOOMBA_WALKING, animation);
-
-	animation = new Animation(100);
-	animation->add(SPRITE_BRICK);
+	animation->add(SPRITE_BRICK_2);
 	animationManager->add(ANIMATION_BRICK_IDLE, animation);
 
-	mario = new Mario();
-	Mario::addAnimation(ANIMATION_MARIO_FACE_LEFT);
-	Mario::addAnimation(ANIMATION_MARIO_FACE_RIGHT);
-	Mario::addAnimation(ANIMATION_MARIO_IDLE_LEFT);
-	Mario::addAnimation(ANIMATION_MARIO_IDLE_RIGHT);
+	/* Simon animations */
+	loadSimonAnimations();
+}
 
-	mario->setPosition(10.f, 100.f);
+void loadSimonAnimations()
+{
+	auto animationManager = AnimationManager::getInstance();
+	auto animation = new Animation(100);
+	animation->add(SPRITE_SIMON_MOVING_RIGHT_1);
+	animation->add(SPRITE_SIMON_MOVING_RIGHT_2);
+	animation->add(SPRITE_SIMON_MOVING_RIGHT_3);
+	animationManager->add(ANIMATION_SIMON_WALKING_RIGHT, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_SIMON_MOVING_LEFT_1);
+	animation->add(SPRITE_SIMON_MOVING_LEFT_2);
+	animation->add(SPRITE_SIMON_MOVING_LEFT_3);
+	animationManager->add(ANIMATION_SIMON_WALKING_LEFT, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_SIMON_HITTING_LEFT1);
+	animation->add(SPRITE_SIMON_HITTING_LEFT2);
+	animation->add(SPRITE_SIMON_HITTING_LEFT3);
+	animationManager->add(ANIMATION_SIMON_HITTING_LEFT, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_SIMON_HITTING_RIGHT1);
+	animation->add(SPRITE_SIMON_HITTING_RIGHT2);
+	animation->add(SPRITE_SIMON_HITTING_RIGHT3);
+	animationManager->add(ANIMATION_SIMON_HITTING_RIGHT, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_SIMON_MOVING_RIGHT_1);
+	animationManager->add(ANIMATION_SIMON_IDLE_FACE_RIGHT, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_SIMON_MOVING_LEFT_1);
+	animationManager->add(ANIMATION_SIMON_IDLE_FACE_LEFT, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_SIMON_SIT_FACE_RIGHT);
+	animationManager->add(ANIMATION_SIMON_SIT_FACE_RIGHT, animation);
+	animation = new Animation(100);
+	animation->add(SPRITE_SIMON_SIT_FACE_LEFT);
+	animationManager->add(ANIMATION_SIMON_SIT_FACE_LEFT, animation);
+}
+
+void loadGameObjects()
+{
+
+	simon = new Simon();
+	Simon::addAnimation(ANIMATION_SIMON_WALKING_RIGHT);
+	Simon::addAnimation(ANIMATION_SIMON_WALKING_LEFT);
+	Simon::addAnimation(ANIMATION_SIMON_IDLE_FACE_LEFT);
+	Simon::addAnimation(ANIMATION_SIMON_IDLE_FACE_RIGHT);
+	Simon::addAnimation(ANIMATION_SIMON_SIT_FACE_LEFT);
+	Simon::addAnimation(ANIMATION_SIMON_SIT_FACE_RIGHT);
+	Simon::addAnimation(ANIMATION_SIMON_HITTING_LEFT);
+	Simon::addAnimation(ANIMATION_SIMON_HITTING_RIGHT);
+
+	simon->setPosition(10.f, 100.f);
+	simon->setState(STATE_SIMON_IDLE);
+
+	GameObjectManger::getInstance()->addSimon(simon);
 
 	Brick::addAnimation(ANIMATION_BRICK_IDLE);
 
-	for (int i = 0; i < 5; i++)
-	{
-		auto *brick = new Brick();
-		brick->setPosition(100 + i * 48.0f, 74);
-		GameObjectManger::getInstance()->addBrick(brick);
-
-		brick = new Brick();
-		brick->setPosition(100 + i * 48.0f, 90);
-		GameObjectManger::getInstance()->addBrick(brick);
-
-		brick = new Brick();
-		brick->setPosition(84 + i * 48.0f, 90);
-		GameObjectManger::getInstance()->addBrick(brick);
-	}
-
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 50; i++)
 	{
 		auto brick = new Brick();
-		brick->setPosition(0 + i * 16.0f, 150);
+		brick->setPosition(0 + i * 16.0f, 384);
 		GameObjectManger::getInstance()->addBrick(brick);
 	}
-		auto brick = new Brick();
-		brick->setPosition(0 + 250.f, 135);
-		GameObjectManger::getInstance()->addBrick(brick);
-	// and Goombas 
-	for (int i = 0; i < 1; i++)
-	{
-		goomba = new Goomba();
-		goomba->addAnimation(ANIMATION_GOOMBA_DEAD);
-		goomba->addAnimation(ANIMATION_GOOMBA_WALKING);
-		goomba->setPosition(10, 135);
-		goomba->setState(GOOMBA_STATE_WALKING);
-		GameObjectManger::getInstance()->addGomba(goomba);
-	}
-
-	GameObjectManger::getInstance()->init(mario);
 }
+
 
 void update(DWORD dt) {
 	GameObjectManger::getInstance()->update(dt);

@@ -3,6 +3,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <unordered_map>
+#include "Constants.h"
 #include"debug.h"
 #include <dinput.h>
 #include <vector>
@@ -36,7 +37,8 @@ private:
 public:
 	void init(HWND hWnd);
 	void draw(float x, float y, LPDIRECT3DTEXTURE9 texture,
-		int left,int right, int top, int bottom,int alpha=255);
+		int left, int top, int right, int bottom, int alpha
+	);
 
 	static Game * getInstance() {
 		if (instance == NULL) instance = new Game();
@@ -48,10 +50,10 @@ public:
 	LPDIRECT3DSURFACE9 getBackBuffer() { return backBuffer; }
 	LPD3DXSPRITE getSpriteHandler() { return this->spriteHandler; }
 
-	// Handle keyboard
-	void processKeyboard();
-	int isKeyDown(int keyCode);
 	void initKeyboard(KeyboardHandler* handler);
+	int isKeyDown(int KeyCode);
+	int isKeyUp(int keyCode);
+	void processKeyboard();
 
 	~Game();
 };

@@ -16,10 +16,10 @@ void Game::init(HWND hWnd)
 	d3dpp.BackBufferCount = 1;
 
 	RECT r;
-	GetClientRect(hWnd,&r);
+	GetClientRect(hWnd, &r);
 
 	d3dpp.BackBufferHeight = r.bottom + 1;
-	d3dpp.BackBufferWidth = r.right+ 1;
+	d3dpp.BackBufferWidth = r.right + 1;
 
 	d3d->CreateDevice(
 		D3DADAPTER_DEFAULT,
@@ -41,20 +41,26 @@ void Game::init(HWND hWnd)
 }
 
 void Game::draw(float x, float y, LPDIRECT3DTEXTURE9 texture,
-int left,int right,int top, int bottom,int alpha)
+	int left, int top, int right, int bottom,
+	int alpha)
 {
-	D3DXVECTOR3 p(x, y,0);
-	RECT r;
-	r.left = left;
-	r.top = top;
-	r.right = right;
-	r.bottom = bottom;
-	spriteHandler->Draw(texture,&r, NULL,&p, 
-		D3DCOLOR_XRGB(alpha,255, 255, 255));
+
+	if (spriteHandler && texture)
+	{
+		D3DXVECTOR3 p(x, y, 0);
+		RECT r;
+		r.left = left;
+		r.top = top;
+		r.right = right;
+		r.bottom = bottom;
+		spriteHandler->Draw(texture, &r, NULL, &p,
+			D3DCOLOR_XRGB(alpha, 255, 255, 255));
+	}
 }
 
 void Game::processKeyboard()
 {
+	if (keyHandler == nullptr) return;
 	HRESULT hr;
 
 	// Collect all key states first
@@ -77,7 +83,7 @@ void Game::processKeyboard()
 			return;
 		}
 	}
-		if(keyHandler != nullptr) keyHandler->KeyState((BYTE *)&keyStates);
+	if (keyHandler != nullptr) keyHandler->KeyState((BYTE *)&keyStates);
 	// Collect all buffered events
 	DWORD dwElements = KEYBOARD_BUFFER_SIZE;
 	hr = didv->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), keyEvents, &dwElements, 0);
@@ -100,6 +106,11 @@ void Game::processKeyboard()
 }
 
 int Game::isKeyDown(int keyCode)
+{
+	return (keyStates[keyCode] & 0x80) > 0;
+}
+
+int Game::isKeyUp(int keyCode)
 {
 	return (keyStates[keyCode] & 0x80) > 0;
 }
@@ -157,7 +168,6 @@ void Game::initKeyboard(KeyboardHandler * handler)
 	}
 
 	this->keyHandler = handler;
-
 }
 
 Game::~Game()

@@ -1,7 +1,9 @@
 #pragma once
 #include "AnimationFrame.h"
 #include "SpriteManager.h"
+#include "Constants.h"
 using namespace std;
+
 class Animation
 {
 	DWORD lastFrameTime;

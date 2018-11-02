@@ -1,7 +1,8 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 texture)
+Sprite::Sprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 texture
+)
 {
 	this->id = id;
 	this->left = left;
@@ -14,9 +15,6 @@ Sprite::Sprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTU
 
 void Sprite::draw(float x, float y)
 {
-	if (texture) {
 	auto game = Game::getInstance();
-	game->draw(x, y, texture, left, right, top, bottom);
-
-	}
+	game->draw(x, y, texture, left, top, right, bottom,255);
 }

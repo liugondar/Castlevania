@@ -1,6 +1,7 @@
 #include "GameObject.h"
 
-unordered_map<int,Animation* > GameObject::animations;
+
+unordered_map<int, Animation* > GameObject::animations;
 
 GameObject::~GameObject()
 {
@@ -13,51 +14,50 @@ void GameObject::RenderBoundingBox()
 	D3DXVECTOR3 p(x, y, 0);
 	RECT rect;
 
-	LPDIRECT3DTEXTURE9 bbox = TextureManager::getInstance()->get(ID_TEX_BBOX);
+	auto texture = TextureManager::getInstance()->get(ID_TEX_BBOX);
+	auto game = Game::getInstance();
 
-
-	auto box=getBoundingBox();
+	auto box = getBoundingBox();
 	rect.left = 0;
 	rect.top = 0;
 	rect.right = (int)box.right - (int)box.left;
 	rect.bottom = (int)box.bottom - (int)box.top;
 
-	Game::getInstance()->draw(x, y, bbox,
-		rect.left, rect.right,rect.top,rect.bottom,32);
+	game->draw(x, y, texture, rect.left, rect.top, rect.right, rect.bottom, 255);
 }
 
 void GameObject::addAnimation(int animationId)
 {
-		auto animation = AnimationManager::getInstance()->get(animationId);
-		animations[animationId] = animation;
+	auto animation = AnimationManager::getInstance()->get(animationId);
+	animations[animationId] = animation;
 }
 
 
 LPCollisionEvent GameObject::sweptAABBEx(LPGameObject coO)
 {
 	Box staticBox, movingBox;
-		float t, normalX, normalY;
-	
-		staticBox = coO->getBoundingBox();
-		float svx, svy;
-		coO->getSpeed(svx, svy);
-		float sdx = svx * dt;
-		float sdy = svy * dt;
-	
-		float dx = this->dx - sdx;
-		float dy = this->dy - sdy;
-	
-		movingBox = getBoundingBox();
+	float t, normalX, normalY;
 
-		sweptAABB(movingBox,staticBox,
-			dx, dy,
-			t, normalX, normalY
-		);
-		if (normalX != 0) DebugOut(L"collision");
-	
-		auto collisonEvent = new CollisionEvent(t, normalX, normalY, coO);
-	
-		return collisonEvent;
+	staticBox = coO->getBoundingBox();
+	float svx, svy;
+	coO->getSpeed(svx, svy);
+	float sdx = svx * dt;
+	float sdy = svy * dt;
+
+	float dx = this->dx - sdx;
+	float dy = this->dy - sdy;
+
+	movingBox = getBoundingBox();
+
+	sweptAABB(movingBox, staticBox,
+		dx, dy,
+		t, normalX, normalY
+	);
+	if (normalX != 0) DebugOut(L"collision");
+
+	auto collisonEvent = new CollisionEvent(t, normalX, normalY, coO);
+
+	return collisonEvent;
 
 }
 
@@ -85,7 +85,7 @@ void GameObject::calcPotentialCollisions
 
 void GameObject::filterCollision
 (vector<LPCollisionEvent>& coEvents,
-	vector<LPCollisionEvent>& coEventsResult, 
+	vector<LPCollisionEvent>& coEventsResult,
 	float & min_tx, float & min_ty, float & nx, float & ny)
 {
 	min_tx = 1.0f;

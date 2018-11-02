@@ -25,9 +25,10 @@ protected:
 	float vy;
 	DWORD dt;
 
-	int faceSide;
+	FaceSide faceSide;
 
 	int currentState;
+	int previousState;
 	static unordered_map<int, Animation*> animations;
 
 	LPDIRECT3DTEXTURE9 texture;
@@ -36,16 +37,21 @@ public:
 	GameObject() {
 		x = y = 0;
 		vx = vy = 0;
-		faceSide = FACE_TO_RIGHT; // right side
+		faceSide = FaceSide::right; // right side
 	}
 	~GameObject();
 
 	void setPosition(float x, float y) { this->x = x; this->y = y; }
-	void setState(int state) { this->currentState = state; }
+	void setState(int state) { this->previousState = this->currentState; this->currentState = state; }
 	void setSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 
+	int getPreviousState() { return previousState; }
 	int getState() { return currentState; }
 	void getSpeed(float &vx, float &vy) { vx = this->vx; vy = this->vy; }
+	void getPosition(float &x, float &y) {
+		x = this->x;
+		y = this->y;
+	}
 
 	void RenderBoundingBox();
 
@@ -63,7 +69,7 @@ public:
 
 	virtual void update(DWORD dt, vector<GameObject*> *coObjects = NULL);
 
-	virtual void render()=0;
+	virtual void render() = 0;
 	virtual Box getBoundingBox() = 0;
 };
 
@@ -72,7 +78,9 @@ struct CollisionEvent
 	GameObject* obj;
 	float t, nx, ny;
 	CollisionEvent(float t, float nx, float ny, LPGameObject obj = NULL)
-	{ this->t = t; this->nx = nx; this->ny = ny; this->obj = obj; }
+	{
+		this->t = t; this->nx = nx; this->ny = ny; this->obj = obj;
+	}
 
 	static bool compare(const LPCollisionEvent &a, LPCollisionEvent &b)
 	{

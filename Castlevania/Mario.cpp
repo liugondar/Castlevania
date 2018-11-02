@@ -55,12 +55,10 @@ void Mario::updateVelocity() {
 	{
 	case MARIO_STATE_WALKING_RIGHT:
 		vx = MARIO_WALKING_SPEED;
-		faceSide = FACE_TO_RIGHT;
 		break;
 
 	case MARIO_STATE_WALKING_LEFT:
 		vx = -MARIO_WALKING_SPEED;
-		faceSide = FACE_TO_LEFT;
 		break;
 
 	case MARIO_STATE_JUMP:

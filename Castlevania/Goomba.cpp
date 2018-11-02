@@ -16,12 +16,10 @@ void Goomba::checkBoundingScreen()
 
 	// simple screen edge collision!!!
 	if (vx > 0 && x > 290) {
-		faceSide = FACE_TO_LEFT;
 		vx = -vx;
 		x = 290;
 	}
 	if (vx < 0 && x < SCREEN_LEFT) {
-		faceSide = FACE_TO_RIGHT;
 		x = SCREEN_LEFT; vx = -vx;
 	}
 }

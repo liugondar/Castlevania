@@ -3,23 +3,28 @@
 #include "Mario.h"
 #include "Brick.h"
 #include "Goomba.h"
+#include "Simon.h"
 using namespace std;
 
 class GameObjectManger
 {
 private:
 	static GameObjectManger* instance;
-	Mario* mario;
-	vector<GameObject*> bricks;
+	Simon* simon;
+	vector<GameObject *> bricks;
 	vector<Goomba*> goombas;
+	vector <GameObject*> gameObjects;
 public:
 	static GameObjectManger* getInstance() {
 		if (instance == nullptr) instance = new GameObjectManger();
 		return instance;
 	}
-	void init(Mario* mario);
 	void render();
 	void update(DWORD dt);
+
+	void add(GameObject* gameObject) {
+		gameObjects.push_back(gameObject);
+	}
 	
 	void addBrick(Brick* brick) {
 		bricks.push_back(brick);
@@ -29,7 +34,10 @@ public:
 		goombas.push_back(goomba);
 	}
 
-	Mario* getMario() { return mario; }
+	void addSimon(Simon * simon) {
+		this->simon = simon;
+	}
+
 	vector<GameObject*> getBricks() { return bricks; }
 };
 
