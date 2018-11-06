@@ -17,6 +17,7 @@ enum FaceSide {
 #define SIMON_HITTING_HEIGHT 60
 #define SIMON_SITTING_WIDTH 40
 #define SIMON_SITTING_HEIGHT 44
+constexpr auto SIMON_HITTING_TIME = 150;
 
 // trong luc luc nhay
 #define SIMON_GRAVITY 0.002f;

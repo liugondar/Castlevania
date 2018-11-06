@@ -16,6 +16,7 @@ public:
 		return animations[id];
 	}
 
+
 	static AnimationManager* getInstance();
 };
 

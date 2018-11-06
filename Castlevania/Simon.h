@@ -6,6 +6,7 @@
 class Simon :
 	public GameObject
 {
+	bool isHitting;
 public:
 	Simon();
 	~Simon();

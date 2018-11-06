@@ -30,6 +30,8 @@ protected:
 	int currentState;
 	int previousState;
 	static unordered_map<int, Animation*> animations;
+	int previousAmiId;
+	bool previousAnimIsOneTimeAnim;
 
 	LPDIRECT3DTEXTURE9 texture;
 
@@ -38,6 +40,8 @@ public:
 		x = y = 0;
 		vx = vy = 0;
 		faceSide = FaceSide::right; // right side
+		previousAmiId = -1;
+		previousAnimIsOneTimeAnim = false;
 	}
 	~GameObject();
 

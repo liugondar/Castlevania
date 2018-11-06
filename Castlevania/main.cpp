@@ -185,8 +185,8 @@ void loadTextures()
 	spriteManager->add(SPRITE_SIMON_HITTING_LEFT2, 850, 0, 850 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
 	spriteManager->add(SPRITE_SIMON_HITTING_LEFT3, 898, 0, 898 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
 	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT1, 118, 0, 118 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT2, 72, 0, 72 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT3, 14, 0, 10 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT2, 67, 0, 67+ SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT3, 11, 0, 11 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
 
 
 	auto texMisc = textureManager->get(ID_TEX_MISC);
@@ -222,16 +222,18 @@ void loadSimonAnimations()
 	animation->add(SPRITE_SIMON_MOVING_LEFT_3);
 	animationManager->add(ANIMATION_SIMON_WALKING_LEFT, animation);
 
-	animation = new Animation(100);
+	animation = new Animation(SIMON_HITTING_TIME);
 	animation->add(SPRITE_SIMON_HITTING_LEFT1);
 	animation->add(SPRITE_SIMON_HITTING_LEFT2);
 	animation->add(SPRITE_SIMON_HITTING_LEFT3);
+	animation->add(SPRITE_SIMON_MOVING_LEFT_1);
 	animationManager->add(ANIMATION_SIMON_HITTING_LEFT, animation);
 
-	animation = new Animation(100);
+	animation = new Animation(SIMON_HITTING_TIME);
 	animation->add(SPRITE_SIMON_HITTING_RIGHT1);
 	animation->add(SPRITE_SIMON_HITTING_RIGHT2);
 	animation->add(SPRITE_SIMON_HITTING_RIGHT3);
+	animation->add(SPRITE_SIMON_MOVING_RIGHT_1);
 	animationManager->add(ANIMATION_SIMON_HITTING_RIGHT, animation);
 
 	animation = new Animation(100);
