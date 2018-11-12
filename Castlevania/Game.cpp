@@ -38,6 +38,8 @@ void Game::init(HWND hWnd)
 	// Initialize sprite helper from Direct3DX helper library
 	D3DXCreateSprite(d3ddv, &spriteHandler);
 
+	xCamera=0;
+	yCamera=0;
 }
 
 void Game::draw(float x, float y, LPDIRECT3DTEXTURE9 texture,
@@ -47,7 +49,7 @@ void Game::draw(float x, float y, LPDIRECT3DTEXTURE9 texture,
 
 	if (spriteHandler && texture)
 	{
-		D3DXVECTOR3 p(x, y, 0);
+		D3DXVECTOR3 p(x-xCamera,y, 0);
 		RECT r;
 		r.left = left;
 		r.top = top;
@@ -103,6 +105,18 @@ void Game::processKeyboard()
 		else
 			keyHandler->OnKeyUp(KeyCode);
 	}
+}
+
+void Game::setCameraPosition(float x, float y)
+{
+	xCamera=x;
+	yCamera=y;
+}
+
+void Game::getCameraPosition(float & x, float & y)
+{
+	x = xCamera;
+	y = yCamera;
 }
 
 int Game::isKeyDown(int keyCode)

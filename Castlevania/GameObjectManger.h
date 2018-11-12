@@ -2,7 +2,11 @@
 #include "Game.h"
 #include "Brick.h"
 #include "Simon.h"
+#include "BigCandle.h"
 using namespace std;
+
+constexpr auto SCENE_WIDTH = 1536;
+constexpr auto SCENE_HEIGHT = 384;
 
 class GameObjectManger
 {
@@ -16,6 +20,10 @@ public:
 		if (instance == nullptr) instance = new GameObjectManger();
 		return instance;
 	}
+	void onKeyDown(int KeyCode);
+	void onKeyUp(int KeyCode);
+	void keyState(BYTE *states);
+	void loadGameObjects();
 	void render();
 	void update(DWORD dt);
 

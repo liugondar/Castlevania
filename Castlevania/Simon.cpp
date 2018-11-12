@@ -1,7 +1,5 @@
 #include "Simon.h"
 
-
-
 Simon::Simon()
 {
 	whip = new Whip();
@@ -147,6 +145,11 @@ void Simon::update(DWORD dt, vector<LPGameObject>* coObject, vector<LPGameObject
 	whip->update(dt, x, y,gameObjects);
 
 	checkCollisionWithGround(dt, coObject);
+	auto newPositionX = x+dx;
+	if (newPositionX >= 0 && newPositionX + SIMON_MOVING_WIDTH<= boundingGameX) {
+		x = newPositionX;
+	}
+
 	vy += dt * SIMON_GRAVITY;
 	// simple fall down
 }
@@ -238,7 +241,6 @@ void Simon::checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks)
 
 	// no collison
 	if (coEvents.size() == 0) {
-		x += dx;
 		y += dy;
 	}
 	else {
@@ -247,11 +249,8 @@ void Simon::checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks)
 		filterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 		// block 
-		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
 		y += min_ty * dy + ny * 0.4f;
 
-
-		if (nx != 0) vx = 0;
 		if (ny != 0) {
 			vy = 0;
 			isInGround = true;

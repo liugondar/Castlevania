@@ -23,6 +23,8 @@ protected:
 	float dy;	// dy = vy*dt
 	float vx;
 	float vy;
+	float boundingGameX; // gioi han man hinh game x
+	float boundingGameY; // gioi han man hinh game y
 	DWORD dt;
 	int animationId;
 
@@ -43,12 +45,15 @@ public:
 		faceSide = FaceSide::right; // right side
 		previousAmiId = -1;
 		previousAnimIsOneTimeAnim = false;
+		boundingGameX = 0;
+		boundingGameY = 0;
 	}
 	~GameObject();
 
 	void setPosition(float x, float y) { this->x = x; this->y = y; }
 	void setState(int state) { this->previousState = this->currentState; this->currentState = state; }
 	void setSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
+	void setBoundingGame(float x, float y) { this->boundingGameX = x; this->boundingGameY = y; }
 
 	int getPreviousState() { return previousState; }
 	int getState() { return currentState; }

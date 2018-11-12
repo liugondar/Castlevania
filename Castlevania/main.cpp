@@ -1,7 +1,6 @@
 #include"main.h"
 
 Game* game;
-Simon* simon;
 SampleKeyHander * keyHandler;
 
 //Create keyboard handler for main program
@@ -9,19 +8,18 @@ SampleKeyHander * keyHandler;
 void SampleKeyHander::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-	simon->handleOnKeyDown(KeyCode);
+	GameObjectManger::getInstance()->onKeyDown(KeyCode);
 }
 
 void SampleKeyHander::OnKeyUp(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
-
-	simon->handleOnKeyRelease(KeyCode);
+	GameObjectManger::getInstance()->onKeyUp(KeyCode);
 }
 
 void SampleKeyHander::KeyState(BYTE *states)
 {
-	simon->handleOnKeyPress(states);
+	GameObjectManger::getInstance()->keyState(states);
 }
 
 /// Create a window then display and running until exit message send
@@ -287,40 +285,7 @@ void loadSimonAnimations()
 void loadGameObjects()
 {
 	auto gameObjectManager = GameObjectManger::getInstance();
-	simon = new Simon();
-	Simon::addAnimation(ANIMATION_SIMON_WALKING_RIGHT);
-	Simon::addAnimation(ANIMATION_SIMON_WALKING_LEFT);
-	Simon::addAnimation(ANIMATION_SIMON_IDLE_FACE_LEFT);
-	Simon::addAnimation(ANIMATION_SIMON_IDLE_FACE_RIGHT);
-	Simon::addAnimation(ANIMATION_SIMON_SIT_FACE_LEFT);
-	Simon::addAnimation(ANIMATION_SIMON_SIT_FACE_RIGHT);
-	Simon::addAnimation(ANIMATION_SIMON_HITTING_LEFT);
-	Simon::addAnimation(ANIMATION_SIMON_HITTING_RIGHT);
-
-	simon->setPosition(10.f, 100.f);
-	simon->setState(STATE_SIMON_IDLE);
-
-	gameObjectManager->addSimon(simon);
-
-	Brick::addAnimation(ANIMATION_BRICK_IDLE);
-
-	Whip::addAnimation(ANIMATION_WHIP_LV1_LEFT);
-	Whip::addAnimation(ANIMATION_WHIP_LV1_RIGHT);
-	BigCandle::addAnimation(ANIMATION_BIG_CANDLE_IDLE);
-
-	for (int i = 0; i < 50; i++)
-	{
-		auto brick = new Brick();
-		brick->setPosition(0 + i * 16.0f, LV1_GROUND_Y);
-		gameObjectManager->addBrick(brick);
-	}
-
-	for (int i = 0; i < 20; i++)
-	{
-		auto candle = new BigCandle();
-		candle->setPosition(0+ i*75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
-		gameObjectManager->add(candle);
-	}
+	gameObjectManager->loadGameObjects();
 }
 
 void update(DWORD dt) {
