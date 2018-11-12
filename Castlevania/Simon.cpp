@@ -27,7 +27,7 @@ void Simon::handleOnKeyRelease(int KeyCode)
 	}
 
 	if (KeyCode == DIK_LCONTROL) {
-		if (game->isKeyDown(DIK_LEFT) || game->isKeyDown(DIK_RIGHT))return ;
+		if (game->isKeyDown(DIK_LEFT) || game->isKeyDown(DIK_RIGHT))return;
 		isReleaseHitButton = true;
 	}
 }
@@ -51,8 +51,8 @@ void Simon::handleOnKeyPress(BYTE * states)
 			moveLeft();
 		}
 		else if (game->isKeyDown(DIK_DOWN)) {
-			if (simonState != STATE_SIMON_SITTING && isInGround && simonState!= STATE_SIMON_JUMPING) {
- 				y = y + (SIMON_MOVING_HEIGHT - SIMON_SITTING_HEIGHT);
+			if (simonState != STATE_SIMON_SITTING && isInGround && simonState != STATE_SIMON_JUMPING) {
+				y = y + (SIMON_MOVING_HEIGHT - SIMON_SITTING_HEIGHT);
 				sit();
 			}
 		}
@@ -142,11 +142,11 @@ void Simon::beginFight()
 void Simon::update(DWORD dt, vector<LPGameObject>* coObject, vector<LPGameObject>* gameObjects)
 {
 	GameObject::update(dt);
-	whip->update(dt, x, y,gameObjects);
+	whip->update(dt, x, y, gameObjects);
 
 	checkCollisionWithGround(dt, coObject);
-	auto newPositionX = x+dx;
-	if (newPositionX >= 0 && newPositionX + SIMON_MOVING_WIDTH<= boundingGameX) {
+	auto newPositionX = x + dx;
+	if (newPositionX >= 0 && newPositionX + SIMON_MOVING_WIDTH <= boundingGameX) {
 		x = newPositionX;
 	}
 
@@ -175,6 +175,14 @@ void Simon::render()
 		if (faceSide == FaceSide::left)  animationId = ANIMATION_SIMON_HITTING_LEFT;
 		if (faceSide == FaceSide::right) animationId = ANIMATION_SIMON_HITTING_RIGHT;
 		isOneTimeAnim = true;
+		if (animations[animationId]) {
+			auto frame = animations[animationId]->getFrame();
+			if (frame == 3) {
+				whip->refreshAnim();
+				setState(STATE_SIMON_IDLE);
+				animationId = faceSide == FaceSide::left ? ANIMATION_SIMON_IDLE_FACE_LEFT : ANIMATION_SIMON_IDLE_FACE_RIGHT;
+			}
+		}
 	}
 	else {
 		if (currentState == STATE_SIMON_WALKING_LEFT) animationId = ANIMATION_SIMON_WALKING_LEFT;
