@@ -24,6 +24,7 @@ protected:
 	float vx;
 	float vy;
 	DWORD dt;
+	int animationId;
 
 	FaceSide faceSide;
 
@@ -74,7 +75,7 @@ public:
 	virtual void update(DWORD dt, vector<GameObject*> *coObjects = NULL);
 
 	virtual void render() = 0;
-	virtual Box getBoundingBox() = 0;
+	virtual void getBoundingBox(float &left, float &top, float &right, float &bottom) = 0;
 };
 
 struct CollisionEvent

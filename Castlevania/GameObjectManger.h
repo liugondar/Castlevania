@@ -1,8 +1,6 @@
 #pragma once
 #include "Game.h"
-#include "Mario.h"
 #include "Brick.h"
-#include "Goomba.h"
 #include "Simon.h"
 using namespace std;
 
@@ -12,7 +10,6 @@ private:
 	static GameObjectManger* instance;
 	Simon* simon;
 	vector<GameObject *> bricks;
-	vector<Goomba*> goombas;
 	vector <GameObject*> gameObjects;
 public:
 	static GameObjectManger* getInstance() {
@@ -28,10 +25,6 @@ public:
 	
 	void addBrick(Brick* brick) {
 		bricks.push_back(brick);
-	}
-
-	void addGomba(Goomba* goomba) {
-		goombas.push_back(goomba);
 	}
 
 	void addSimon(Simon * simon) {

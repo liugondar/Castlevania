@@ -43,6 +43,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Constants">
+      <UniqueIdentifier>{fb807abb-9a87-4dbe-a184-55e573131449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Enemy">
+      <UniqueIdentifier>{f8f3e593-9d70-44f6-aa21-52cb7e4a5b25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StaticObjects">
+      <UniqueIdentifier>{4ea53c3b-eb99-4727-acac-c08ca23ca1ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StaticObjects">
+      <UniqueIdentifier>{336b016d-50f8-4b87-b57d-a49b2c71aa88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,12 +87,6 @@
     <ClCompile Include="GameObjectManger.cpp">
       <Filter>Source Files\GameManager</Filter>
     </ClCompile>
-    <ClCompile Include="Goomba.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Mario.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files\Sprite</Filter>
     </ClCompile>
@@ -96,8 +102,14 @@
     <ClCompile Include="Simon.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files\GameManager</Filter>
+    <ClCompile Include="Whip.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BigCandle.cpp">
+      <Filter>Source Files\StaticObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,14 +128,8 @@
     <ClInclude Include="Brick.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Mario.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Goomba.h">
-      <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="SweptAABB.h">
       <Filter>Header Files\Util</Filter>
@@ -152,14 +158,23 @@
     <ClInclude Include="Sprite.h">
       <Filter>Header Files\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="Simon.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files\GameManager</Filter>
+    <ClInclude Include="Whip.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Header Files\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="SimonConstants.h">
+      <Filter>Header Files\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BigCandle.h">
+      <Filter>Header Files\StaticObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

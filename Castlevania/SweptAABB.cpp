@@ -1,133 +1,109 @@
 #include "SweptAABB.h"
 #include "debug.h"
 
-bool isColliding(const Box& object, const Box& other)
+bool isColliding(float bl, float bt, float br,float bb, float sl, float st, float sr, float sb)
 {
-	auto left = object.right < other.left;
-	auto top = object.left > other.right;
-	auto right = object.bottom < other.top;
-	auto bottom = object.top > other.bottom;
-
-	return !(left||top||right||bottom);
+	return !(br < sl || bl > sr || bb < st || bt > sb);
 }
 
-Box getSweptBroadphaseRect(const Box& movingObject,float dx,float dy)
-{
-	float left = dx > 0 ? movingObject.left : movingObject.left + dx;
-	float top = dy > 0 ? movingObject.top : movingObject.top + dy;
-	float right = dx > 0 ? movingObject.right+ dx : movingObject.right;
-	float bottom = dy > 0 ? movingObject.bottom + dy : movingObject.bottom;
-	
-	return Box(left,top,right,bottom);
-}
-
-void findDistance(float& dxEntry, float& dyEntry,
-	float& dxExit, float& dyExit,
+void sweptAABB(
+	float ml,			// move left 
+	float mt,			// move top
+	float mr,			// move right 
+	float mb,			// move bottom
+	float sl,			// static left
+	float st,
+	float sr,
+	float sb,
 	float dx, float dy,
-	Box movingObject,
-	Box standingObject)
+	float &t, float &nx, float &ny)
 {
-	auto ml = movingObject.left, mt = movingObject.top, mr = movingObject.right, mb = movingObject.bottom;
-	auto sl = standingObject.left, st = standingObject.top, sr = standingObject.right, sb = standingObject.bottom;
+
+	float dx_entry, dx_exit, tx_entry, tx_exit;
+	float dy_entry, dy_exit, ty_entry, ty_exit;
+
+	float t_entry;
+	float t_exit;
+
+	t = -1.0f;			// no collision
+	nx = ny = 0;
+
+	//
+	// Broad-phase test 
+	//
+
+	float bl = dx > 0 ? ml : ml + dx;
+	float bt = dy > 0 ? mt : mt + dy;
+	float br = dx > 0 ? mr + dx : mr;
+	float bb = dy > 0 ? mb + dy : mb;
+
+	if (br < sl || bl > sr || bb < st || bt > sb) return;
+
+
+	if (dx == 0 && dy == 0) return;		// moving object is not moving > obvious no collision
 
 	if (dx > 0)
 	{
-		dxEntry = sl - mr;
-		dxExit = sr - ml;
+		dx_entry = sl - mr;
+		dx_exit = sr - ml;
 	}
 	else if (dx < 0)
 	{
-		dxEntry = sr - ml;
-		dxExit = sl - mr;
+		dx_entry = sr - ml;
+		dx_exit = sl - mr;
 	}
 
 
 	if (dy > 0)
 	{
-		dyEntry = st - mb;
-		dyExit = sb - mt;
+		dy_entry = st - mb;
+		dy_exit = sb - mt;
 	}
 	else if (dy < 0)
 	{
-		dyEntry = sb - mt;
-		dyExit = st - mb;
+		dy_entry = sb - mt;
+		dy_exit = st - mb;
 	}
-}
 
-void findCollisonAndExittime(float& txEntry, float& tyEntry,
-	float& txExit, float& tyExit,
-	float dxEntry, float dxExit,
-	float dyEntry, float dyExit,
-	float dx, float dy
-)
-{
 	if (dx == 0)
 	{
-		txEntry = -99999999999;
-		txExit = 99999999999;
+		tx_entry = -99999999999;
+		tx_exit = 99999999999;
 	}
 	else
 	{
-		txEntry = dxEntry / dx;
-		txExit = dxExit / dx;
+		tx_entry = dx_entry / dx;
+		tx_exit = dx_exit / dx;
 	}
 
 	if (dy == 0)
 	{
-		tyEntry = -99999999999;
-		tyExit = 99999999999;
+		ty_entry = -99999999999;
+		ty_exit = 99999999999;
 	}
 	else
 	{
-		tyEntry = dyEntry / dy;
-		tyExit = dyExit / dy;
+		ty_entry = dy_entry / dy;
+		ty_exit = dy_exit / dy;
 	}
 
-}
 
-void sweptAABB(
-	Box movingObject, Box standingObject,
-	float dx, float dy,
-	float &t, float &nx, float &ny)
-{
-	auto ml = movingObject.left, mt = movingObject.top, mr = movingObject.right, mb = movingObject.bottom;
-	auto sl = standingObject.left, st = standingObject.top, sr = standingObject.right, sb = standingObject.bottom;
+	if ((tx_entry < 0.0f && ty_entry < 0.0f) || tx_entry > 1.0f || ty_entry > 1.0f) return;
 
-	float dxEntry, dxExit, txEntry, txExit;
-	float dyEntry, dyExit, tyEntry, tyExit;
+	t_entry = std::max(tx_entry, ty_entry);
+	t_exit = std::min(tx_exit, ty_exit);
 
-	float entryTime;
-	float exitTime;
-
-	t = -1.0f;			// no collision
-	nx = ny = 0;
-	// Broad-phase test
-	Box broadPhase = getSweptBroadphaseRect(movingObject, dx, dy);
-	if (!isColliding(broadPhase, standingObject)) return;
-
-	if (dx == 0 && dy == 0) return;		// moving object is not moving > obvious no collision
-
-	findDistance(dxEntry, dyEntry, dxExit, dyExit, dx,dy,movingObject, standingObject);
-	findCollisonAndExittime(txEntry, tyEntry, txExit, tyExit, dxEntry, dxExit, dyEntry, dyExit, dx, dy);
-
-	if ((txEntry < 0.0f && tyEntry < 0.0f) || txEntry > 1.0f || tyEntry > 1.0f) return;
-
-	// get final entry time and exit time
-	entryTime = std::max(txEntry, tyEntry);
-	exitTime = std::min(txExit, tyExit);
-
-	bool notCollision = (entryTime > exitTime
-		|| (txEntry < 0.0f && tyEntry < 0.0f)
-		|| txEntry > 1.0f
-		|| tyEntry > 1.0f
+	bool notCollision = (t_entry > t_exit
+		|| (t_entry < 0.0f && t_entry < 0.0f)
+		|| t_entry > 1.0f
+		|| t_entry > 1.0f
 		);
-	if (notCollision) return ;
+	if (notCollision) return;
 
-	// time collison = entry time
-	t = entryTime;
 
-	// find direction result
-	if (txEntry > tyEntry)
+	t = t_entry;
+
+	if (tx_entry > ty_entry)
 	{
 		ny = 0.0f;
 		dx > 0 ? nx = -1.0f : nx = 1.0f;
@@ -137,4 +113,5 @@ void sweptAABB(
 		nx = 0.0f;
 		dy > 0 ? ny = -1.0f : ny = 1.0f;
 	}
+
 }

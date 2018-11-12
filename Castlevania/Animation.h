@@ -23,6 +23,7 @@ public:
 		currentFrame = -1;
 		state = -1;
 	}
+	int getFrame() { return currentFrame; }
 	void add(int spriteId, DWORD time = 0);
 	void render(float x, float y,bool isOneTimeAnim=false);
 	void refresh();

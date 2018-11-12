@@ -2,14 +2,13 @@
 #include "Game.h"
 #include "Constants.h"
 #include "KeyboardHandler.h"
-#include "Input.h"
 
 #include "GameObject.h"
 #include "GameObjectManger.h"
-#include "Mario.h"
 #include "Brick.h"
-#include "Goomba.h"
 #include "Simon.h"
+#include "Whip.h"
+#include "BigCandle.h"
 
 #include "AnimationManager.h"
 #include "TextureManager.h"

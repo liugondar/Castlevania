@@ -1,22 +1,20 @@
 #include"main.h"
 
 Game* game;
-Mario* mario;
-Goomba* goomba;
 Simon* simon;
 SampleKeyHander * keyHandler;
 
- //Create keyboard handler for main program
+//Create keyboard handler for main program
 
 void SampleKeyHander::OnKeyDown(int KeyCode)
 {
-	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
+	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 	simon->handleOnKeyDown(KeyCode);
 }
 
 void SampleKeyHander::OnKeyUp(int KeyCode)
 {
-	DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
+	//DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
 
 	simon->handleOnKeyRelease(KeyCode);
 }
@@ -149,12 +147,12 @@ void loadTextures()
 {
 	TextureManager* textureManager = TextureManager::getInstance();
 
-	textureManager->add(ID_TEX_MISC, L"textures\\misc.png",
-		D3DCOLOR_XRGB(176, 224, 248));
-	textureManager->add(ID_TEX_BBOX, L"textures\\bbox.png",
-		D3DCOLOR_XRGB(255, 255, 255));
-	textureManager->add(ID_TEX_SIMON, TEXTURE_SIMON_PATH,
-		D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
+	textureManager->add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
+	textureManager->add(ID_TEX_SIMON, TEXTURE_SIMON_PATH, D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_EMPTY, TEXTURE_EMPTY_PATH, D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_WHIP, TEXTURE_WHIP_PATH, D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_BIG_CANDLE, TEXTURE_BIG_CANDLE_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_BRICK_2, ENTRANCE_GROUND_BRICK_SCREEN_2);
 	textureManager->add(ID_TEX_BACKGROUND_LV1, TEXTURE_LVL1_BACKGROUND_PATH);
 	textureManager->add(ID_TEX_ENTRANCE_BACKGROUND, TEXTURE_ENTRANCE_BACKGROUND_PATH);
@@ -169,9 +167,9 @@ void loadTextures()
 	// spriteManager->add(SPRITE_SIMON_MOVING_LEFT_3, 1083, 18, 1083+ SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
 
 
-	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_1, 432, 0, 432 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_2, 373, 0, 373 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_3, 311, 0, 311 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_1, 432, 0, 432 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_2, 373, 0, 373 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_3, 311, 0, 311 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
 
 	spriteManager->add(SPRITE_SIMON_MOVING_LEFT_1, 491, 0, 491 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
 	spriteManager->add(SPRITE_SIMON_MOVING_LEFT_2, 552, 0, 552 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
@@ -182,11 +180,11 @@ void loadTextures()
 	spriteManager->add(SPRITE_SIMON_SIT_FACE_LEFT, 728, 16, 728 + SIMON_SITTING_WIDTH, 16 + SIMON_SITTING_HEIGHT, textureSimon);
 
 	spriteManager->add(SPRITE_SIMON_HITTING_LEFT1, 791, 0, 791 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_LEFT2, 850, 0, 850 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_LEFT3, 898, 0, 898 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT1, 118, 0, 118 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT2, 67, 0, 67+ SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT3, 11, 0, 11 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_LEFT2, 851, 0, 851 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_LEFT3, 901, 0, 901 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT1, 121, 0, 121 + 48, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT2, 76, 0, 76 + 32, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT3, 14, 0, 14 + 45, 0 + SIMON_HITTING_HEIGHT, textureSimon);
 
 
 	auto texMisc = textureManager->get(ID_TEX_MISC);
@@ -194,6 +192,21 @@ void loadTextures()
 
 	auto texBrick2 = textureManager->get(ID_TEX_BRICK_2);
 	spriteManager->add(SPRITE_BRICK_2, 0, 0, BRICK_2_SIZE, BRICK_2_SIZE, texBrick2);
+
+	auto texWhip = textureManager->get(ID_TEX_WHIP);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_1, 158 - SIMON_HITTING_WIDTH, 0, 148 + 19, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_2, 390 - SIMON_HITTING_WIDTH, 0, 372 + 32, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_3, 560, 0, 532, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_1, 1273 + 19, 0, 1273, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_2, 1034 + 32, 0, 1032, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_3, 830, 0, 824 + 86, 0 + SIMON_HITTING_HEIGHT, texWhip);
+
+	auto texEmpty = textureManager->get(ID_TEX_EMPTY);
+	spriteManager->add(SPRITE_EMPTY, 0, 0, 10, 10, texEmpty);
+
+	auto texBigCandle = textureManager->get(ID_TEX_BIG_CANDLE);
+	spriteManager->add(SPRITE_BIG_CANDLE_1, 0, 0, BIG_CANDLE_WIDTH, BIG_CANDLE_HEIGHT, texBigCandle);
+	spriteManager->add(SPRITE_BIG_CANDLE_2, 32, 0, 32 + BIG_CANDLE_WIDTH, BIG_CANDLE_HEIGHT, texBigCandle);
 }
 
 void loadAnimations()
@@ -202,6 +215,25 @@ void loadAnimations()
 	auto animation = new Animation(100);
 	animation->add(SPRITE_BRICK_2);
 	animationManager->add(ANIMATION_BRICK_IDLE, animation);
+
+	animation = new Animation(SIMON_HITTING_TIME);
+	animation->add(SPRITE_WHIP_LEFT_LV1_1);
+	animation->add(SPRITE_WHIP_LEFT_LV1_2);
+	animation->add(SPRITE_WHIP_LEFT_LV1_3);
+	animation->add(SPRITE_EMPTY);
+	animationManager->add(ANIMATION_WHIP_LV1_LEFT, animation);
+
+	animation = new Animation(SIMON_HITTING_TIME);
+	animation->add(SPRITE_WHIP_RIGHT_LV1_1);
+	animation->add(SPRITE_WHIP_RIGHT_LV1_2);
+	animation->add(SPRITE_WHIP_RIGHT_LV1_3);
+	animation->add(SPRITE_EMPTY);
+	animationManager->add(ANIMATION_WHIP_LV1_RIGHT, animation);
+
+	animation = new Animation(BIG_CANDLE_ANIMATION_FRAME_TIME);
+	animation->add(SPRITE_BIG_CANDLE_1);
+	animation->add(SPRITE_BIG_CANDLE_2);
+	animationManager->add(ANIMATION_BIG_CANDLE_IDLE, animation);
 
 	/* Simon animations */
 	loadSimonAnimations();
@@ -254,7 +286,7 @@ void loadSimonAnimations()
 
 void loadGameObjects()
 {
-
+	auto gameObjectManager = GameObjectManger::getInstance();
 	simon = new Simon();
 	Simon::addAnimation(ANIMATION_SIMON_WALKING_RIGHT);
 	Simon::addAnimation(ANIMATION_SIMON_WALKING_LEFT);
@@ -268,18 +300,28 @@ void loadGameObjects()
 	simon->setPosition(10.f, 100.f);
 	simon->setState(STATE_SIMON_IDLE);
 
-	GameObjectManger::getInstance()->addSimon(simon);
+	gameObjectManager->addSimon(simon);
 
 	Brick::addAnimation(ANIMATION_BRICK_IDLE);
+
+	Whip::addAnimation(ANIMATION_WHIP_LV1_LEFT);
+	Whip::addAnimation(ANIMATION_WHIP_LV1_RIGHT);
+	BigCandle::addAnimation(ANIMATION_BIG_CANDLE_IDLE);
 
 	for (int i = 0; i < 50; i++)
 	{
 		auto brick = new Brick();
-		brick->setPosition(0 + i * 16.0f, 384);
-		GameObjectManger::getInstance()->addBrick(brick);
+		brick->setPosition(0 + i * 16.0f, LV1_GROUND_Y);
+		gameObjectManager->addBrick(brick);
+	}
+
+	for (int i = 0; i < 20; i++)
+	{
+		auto candle = new BigCandle();
+		candle->setPosition(0+ i*75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+		gameObjectManager->add(candle);
 	}
 }
-
 
 void update(DWORD dt) {
 	GameObjectManger::getInstance()->update(dt);

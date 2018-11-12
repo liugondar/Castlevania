@@ -17,13 +17,15 @@ void GameObject::RenderBoundingBox()
 	auto texture = TextureManager::getInstance()->get(ID_TEX_BBOX);
 	auto game = Game::getInstance();
 
-	auto box = getBoundingBox();
+	float l, t, r, b;
+	getBoundingBox(l, t, r, b);
+
 	rect.left = 0;
 	rect.top = 0;
-	rect.right = (int)box.right - (int)box.left;
-	rect.bottom = (int)box.bottom - (int)box.top;
+	rect.right = (int)r - (int)l;
+	rect.bottom = (int)b- (int)t;
 
-	game->draw(x, y, texture, rect.left, rect.top, rect.right, rect.bottom, 255);
+	game->draw(l,t, texture, rect.left, rect.top, rect.right, rect.bottom, 255);
 }
 
 void GameObject::addAnimation(int animationId)
@@ -35,29 +37,33 @@ void GameObject::addAnimation(int animationId)
 
 LPCollisionEvent GameObject::sweptAABBEx(LPGameObject coO)
 {
-	Box staticBox, movingBox;
-	float t, normalX, normalY;
+	float sl, st, sr, sb;		// static object bbox
+	float ml, mt, mr, mb;		// moving object bbox
+	float t, nx, ny;
 
-	staticBox = coO->getBoundingBox();
+	coO->getBoundingBox(sl, st, sr, sb);
+
+	// deal with moving object: m speed = original m speed - collide object speed
 	float svx, svy;
 	coO->getSpeed(svx, svy);
+
 	float sdx = svx * dt;
 	float sdy = svy * dt;
 
 	float dx = this->dx - sdx;
 	float dy = this->dy - sdy;
 
-	movingBox = getBoundingBox();
+	getBoundingBox(ml, mt, mr, mb);
 
-	sweptAABB(movingBox, staticBox,
+	sweptAABB(
+		ml, mt, mr, mb,
+		sl, st, sr, sb,
 		dx, dy,
-		t, normalX, normalY
+		t, nx, ny
 	);
-	if (normalX != 0) DebugOut(L"collision");
 
-	auto collisonEvent = new CollisionEvent(t, normalX, normalY, coO);
-
-	return collisonEvent;
+	CollisionEvent * e = new CollisionEvent(t, nx, ny, coO);
+	return e;;
 
 }
 

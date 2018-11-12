@@ -11,8 +11,9 @@ public:
 	Brick();
 	~Brick();
 
-	// Inherited via GameObject
-	virtual Box getBoundingBox() ;
 	void render() ;
+
+	// Inherited via GameObject
+	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
 };
 

@@ -15,12 +15,11 @@ void Brick::render()
 	animations[ANIMATION_BRICK_IDLE]->render(x, y);
 }
 
-Box Brick::getBoundingBox()
+void Brick::getBoundingBox(float & left, float & top, float & right, float & bottom)
 {
-	auto box = Box();
-	box.left = x;
-	box.top = y;
-	box.right = x + BRICK_2_SIZE;
-	box.bottom = y + BRICK_2_SIZE;
-	return box;
+	left = x;
+	top = y;
+	right = x + BRICK_2_SIZE;
+	bottom = y + BRICK_2_SIZE;
 }
+

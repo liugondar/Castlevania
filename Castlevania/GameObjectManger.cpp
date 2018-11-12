@@ -8,7 +8,6 @@ void GameObjectManger::render()
 	 auto texture = TextureManager::getInstance()->get(ID_TEX_BACKGROUND_LV1);
 	game->draw(0,60, texture, 0, 0, 1536, 384,255);
 
-
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->render();
@@ -22,5 +21,5 @@ void GameObjectManger::render()
 
 void GameObjectManger::update(DWORD dt)
 {
-	simon->update(dt,&bricks);
+	simon->update(dt,&bricks,&gameObjects);
 }

@@ -1,12 +1,18 @@
 #pragma once
 #include "GameObject.h"
+#include "Whip.h"
 #include "Constants.h"
-#include "Input.h"
+#include "SetTimeOut.h"
+#include <conio.h>
+#include "SimonConstants.h"
 
 class Simon :
 	public GameObject
 {
 	bool isHitting;
+	bool isReleaseHitButton;
+	Whip* whip;
+	bool isInGround;
 public:
 	Simon();
 	~Simon();
@@ -22,14 +28,15 @@ public:
 	void sit();
 	void stand();
 	void hit();
+	void hitWhenSitting();
 	void beginFight();
 
 	
 	// Inherited via GameObject
 	void setState(int state);
-	virtual void update(DWORD dt, vector<LPGameObject> *coObject = nullptr);
+	virtual void update(DWORD dt, vector<LPGameObject> *coObject = nullptr, vector<LPGameObject>* gameObject=nullptr);
 	virtual void render() override;
-	virtual Box getBoundingBox() override;
+	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
 
 };
 
