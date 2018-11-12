@@ -2,6 +2,32 @@
 
 GameObjectManger* GameObjectManger::instance = nullptr;
 
+void GameObjectManger::updateCamera(DWORD dt)
+{
+	auto game = Game::getInstance();
+	float simonX, simonY, xCamera, yCamera, simonVx, simonVy;
+	simon->getPosition(simonX, simonY);
+	simon->getSpeed(simonVx, simonVy);
+	game->getCameraPosition(xCamera, yCamera);
+
+	auto newCameraPositionX = xCamera + simonVx * dt;
+	// check if new camera postion is out of box
+	if (newCameraPositionX + SCREEN_WIDTH > SCENE_WIDTH)
+		newCameraPositionX = SCENE_WIDTH - SCREEN_WIDTH;
+	if (newCameraPositionX < 0) newCameraPositionX = 0;
+
+
+	if (simonVx >= 0) {
+		if (simonX >= (0 + SCREEN_WIDTH) / 2)
+			game->setCameraPosition(newCameraPositionX, yCamera);
+	}
+	else {
+		auto middlePointOfEndScreen = (SCENE_WIDTH - SCREEN_WIDTH) + (SCREEN_WIDTH / 2);
+		if (simonX <= middlePointOfEndScreen)
+			game->setCameraPosition(newCameraPositionX, yCamera);
+	}
+}
+
 void GameObjectManger::onKeyDown(int KeyCode)
 {
 	simon->handleOnKeyDown(KeyCode);
@@ -76,27 +102,5 @@ void GameObjectManger::render()
 void GameObjectManger::update(DWORD dt)
 {
 	simon->update(dt, &bricks, &gameObjects);
-	auto game = Game::getInstance();
-
-	float simonX, simonY, xCamera, yCamera, simonVx, simonVy;
-	simon->getPosition(simonX, simonY);
-	simon->getSpeed(simonVx, simonVy);
-	game->getCameraPosition(xCamera, yCamera);
-
-	auto newCameraPositionX = xCamera + simonVx * dt;
-	// check if new camera postion is out of box
-	if (newCameraPositionX + SCREEN_WIDTH > SCENE_WIDTH)
-		newCameraPositionX = SCENE_WIDTH - SCREEN_WIDTH;
-	if (newCameraPositionX < 0) newCameraPositionX = 0;
-
-
-	if (simonVx >= 0) {
-		if (simonX >= (0 + SCREEN_WIDTH) / 2)
-			game->setCameraPosition(newCameraPositionX, yCamera);
-	}
-	else {
-		auto middlePointOfEndScreen = (SCENE_WIDTH - SCREEN_WIDTH) + (SCREEN_WIDTH / 2);
-		if (simonX <= middlePointOfEndScreen)
-			game->setCameraPosition(newCameraPositionX, yCamera);
-	}
+	updateCamera(dt);
 }

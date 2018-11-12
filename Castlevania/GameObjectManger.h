@@ -20,12 +20,19 @@ public:
 		if (instance == nullptr) instance = new GameObjectManger();
 		return instance;
 	}
+
+	// util methods
+	void updateCamera(DWORD dt);
+
+	// event methods
 	void onKeyDown(int KeyCode);
 	void onKeyUp(int KeyCode);
 	void keyState(BYTE *states);
-	void loadGameObjects();
 	void render();
 	void update(DWORD dt);
+
+	// mananger objects methods
+	void loadGameObjects();
 
 	void add(GameObject* gameObject) {
 		gameObjects.push_back(gameObject);
