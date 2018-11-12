@@ -27,6 +27,7 @@ public:
 	void jump();
 	void sit();
 	void stand();
+	void standUp();
 	void hit();
 	void hitWhenSitting();
 	void beginFight();

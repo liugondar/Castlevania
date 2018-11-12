@@ -20,6 +20,8 @@ void Animation::render(float x, float y,bool isOneTimeAnim) {
 		if (now - lastFrameTime > t) {
 			currentFrame++;
 			lastFrameTime = now;
+			if (isOneTimeAnim) {
+			}
 			if (currentFrame == frames.size()) {
 				if (isOneTimeAnim ) {
 					currentFrame = currentFrame - 1;

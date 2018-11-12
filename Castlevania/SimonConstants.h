@@ -16,7 +16,7 @@ constexpr auto SIMON_HITTING_TIME = 150;
 //trong luc luc roi
 #define SIMON_FALL 180
 //di binh thuong
-#define SIMON_VX 1.f;
+#define SIMON_VX 0.15f;
 //len xuong cau thang
 #define SIMON_VX_STAIR 43	
 #define SIMON_VY_STAIR 43

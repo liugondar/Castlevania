@@ -29,11 +29,11 @@ void Whip::checkEnemyCollisions(vector<LPGameObject> coObjects)
 
 void Whip::render()
 {
-	animationId = ANIMATION_WHIP_LV1_LEFT;
-	if (faceSide == FaceSide::right) {
-		animationId = ANIMATION_WHIP_LV1_RIGHT;
-	}
-	animations[animationId]->render(x, y);
+	animationId = faceSide == FaceSide::left
+		? ANIMATION_WHIP_LV1_LEFT
+		: ANIMATION_WHIP_LV1_RIGHT;
+
+	animations[animationId]->render(x, y,true);
 
 	auto frame = animations[animationId]->getFrame();
 
@@ -69,20 +69,20 @@ void Whip::refreshAnim()
 
 void Whip::getBoundingBox(float & left, float & top, float & right, float & bottom)
 {
-	if (currentState== STATE_WHIP_HITTING) {
+	if (currentState == STATE_WHIP_HITTING) {
 		auto width = x;
 		auto height = y;
 
 		if (faceSide == FaceSide::left) {
-			left = x - WHIP_WIDTH;
+			left = x - WHIP_HITTING_WIDTH;
 			right = x + 10;
 		}
 		else {
 			left = x + SIMON_HITTING_WIDTH - 10;
-			right = left + WHIP_WIDTH;
+			right = left + WHIP_HITTING_WIDTH;
 		}
 		top = y + 13;
-		bottom = top + WHIP_HEIGHT;
+		bottom = top + WHIP_HITTING_HEIGHT;
 	}
 	else {
 		left = 0;

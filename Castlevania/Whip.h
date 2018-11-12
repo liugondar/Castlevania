@@ -2,8 +2,12 @@
 #include "GameObject.h"
 #include "SimonConstants.h"
 
-constexpr auto WHIP_WIDTH = 42;
-constexpr auto WHIP_HEIGHT = 19;
+constexpr auto WHIP_READY_WIDTH = 15;
+constexpr auto WHIP_READY_HEIGHT = 49;
+constexpr auto WHIP_START_HIT_WIDTH = 31;
+constexpr auto WHIP_START_HIT_HEIGHT = 40;
+constexpr auto WHIP_HITTING_WIDTH = 42;
+constexpr auto WHIP_HITTING_HEIGHT = 19;
 
 constexpr auto STATE_WHIP_READY_HIT = 0;
 constexpr auto STATE_WHIP_START_HIT= 1;

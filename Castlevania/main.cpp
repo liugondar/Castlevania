@@ -192,12 +192,12 @@ void loadTextures()
 	spriteManager->add(SPRITE_BRICK_2, 0, 0, BRICK_2_SIZE, BRICK_2_SIZE, texBrick2);
 
 	auto texWhip = textureManager->get(ID_TEX_WHIP);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_1, 158 - SIMON_HITTING_WIDTH, 0, 148 + 19, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_2, 390 - SIMON_HITTING_WIDTH, 0, 372 + 32, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_3, 560, 0, 532, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_1, 1273 + 19, 0, 1273, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_2, 1034 + 32, 0, 1032, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_3, 830, 0, 824 + 86, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_1, 158 - SIMON_HITTING_WIDTH, 0, 148 + WHIP_READY_WIDTH, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_2, 390 - SIMON_HITTING_WIDTH, 0, 372 + WHIP_START_HIT_WIDTH, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_3, 531+40, 0, 531, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_1, 1273 + WHIP_READY_WIDTH, 0, 1273, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_2, 1034 + WHIP_START_HIT_WIDTH, 0, 1032, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_3, 826, 0, 826+81, 0 + SIMON_HITTING_HEIGHT, texWhip);
 
 	auto texEmpty = textureManager->get(ID_TEX_EMPTY);
 	spriteManager->add(SPRITE_EMPTY, 0, 0, 10, 10, texEmpty);

@@ -4,10 +4,6 @@
 #include "Constants.h"
 using namespace std;
 
-enum AnimationState{
-	done = 1, acting = 0, notRender = 3
-};
-
 class Animation
 {
 	DWORD lastFrameTime;
