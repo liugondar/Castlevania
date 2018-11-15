@@ -13,7 +13,13 @@ BigCandle::~BigCandle()
 
 void BigCandle::render()
 {
-	if(getState()!=-1)animations[ANIMATION_BIG_CANDLE_IDLE]->render(x, y);
+	if (getState() != -1) animations[ANIMATION_BIG_CANDLE_IDLE]->render(x, y);
+	else {
+		auto heart = new Item();
+		heart->setPosition(x+BIG_CANDLE_WIDTH/2, y+BIG_CANDLE_HEIGHT/2);
+		GameObjectManger::getInstance()->addItem(heart);
+		GameObjectManger::getInstance()->removeGameObject(id);
+	}
 }
 
 

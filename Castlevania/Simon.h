@@ -10,7 +10,8 @@ class Simon :
 	public GameObject
 {
 	bool isHitting;
-	bool isReleaseHitButton;
+	bool isReleaseSitButton;
+	bool isOneTimeAnim;
 	Whip* whip;
 	bool isInGround;
 public:
@@ -22,8 +23,7 @@ public:
 	void handleOnKeyPress(BYTE *states);
 	void handleOnKeyDown(int KeyCode );
 	void handleOnKeyRelease(int KeyCode);
-	void moveLeft();
-	void moveRight();
+	void move(int side);
 	void jump();
 	void sit();
 	void stand();
@@ -37,6 +37,7 @@ public:
 	void setState(int state);
 	virtual void update(DWORD dt, vector<LPGameObject> *coObject = nullptr, vector<LPGameObject>* gameObject=nullptr);
 	virtual void render() override;
+	void updateAnimId();
 	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
 
 };

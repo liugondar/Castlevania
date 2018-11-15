@@ -154,9 +154,10 @@ void loadTextures()
 	textureManager->add(ID_TEX_BRICK_2, ENTRANCE_GROUND_BRICK_SCREEN_2);
 	textureManager->add(ID_TEX_BACKGROUND_LV1, TEXTURE_LVL1_BACKGROUND_PATH);
 	textureManager->add(ID_TEX_ENTRANCE_BACKGROUND, TEXTURE_ENTRANCE_BACKGROUND_PATH);
+	textureManager->add(ID_TEX_HEART_ITEM, TEXTURE_HEART_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
 
 	auto spriteManager = SpriteManager::getInstance();
-	auto textureSimon = textureManager->get(ID_TEX_SIMON);
+	auto texSim = textureManager->get(ID_TEX_SIMON);
 	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_1, 305*2, 9*2, 305*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
 	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_2, 279*2, 9*2, 279*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
 	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_3, 251*2, 9*2, 254*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
@@ -165,24 +166,33 @@ void loadTextures()
 	// spriteManager->add(SPRITE_SIMON_MOVING_LEFT_3, 1083, 18, 1083+ SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
 
 
-	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_1, 432, 0, 432 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_2, 373, 0, 373 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_3, 311, 0, 311 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIM_MOVE_R1, 436, 2, 468, 64, texSim);
+	spriteManager->add(SPRITE_SIM_MOVE_R2, 375, 2, 404, 64, texSim);
+	spriteManager->add(SPRITE_SIM_MOVE_R3, 314, 2, 345, 64, texSim);
 
-	spriteManager->add(SPRITE_SIMON_MOVING_LEFT_1, 491, 0, 491 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_MOVING_LEFT_2, 552, 0, 552 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_MOVING_LEFT_3, 604, 0, 604 + SIMON_MOVING_WIDTH, 0 + SIMON_MOVING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIM_MOVE_L1, 492, 2, 492 + SIM_MOVE_W, 64, texSim);
+	spriteManager->add(SPRITE_SIM_MOVE_L2, 557, 2, 557 + SIM_MOVE_W, 64, texSim);
+	spriteManager->add(SPRITE_SIM_MOVE_L3, 616, 2, 616 + SIM_MOVE_W, 64, texSim);
 
 
-	spriteManager->add(SPRITE_SIMON_SIT_FACE_RIGHT, 194, 16, 194 + SIMON_SITTING_WIDTH, 16 + SIMON_SITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_SIT_FACE_LEFT, 728, 16, 728 + SIMON_SITTING_WIDTH, 16 + SIMON_SITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIM_SIT_R, 196, 18, 196 + SIM_SIT_W, 18 + SIM_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_SIT_L, 732, 18, 732 + SIM_SIT_W, 18 + SIM_SIT_H, texSim);
 
-	spriteManager->add(SPRITE_SIMON_HITTING_LEFT1, 791, 0, 791 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_LEFT2, 851, 0, 851 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_LEFT3, 901, 0, 901 + SIMON_HITTING_WIDTH, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT1, 121, 0, 121 + 48, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT2, 76, 0, 76 + 32, 0 + SIMON_HITTING_HEIGHT, textureSimon);
-	spriteManager->add(SPRITE_SIMON_HITTING_RIGHT3, 14, 0, 14 + 45, 0 + SIMON_HITTING_HEIGHT, textureSimon);
+	spriteManager->add(SPRITE_SIM_HIT_L1, 792, 2, 792 + SIM_HIT_W, 2 + SIM_HIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_L2, 852, 2, 852 + SIM_HIT_W, 2 + SIM_HIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_L3, 901, 2, 901 + SIM_HIT_W, 2 + SIM_HIT_H, texSim);
+
+	spriteManager->add(SPRITE_SIM_HIT_R1, 121, 0, 121 + 48, 0 + SIM_HIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_R2, 76, 0, 76 + 32, 0 + SIM_HIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_R3, 14, 0, 14 + 45, 0 + SIM_HIT_H, texSim);
+
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L1, 912, 84, 912 + SIM_HIT_WHEN_SIT_W, 84 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L2, 492, 150, 492 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L3, 540, 150, 540 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
+
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R1, 0, 84, 0 + SIM_HIT_WHEN_SIT_W, 84 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R2, 436, 150, 436 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R3, 376, 150, 376 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
 
 
 	auto texMisc = textureManager->get(ID_TEX_MISC);
@@ -192,12 +202,12 @@ void loadTextures()
 	spriteManager->add(SPRITE_BRICK_2, 0, 0, BRICK_2_SIZE, BRICK_2_SIZE, texBrick2);
 
 	auto texWhip = textureManager->get(ID_TEX_WHIP);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_1, 158 - SIMON_HITTING_WIDTH, 0, 148 + WHIP_READY_WIDTH, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_2, 390 - SIMON_HITTING_WIDTH, 0, 372 + WHIP_START_HIT_WIDTH, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_3, 531+40, 0, 531, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_1, 1273 + WHIP_READY_WIDTH, 0, 1273, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_2, 1034 + WHIP_START_HIT_WIDTH, 0, 1032, 0 + SIMON_HITTING_HEIGHT, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_3, 826, 0, 826+81, 0 + SIMON_HITTING_HEIGHT, texWhip);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_1, 158 - SIM_HIT_W, 0, 148 + WHIP_READY_WIDTH, 0 + SIM_HIT_W, texWhip);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_2, 390 - SIM_HIT_W, 0, 372 + WHIP_START_HIT_WIDTH, 0 + SIM_HIT_W, texWhip);
+	spriteManager->add(SPRITE_WHIP_LEFT_LV1_3, 531 + 40, 0, 531, 0 + SIM_HIT_W, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_1, 1273 + WHIP_READY_WIDTH, 0, 1273, 0 + SIM_HIT_W, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_2, 1034 + WHIP_START_HIT_WIDTH, 0, 1032, 0 + SIM_HIT_W, texWhip);
+	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_3, 826, 0, 826 + 81, 0 + SIM_HIT_W, texWhip);
 
 	auto texEmpty = textureManager->get(ID_TEX_EMPTY);
 	spriteManager->add(SPRITE_EMPTY, 0, 0, 10, 10, texEmpty);
@@ -205,6 +215,9 @@ void loadTextures()
 	auto texBigCandle = textureManager->get(ID_TEX_BIG_CANDLE);
 	spriteManager->add(SPRITE_BIG_CANDLE_1, 0, 0, BIG_CANDLE_WIDTH, BIG_CANDLE_HEIGHT, texBigCandle);
 	spriteManager->add(SPRITE_BIG_CANDLE_2, 32, 0, 32 + BIG_CANDLE_WIDTH, BIG_CANDLE_HEIGHT, texBigCandle);
+
+	auto textHeart = textureManager->get(ID_TEX_HEART_ITEM);
+	spriteManager->add(SPRITE_HEART_ITEM, 0, 0, 24, 20, textHeart);
 }
 
 void loadAnimations()
@@ -233,6 +246,10 @@ void loadAnimations()
 	animation->add(SPRITE_BIG_CANDLE_2);
 	animationManager->add(ANIMATION_BIG_CANDLE_IDLE, animation);
 
+	animation = new Animation(100);
+	animation->add(SPRITE_HEART_ITEM);
+	animationManager->add(ANIM_HEART_ITEM_IDLE, animation);
+
 	/* Simon animations */
 	loadSimonAnimations();
 }
@@ -241,45 +258,63 @@ void loadSimonAnimations()
 {
 	auto animationManager = AnimationManager::getInstance();
 	auto animation = new Animation(100);
-	animation->add(SPRITE_SIMON_MOVING_RIGHT_1);
-	animation->add(SPRITE_SIMON_MOVING_RIGHT_2);
-	animation->add(SPRITE_SIMON_MOVING_RIGHT_3);
-	animationManager->add(ANIMATION_SIMON_WALKING_RIGHT, animation);
+	/// Moving anim
+	animation->add(SPRITE_SIM_MOVE_R1);
+	animation->add(SPRITE_SIM_MOVE_R2);
+	animation->add(SPRITE_SIM_MOVE_R3);
+	animationManager->add(ANIM_SIM_WALKING_RIGHT, animation);
 
 	animation = new Animation(100);
-	animation->add(SPRITE_SIMON_MOVING_LEFT_1);
-	animation->add(SPRITE_SIMON_MOVING_LEFT_2);
-	animation->add(SPRITE_SIMON_MOVING_LEFT_3);
-	animationManager->add(ANIMATION_SIMON_WALKING_LEFT, animation);
+	animation->add(SPRITE_SIM_MOVE_L1);
+	animation->add(SPRITE_SIM_MOVE_L2);
+	animation->add(SPRITE_SIM_MOVE_L3);
+	animationManager->add(ANIM_SIM_WALKING_LEFT, animation);
+
+	/// Hitting anim
+	animation = new Animation(SIMON_HITTING_TIME);
+	animation->add(SPRITE_SIM_HIT_L1);
+	animation->add(SPRITE_SIM_HIT_L2);
+	animation->add(SPRITE_SIM_HIT_L3);
+	animation->add(SPRITE_SIM_MOVE_L1);
+	animationManager->add(ANIM_SIM_HIT_LEFT, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
-	animation->add(SPRITE_SIMON_HITTING_LEFT1);
-	animation->add(SPRITE_SIMON_HITTING_LEFT2);
-	animation->add(SPRITE_SIMON_HITTING_LEFT3);
-	animation->add(SPRITE_SIMON_MOVING_LEFT_1);
-	animationManager->add(ANIMATION_SIMON_HITTING_LEFT, animation);
+	animation->add(SPRITE_SIM_HIT_R1);
+	animation->add(SPRITE_SIM_HIT_R2);
+	animation->add(SPRITE_SIM_HIT_R3);
+	animation->add(SPRITE_SIM_MOVE_R1);
+	animationManager->add(ANIM_SIM_HIT_RIGHT, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
-	animation->add(SPRITE_SIMON_HITTING_RIGHT1);
-	animation->add(SPRITE_SIMON_HITTING_RIGHT2);
-	animation->add(SPRITE_SIMON_HITTING_RIGHT3);
-	animation->add(SPRITE_SIMON_MOVING_RIGHT_1);
-	animationManager->add(ANIMATION_SIMON_HITTING_RIGHT, animation);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_L1);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_L2);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_L3);
+	animation->add(SPRITE_SIM_SIT_L);
+	animationManager->add(ANIM_SIM_HIT_WHEN_SIT_LEFT, animation);
+
+	animation = new Animation(SIMON_HITTING_TIME);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_R1);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_R2);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_R3);
+	animation->add(SPRITE_SIM_SIT_R);
+	animationManager->add(ANIM_SIM_HIT_WHEN_SIT_RIGHT, animation);
+
+	/// Idle anim
+	animation = new Animation(100);
+	animation->add(SPRITE_SIM_MOVE_R1);
+	animationManager->add(ANIM_SIM_IDLE_FACE_RIGHT, animation);
 
 	animation = new Animation(100);
-	animation->add(SPRITE_SIMON_MOVING_RIGHT_1);
-	animationManager->add(ANIMATION_SIMON_IDLE_FACE_RIGHT, animation);
+	animation->add(SPRITE_SIM_MOVE_L1);
+	animationManager->add(ANIM_SIM_IDLE_FACE_LEFT, animation);
 
 	animation = new Animation(100);
-	animation->add(SPRITE_SIMON_MOVING_LEFT_1);
-	animationManager->add(ANIMATION_SIMON_IDLE_FACE_LEFT, animation);
+	animation->add(SPRITE_SIM_SIT_R);
+	animationManager->add(ANIM_SIM_SIT_FACE_RIGHT, animation);
+	animation = new Animation(100);
+	animation->add(SPRITE_SIM_SIT_L);
+	animationManager->add(ANIM_SIM_SIT_FACE_LEFT, animation);
 
-	animation = new Animation(100);
-	animation->add(SPRITE_SIMON_SIT_FACE_RIGHT);
-	animationManager->add(ANIMATION_SIMON_SIT_FACE_RIGHT, animation);
-	animation = new Animation(100);
-	animation->add(SPRITE_SIMON_SIT_FACE_LEFT);
-	animationManager->add(ANIMATION_SIMON_SIT_FACE_LEFT, animation);
 }
 
 void loadGameObjects()

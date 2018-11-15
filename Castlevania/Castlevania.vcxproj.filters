@@ -60,9 +60,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
     <ClCompile Include="Brick.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
@@ -111,6 +108,9 @@
     <ClCompile Include="BigCandle.cpp">
       <Filter>Source Files\StaticObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -127,9 +127,6 @@
     </ClInclude>
     <ClInclude Include="Brick.h">
       <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="SweptAABB.h">
       <Filter>Header Files\Util</Filter>
@@ -175,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="BigCandle.h">
       <Filter>Header Files\StaticObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

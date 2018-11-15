@@ -2,12 +2,11 @@
 #include "Game.h"
 #include "AnimationManager.h"
 #include "TextureManager.h"
-#include "Box.h"
 #include "SweptAABB.h"
 using namespace std;
 
-#define FACE_TO_RIGHT 1
-#define FACE_TO_LEFT -1
+constexpr auto FACE_TO_RIGHT = 1;
+constexpr auto FACE_TO_LEFT = -1;
 
 struct CollisionEvent;
 typedef CollisionEvent* LPCollisionEvent;
@@ -17,6 +16,8 @@ typedef GameObject* LPGameObject;
 class GameObject
 {
 protected:
+	int id;
+
 	float x;
 	float y;
 	float dx;	// dx = vx*dt
@@ -28,7 +29,7 @@ protected:
 	DWORD dt;
 	int animationId;
 
-	FaceSide faceSide;
+	int faceSide;
 
 	int currentState;
 	int previousState;
@@ -50,11 +51,13 @@ public:
 	}
 	~GameObject();
 
+	void setId(int id) { this->id = id; }
 	void setPosition(float x, float y) { this->x = x; this->y = y; }
 	void setState(int state) { this->previousState = this->currentState; this->currentState = state; }
 	void setSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void setBoundingGame(float x, float y) { this->boundingGameX = x; this->boundingGameY = y; }
 
+	int getId() { return id; }
 	int getPreviousState() { return previousState; }
 	int getState() { return currentState; }
 	void getSpeed(float &vx, float &vy) { vx = this->vx; vy = this->vy; }

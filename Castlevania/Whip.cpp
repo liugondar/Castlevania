@@ -55,7 +55,7 @@ void Whip::update(DWORD dt, float x, float y, vector<LPGameObject> *coObject)
 	}
 }
 
-void Whip::setSide(FaceSide side)
+void Whip::setSide(int side)
 {
 	faceSide = side;
 }
@@ -78,7 +78,7 @@ void Whip::getBoundingBox(float & left, float & top, float & right, float & bott
 			right = x + 10;
 		}
 		else {
-			left = x + SIMON_HITTING_WIDTH - 10;
+			left = x + SIM_HIT_W - 10;
 			right = left + WHIP_HITTING_WIDTH;
 		}
 		top = y + 13;

@@ -24,7 +24,7 @@ public:
 	// Inherited via GameObject
 	virtual void render() override;
 	void update(DWORD dt, float x, float y, vector<LPGameObject> *coObject);
-	void setSide(FaceSide side);
+	void setSide(int side);
 	void refreshAnim();
 	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
 };

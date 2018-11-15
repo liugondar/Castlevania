@@ -3,10 +3,15 @@
 #include "Brick.h"
 #include "Simon.h"
 #include "BigCandle.h"
+#include "Item.h"
 using namespace std;
 
 constexpr auto SCENE_WIDTH = 1536;
 constexpr auto SCENE_HEIGHT = 384;
+constexpr auto simonId = 1;
+constexpr auto bigCandle1Id = 2;
+constexpr auto bigCandle2Id= 3;
+constexpr auto bigCandle3Id= 4;
 
 class GameObjectManger
 {
@@ -15,6 +20,7 @@ private:
 	Simon* simon;
 	vector<GameObject *> bricks;
 	vector <GameObject*> gameObjects;
+	vector <GameObject*> items;
 public:
 	static GameObjectManger* getInstance() {
 		if (instance == nullptr) instance = new GameObjectManger();
@@ -42,9 +48,15 @@ public:
 		bricks.push_back(brick);
 	}
 
+	void addItem(Item* item) {
+		items.push_back(item);
+	}
+
 	void addSimon(Simon * simon) {
 		this->simon = simon;
 	}
+
+	void removeGameObject(int id);
 
 	vector<GameObject*> getBricks() { return bricks; }
 };

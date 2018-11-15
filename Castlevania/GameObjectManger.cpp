@@ -46,15 +46,18 @@ void GameObjectManger::keyState(BYTE * states)
 void GameObjectManger::loadGameObjects()
 {
 	auto simon = new Simon();
-	Simon::addAnimation(ANIMATION_SIMON_WALKING_RIGHT);
-	Simon::addAnimation(ANIMATION_SIMON_WALKING_LEFT);
-	Simon::addAnimation(ANIMATION_SIMON_IDLE_FACE_LEFT);
-	Simon::addAnimation(ANIMATION_SIMON_IDLE_FACE_RIGHT);
-	Simon::addAnimation(ANIMATION_SIMON_SIT_FACE_LEFT);
-	Simon::addAnimation(ANIMATION_SIMON_SIT_FACE_RIGHT);
-	Simon::addAnimation(ANIMATION_SIMON_HITTING_LEFT);
-	Simon::addAnimation(ANIMATION_SIMON_HITTING_RIGHT);
+	Simon::addAnimation(ANIM_SIM_WALKING_RIGHT);
+	Simon::addAnimation(ANIM_SIM_WALKING_LEFT);
+	Simon::addAnimation(ANIM_SIM_IDLE_FACE_LEFT);
+	Simon::addAnimation(ANIM_SIM_IDLE_FACE_RIGHT);
+	Simon::addAnimation(ANIM_SIM_SIT_FACE_LEFT);
+	Simon::addAnimation(ANIM_SIM_SIT_FACE_RIGHT);
+	Simon::addAnimation(ANIM_SIM_HIT_LEFT);
+	Simon::addAnimation(ANIM_SIM_HIT_RIGHT);
+	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SIT_LEFT);
+	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SIT_RIGHT);
 
+	simon->setId(simonId);
 	simon->setPosition(10.f, 100.f);
 	simon->setState(STATE_SIMON_IDLE);
 	simon->setBoundingGame(SCENE_WIDTH, SCENE_HEIGHT);
@@ -66,6 +69,7 @@ void GameObjectManger::loadGameObjects()
 	Whip::addAnimation(ANIMATION_WHIP_LV1_LEFT);
 	Whip::addAnimation(ANIMATION_WHIP_LV1_RIGHT);
 	BigCandle::addAnimation(ANIMATION_BIG_CANDLE_IDLE);
+	Item::addAnimation(ANIM_HEART_ITEM_IDLE);
 
 	for (int i = 0; i < 100; i++)
 	{
@@ -74,11 +78,35 @@ void GameObjectManger::loadGameObjects()
 		addBrick(brick);
 	}
 
-	for (int i = 0; i < 20; i++)
+	auto candle = new BigCandle();
+	candle->setPosition(0 + 5 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setId(bigCandle1Id);
+	add(candle);
+
+	candle = new BigCandle();
+	candle->setPosition(0 + 6 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setId(bigCandle2Id);
+	add(candle);
+
+	candle = new BigCandle();
+	candle->setPosition(0 + 7 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setId(bigCandle3Id);
+	add(candle);
+}
+
+void GameObjectManger::removeGameObject(int id)
+{
+	int index = -1;
+	for (auto i = gameObjects.begin(); i < gameObjects.end(); )
 	{
-		auto candle = new BigCandle();
-		candle->setPosition(0 + i * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
-		add(candle);
+		index++;
+		if (index == gameObjects.size()) break;
+		if (gameObjects[index]->getId()==id) {
+			i = gameObjects.erase(i);
+		}
+		else {
+			++i;
+		}
 	}
 }
 
@@ -97,10 +125,18 @@ void GameObjectManger::render()
 	{
 		bricks[i]->render();
 	}
+	for (int i = 0; i < items.size(); i++)
+	{
+		items[i]->render();
+	}
 }
 
 void GameObjectManger::update(DWORD dt)
 {
 	simon->update(dt, &bricks, &gameObjects);
+	for (int i = 0; i < items.size(); i++)
+	{
+		items[i]->update(dt,&bricks);
+	}
 	updateCamera(dt);
 }
