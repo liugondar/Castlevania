@@ -1,15 +1,15 @@
 #include "GameObject.h"
-
+#include <algorithm>
 
 unordered_map<int, Animation* > GameObject::animations;
 
 GameObject::~GameObject()
 {
-	if (texture != NULL) texture->Release();
+	if (texture != nullptr) texture->Release();
 }
 
 
-void GameObject::RenderBoundingBox()
+void GameObject::renderBoundingBox()
 {
 	D3DXVECTOR3 p(x, y, 0);
 	RECT rect;
@@ -73,7 +73,7 @@ LPCollisionEvent GameObject::sweptAABBEx(LPGameObject coO)
 	coObjects: the list of colliable objects
 	coEvents: list of potential collisions
 */
-void GameObject::calcPotentialCollisions
+	void GameObject::calcPotentialCollisions
 (vector<LPGameObject>* coObjects, vector<LPCollisionEvent>& coEvents)
 {
 	for (UINT i = 0; i < coObjects->size(); i++)
@@ -122,10 +122,9 @@ void GameObject::filterCollision
 }
 
 
-void GameObject::update(DWORD dt, vector<GameObject*> *coObject)
+void GameObject::update(const DWORD dt, vector<GameObject*> *coObject)
 {
 	this->dt = dt;
 	dx = vx * dt;
 	dy = vy * dt;
 }
-

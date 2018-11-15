@@ -23,3 +23,6 @@ void Brick::getBoundingBox(float & left, float & top, float & right, float & bot
 	bottom = y + BRICK_2_SIZE;
 }
 
+void Brick::update(DWORD dt, vector<GameObject*>* coObjects)
+{
+}

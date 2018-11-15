@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Whip.h"
+#include "Item.h"
 #include "Constants.h"
 #include "SetTimeOut.h"
 #include <conio.h>
@@ -18,7 +19,6 @@ public:
 	Simon();
 	~Simon();
 
-	void checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks);
 
 	void handleOnKeyPress(BYTE *states);
 	void handleOnKeyDown(int KeyCode );
@@ -35,9 +35,14 @@ public:
 	
 	// Inherited via GameObject
 	void setState(int state);
-	virtual void update(DWORD dt, vector<LPGameObject> *coObject = nullptr, vector<LPGameObject>* gameObject=nullptr);
+	virtual void update(DWORD dt, vector<LPGameObject> *bricks = nullptr, 
+		vector<LPGameObject>* gameObjects=nullptr, vector<GameObject*> *items=nullptr);
+	void checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks);
+	void checkCollisionWithItems(vector<GameObject*> * items = nullptr);
+
 	virtual void render() override;
 	void updateAnimId();
+
 	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
 
 };

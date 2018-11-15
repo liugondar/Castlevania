@@ -1,5 +1,5 @@
+#include <algorithm>
 #include "SweptAABB.h"
-#include "debug.h"
 
 bool isColliding(float bl, float bt, float br,float bb, float sl, float st, float sr, float sb)
 {
@@ -93,7 +93,7 @@ void sweptAABB(
 	t_entry = std::max(tx_entry, ty_entry);
 	t_exit = std::min(tx_exit, ty_exit);
 
-	bool notCollision = (t_entry > t_exit
+	const bool notCollision = (t_entry > t_exit
 		|| (t_entry < 0.0f && t_entry < 0.0f)
 		|| t_entry > 1.0f
 		|| t_entry > 1.0f

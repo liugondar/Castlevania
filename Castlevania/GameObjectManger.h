@@ -2,22 +2,20 @@
 #include "Game.h"
 #include "Brick.h"
 #include "Simon.h"
-#include "BigCandle.h"
-#include "Item.h"
 using namespace std;
 
 constexpr auto SCENE_WIDTH = 1536;
 constexpr auto SCENE_HEIGHT = 384;
-constexpr auto simonId = 1;
-constexpr auto bigCandle1Id = 2;
-constexpr auto bigCandle2Id= 3;
-constexpr auto bigCandle3Id= 4;
+constexpr auto SIMON_ID = 1;
+constexpr auto BIG_CANDLE1_ID = 2;
+constexpr auto BIG_CANDLE2_ID= 3;
+constexpr auto BIG_CANDLE3_ID= 4;
 
 class GameObjectManger
 {
 private:
 	static GameObjectManger* instance;
-	Simon* simon;
+	Simon* simon{};
 	vector<GameObject *> bricks;
 	vector <GameObject*> gameObjects;
 	vector <GameObject*> items;
@@ -28,16 +26,16 @@ public:
 	}
 
 	// util methods
-	void updateCamera(DWORD dt);
+	void updateCamera(DWORD dt) const;
 
 	// event methods
-	void onKeyDown(int KeyCode);
-	void onKeyUp(int KeyCode);
-	void keyState(BYTE *states);
+	void onKeyDown(int keyCode) const;
+	void onKeyUp(int keyCode) const;
+	void keyState(BYTE *states) const;
 	void render();
 	void update(DWORD dt);
 
-	// mananger objects methods
+	// manager objects methods
 	void loadGameObjects();
 
 	void add(GameObject* gameObject) {
@@ -57,7 +55,9 @@ public:
 	}
 
 	void removeGameObject(int id);
+	void removeGameObject(GameObject* gameObject);
+	void removeItem(GameObject* item);
 
-	vector<GameObject*> getBricks() { return bricks; }
+	vector<GameObject*> getBricks() const { return bricks; }
 };
 

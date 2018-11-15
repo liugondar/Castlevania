@@ -1,8 +1,9 @@
 #include "GameObjectManger.h"
+#include "BigCandle.h"
 
 GameObjectManger* GameObjectManger::instance = nullptr;
 
-void GameObjectManger::updateCamera(DWORD dt)
+void GameObjectManger::updateCamera(const DWORD dt) const
 {
 	auto game = Game::getInstance();
 	float simonX, simonY, xCamera, yCamera, simonVx, simonVy;
@@ -22,23 +23,23 @@ void GameObjectManger::updateCamera(DWORD dt)
 			game->setCameraPosition(newCameraPositionX, yCamera);
 	}
 	else {
-		auto middlePointOfEndScreen = (SCENE_WIDTH - SCREEN_WIDTH) + (SCREEN_WIDTH / 2);
+		const auto middlePointOfEndScreen = (SCENE_WIDTH - SCREEN_WIDTH) + (SCREEN_WIDTH / 2);
 		if (simonX <= middlePointOfEndScreen)
 			game->setCameraPosition(newCameraPositionX, yCamera);
 	}
 }
 
-void GameObjectManger::onKeyDown(int KeyCode)
+void GameObjectManger::onKeyDown(const int keyCode) const
 {
-	simon->handleOnKeyDown(KeyCode);
+	simon->handleOnKeyDown(keyCode);
 }
 
-void GameObjectManger::onKeyUp(int KeyCode)
+void GameObjectManger::onKeyUp(const int keyCode) const
 {
-	simon->handleOnKeyRelease(KeyCode);
+	simon->handleOnKeyRelease(keyCode);
 }
 
-void GameObjectManger::keyState(BYTE * states)
+void GameObjectManger::keyState(BYTE * states) const
 {
 	simon->handleOnKeyPress(states);
 }
@@ -57,7 +58,7 @@ void GameObjectManger::loadGameObjects()
 	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SIT_LEFT);
 	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SIT_RIGHT);
 
-	simon->setId(simonId);
+	simon->setId(SIMON_ID);
 	simon->setPosition(10.f, 100.f);
 	simon->setState(STATE_SIMON_IDLE);
 	simon->setBoundingGame(SCENE_WIDTH, SCENE_HEIGHT);
@@ -71,7 +72,7 @@ void GameObjectManger::loadGameObjects()
 	BigCandle::addAnimation(ANIMATION_BIG_CANDLE_IDLE);
 	Item::addAnimation(ANIM_HEART_ITEM_IDLE);
 
-	for (int i = 0; i < 100; i++)
+	for (auto i = 0; i < 100; i++)
 	{
 		auto brick = new Brick();
 		brick->setPosition(0 + i * 16.0f, LV1_GROUND_Y);
@@ -80,21 +81,21 @@ void GameObjectManger::loadGameObjects()
 
 	auto candle = new BigCandle();
 	candle->setPosition(0 + 5 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
-	candle->setId(bigCandle1Id);
+	candle->setId(BIG_CANDLE1_ID);
 	add(candle);
 
 	candle = new BigCandle();
 	candle->setPosition(0 + 6 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
-	candle->setId(bigCandle2Id);
+	candle->setId(BIG_CANDLE2_ID);
 	add(candle);
 
 	candle = new BigCandle();
 	candle->setPosition(0 + 7 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
-	candle->setId(bigCandle3Id);
+	candle->setId(BIG_CANDLE3_ID);
 	add(candle);
 }
 
-void GameObjectManger::removeGameObject(int id)
+void GameObjectManger::removeGameObject(const int id)
 {
 	int index = -1;
 	for (auto i = gameObjects.begin(); i < gameObjects.end(); )
@@ -110,31 +111,63 @@ void GameObjectManger::removeGameObject(int id)
 	}
 }
 
+void GameObjectManger::removeGameObject(GameObject * gameObject)
+{
+	int index = -1;
+	for (auto i = gameObjects.begin(); i < gameObjects.end(); )
+	{
+		index++;
+		if (index == gameObjects.size()) break;
+		if (gameObjects[index]== gameObject) {
+			i = gameObjects.erase(i);
+		}
+		else {
+			++i;
+		}
+	}
+}
+
+void GameObjectManger::removeItem(GameObject * item)
+{
+	auto index = -1;
+	for (auto i = items.begin(); i < items.end(); )
+	{
+		index++;
+		if (index == items.size()) break;
+		if (items[index] == item) {
+			i = items.erase(i);
+		}
+		else {
+			++i;
+		}
+	}
+}
+
 void GameObjectManger::render()
 {
 	auto game = Game::getInstance();
-	auto texture = TextureManager::getInstance()->get(ID_TEX_BACKGROUND_LV1);
+	const auto texture = TextureManager::getInstance()->get(ID_TEX_BACKGROUND_LV1);
 	game->draw(0, 60, texture, 0, 0, SCENE_WIDTH, 384, 255);
 
-	for (int i = 0; i < gameObjects.size(); i++)
+	for (auto i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->render();
 	}
 	this->simon->render();
-	for (int i = 0; i < bricks.size(); i++)
+	for (auto i = 0; i < bricks.size(); i++)
 	{
 		bricks[i]->render();
 	}
-	for (int i = 0; i < items.size(); i++)
+	for (auto i = 0; i < items.size(); i++)
 	{
 		items[i]->render();
 	}
 }
 
-void GameObjectManger::update(DWORD dt)
+void GameObjectManger::update(const DWORD dt)
 {
-	simon->update(dt, &bricks, &gameObjects);
-	for (int i = 0; i < items.size(); i++)
+	simon->update(dt, &bricks, &gameObjects,&items);
+	for (auto i = 0; i < items.size(); i++)
 	{
 		items[i]->update(dt,&bricks);
 	}

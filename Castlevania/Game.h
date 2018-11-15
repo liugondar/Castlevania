@@ -3,7 +3,6 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <unordered_map>
-#include "Constants.h"
 #include"debug.h"
 #include <dinput.h>
 #include <vector>
@@ -14,6 +13,7 @@
 #define KEYBOARD_BUFFER_SIZE 1024
 #define DIRECTINPUT_VERSION 0x0800
 #define SCREEN_LEFT 0
+
 constexpr auto WINDOW_CLASS_NAME = LR"(Castlevania)";
 constexpr auto MAIN_WINDOW_TITLE = LR"(Castlevania)";
 

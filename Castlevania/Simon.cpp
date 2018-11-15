@@ -133,11 +133,12 @@ void Simon::beginFight()
 {
 }
 
-void Simon::update(DWORD dt, vector<LPGameObject>* bricks, vector<LPGameObject>* gameObjects)
+void Simon::update(DWORD dt, vector<LPGameObject>* bricks, vector<LPGameObject>* gameObjects, vector<GameObject*>* items)
 {
 	GameObject::update(dt);
 	whip->update(dt, x, y, gameObjects);
 
+	checkCollisionWithItems(items);
 	checkCollisionWithGround(dt, bricks);
 	auto newPositionX = x + dx;
 	if (newPositionX >= 0 && newPositionX + SIM_MOVE_W <= boundingGameX) {
@@ -149,9 +150,33 @@ void Simon::update(DWORD dt, vector<LPGameObject>* bricks, vector<LPGameObject>*
 	// simple fall down
 }
 
+void Simon::checkCollisionWithItems(vector<GameObject*>* items)
+{
+	vector<LPCollisionEvent> coEvents;
+	vector<LPCollisionEvent> coEventsResult;
+	coEvents.clear();
+
+	calcPotentialCollisions(items, coEvents);
+
+	if (coEvents.size() > 0) {
+		float min_tx, min_ty, nx = 0, ny;
+		filterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		for (auto i = 0; i < coEventsResult.size(); i++)
+		{
+
+			auto type=coEventsResult[i]->obj->getType();
+			
+			if (type == ItemType::heart) {
+
+			}
+		}
+	}
+
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+}
+
 void Simon::render()
 {
-	DebugOut(L"is hitting in render %d\n", isHitting);
 	if (isHitting) {
 		whip->setSide(faceSide);
 		whip->render();
@@ -172,7 +197,7 @@ void Simon::updateAnimId()
 			: ANIM_SIM_WALKING_RIGHT;
 	}
 	else if (currentState == STATE_SIMON_SITTING) {
-		if (isReleaseSitButton){
+		if (isReleaseSitButton) {
 			standUp();
 		}
 		animationId = faceSide == FaceSide::left
@@ -229,7 +254,7 @@ void Simon::updateAnimId()
 		animationId = faceSide == FaceSide::left
 			? ANIM_SIM_IDLE_FACE_LEFT
 			: ANIM_SIM_IDLE_FACE_RIGHT;
-	
+
 	}
 }
 

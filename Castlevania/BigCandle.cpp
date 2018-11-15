@@ -17,8 +17,9 @@ void BigCandle::render()
 	else {
 		auto heart = new Item();
 		heart->setPosition(x+BIG_CANDLE_WIDTH/2, y+BIG_CANDLE_HEIGHT/2);
+		heart->setType(ItemType::heart);
 		GameObjectManger::getInstance()->addItem(heart);
-		GameObjectManger::getInstance()->removeGameObject(id);
+		GameObjectManger::getInstance()->removeGameObject(this);
 	}
 }
 

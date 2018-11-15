@@ -1,8 +1,4 @@
 ﻿#pragma once
-#include <math.h>
-#include <limits>
-#include <iostream>
-#include <algorithm>
 bool isColliding(float bl, float bt, float br, float bb, float sl, float st, float sr, float sb);
 void sweptAABB(
 	float ml,			// move left 
