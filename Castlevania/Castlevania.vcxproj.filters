@@ -111,6 +111,15 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\StaticObjects</Filter>
     </ClCompile>
+    <ClCompile Include="HeartItem.cpp">
+      <Filter>Source Files\StaticObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="WhipItem.cpp">
+      <Filter>Source Files\StaticObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="KnifeItem.cpp">
+      <Filter>Source Files\StaticObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -176,5 +185,22 @@
     <ClInclude Include="Item.h">
       <Filter>Header Files\StaticObjects</Filter>
     </ClInclude>
+    <ClInclude Include="HeartItem.h">
+      <Filter>Header Files\StaticObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WhipItem.h">
+      <Filter>Header Files\StaticObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KnifeItem.h">
+      <Filter>Header Files\StaticObjects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Castlevania.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

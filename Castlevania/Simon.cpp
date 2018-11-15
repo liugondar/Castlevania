@@ -1,4 +1,5 @@
 #include "Simon.h"
+#include "GameObjectManger.h"
 
 Simon::Simon()
 {
@@ -158,21 +159,21 @@ void Simon::checkCollisionWithItems(vector<GameObject*>* items)
 
 	calcPotentialCollisions(items, coEvents);
 
-	if (coEvents.size() > 0) {
-		float min_tx, min_ty, nx = 0, ny;
-		filterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-		for (auto i = 0; i < coEventsResult.size(); i++)
+	if (!coEvents.empty()) {
+		float minTx, minTy, nx = 0, ny;
+		filterCollision(coEvents, coEventsResult, minTx, minTy, nx, ny);
+		for (auto& i : coEventsResult)
 		{
-
-			auto type=coEventsResult[i]->obj->getType();
-			
-			if (type == ItemType::heart) {
-
+			const auto item = i->obj;
+			if (item->getType() == ItemType::heart) {
 			}
+			else if (item->getType() == ItemType::whip) {
+			}
+			item->setState(State::dead);
 		}
 	}
 
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+	for (auto& coEvent : coEvents) delete coEvent;
 }
 
 void Simon::render()
@@ -183,7 +184,6 @@ void Simon::render()
 	}
 	animations[animationId]->render(x, y, isOneTimeAnim);
 	previousAmiId = animationId;
-
 }
 
 void Simon::updateAnimId()

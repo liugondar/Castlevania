@@ -1,4 +1,5 @@
 #include"main.h"
+#include "KnifeItem.h"
 
 Game* game;
 SampleKeyHander * keyHandler;
@@ -143,7 +144,7 @@ void loadResources() {
 
 void loadTextures()
 {
-	TextureManager* textureManager = TextureManager::getInstance();
+	auto textureManager = TextureManager::getInstance();
 
 	textureManager->add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
 	textureManager->add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
@@ -155,9 +156,11 @@ void loadTextures()
 	textureManager->add(ID_TEX_BACKGROUND_LV1, TEXTURE_LVL1_BACKGROUND_PATH);
 	textureManager->add(ID_TEX_ENTRANCE_BACKGROUND, TEXTURE_ENTRANCE_BACKGROUND_PATH);
 	textureManager->add(ID_TEX_HEART_ITEM, TEXTURE_HEART_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_WHIP_ITEM, TEXTURE_WHIP_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_KNIFE_ITEM, TEXTURE_KNIFE_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
 
 	auto spriteManager = SpriteManager::getInstance();
-	auto texSim = textureManager->get(ID_TEX_SIMON);
+	const auto texSim = textureManager->get(ID_TEX_SIMON);
 	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_1, 305*2, 9*2, 305*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
 	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_2, 279*2, 9*2, 279*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
 	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_3, 251*2, 9*2, 254*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
@@ -195,13 +198,13 @@ void loadTextures()
 	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R3, 376, 150, 376 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
 
 
-	auto texMisc = textureManager->get(ID_TEX_MISC);
+	const auto texMisc = textureManager->get(ID_TEX_MISC);
 	spriteManager->add(SPRITE_BRICK, 408, 225, 424, 241, texMisc);
 
-	auto texBrick2 = textureManager->get(ID_TEX_BRICK_2);
+	const auto texBrick2 = textureManager->get(ID_TEX_BRICK_2);
 	spriteManager->add(SPRITE_BRICK_2, 0, 0, BRICK_2_SIZE, BRICK_2_SIZE, texBrick2);
 
-	auto texWhip = textureManager->get(ID_TEX_WHIP);
+	const auto texWhip = textureManager->get(ID_TEX_WHIP);
 	spriteManager->add(SPRITE_WHIP_LEFT_LV1_1, 158 - SIM_HIT_W, 0, 148 + WHIP_READY_WIDTH, 0 + SIM_HIT_W, texWhip);
 	spriteManager->add(SPRITE_WHIP_LEFT_LV1_2, 390 - SIM_HIT_W, 0, 372 + WHIP_START_HIT_WIDTH, 0 + SIM_HIT_W, texWhip);
 	spriteManager->add(SPRITE_WHIP_LEFT_LV1_3, 531 + 40, 0, 531, 0 + SIM_HIT_W, texWhip);
@@ -209,15 +212,21 @@ void loadTextures()
 	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_2, 1034 + WHIP_START_HIT_WIDTH, 0, 1032, 0 + SIM_HIT_W, texWhip);
 	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_3, 826, 0, 826 + 81, 0 + SIM_HIT_W, texWhip);
 
-	auto texEmpty = textureManager->get(ID_TEX_EMPTY);
+	const auto texEmpty = textureManager->get(ID_TEX_EMPTY);
 	spriteManager->add(SPRITE_EMPTY, 0, 0, 10, 10, texEmpty);
 
-	auto texBigCandle = textureManager->get(ID_TEX_BIG_CANDLE);
+	const auto texBigCandle = textureManager->get(ID_TEX_BIG_CANDLE);
 	spriteManager->add(SPRITE_BIG_CANDLE_1, 0, 0, BIG_CANDLE_WIDTH, BIG_CANDLE_HEIGHT, texBigCandle);
 	spriteManager->add(SPRITE_BIG_CANDLE_2, 32, 0, 32 + BIG_CANDLE_WIDTH, BIG_CANDLE_HEIGHT, texBigCandle);
 
-	auto textHeart = textureManager->get(ID_TEX_HEART_ITEM);
+	const auto textHeart = textureManager->get(ID_TEX_HEART_ITEM);
 	spriteManager->add(SPRITE_HEART_ITEM, 0, 0, 24, 20, textHeart);
+
+	const auto texWhipItem = textureManager->get(ID_TEX_WHIP_ITEM);
+	spriteManager->add(SPRITE_WHIP_ITEM, 0, 0, 32, 32, texWhipItem);
+
+	const auto texKnifeItem = textureManager->get(ID_TEX_KNIFE_ITEM);
+	spriteManager->add(SPRITE_KNIFE_ITEM, 0, 0, KNIFE_ITEM_W, KNIFE_ITEM_H, texKnifeItem);
 }
 
 void loadAnimations()
@@ -249,6 +258,14 @@ void loadAnimations()
 	animation = new Animation(100);
 	animation->add(SPRITE_HEART_ITEM);
 	animationManager->add(ANIM_HEART_ITEM_IDLE, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_WHIP_ITEM);
+	animationManager->add(ANIM_WHIP_ITEM_IDLE, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_KNIFE_ITEM);
+	animationManager->add(ANIM_KNIFE_ITEM_IDLE, animation);
 
 	/* Simon animations */
 	loadSimonAnimations();

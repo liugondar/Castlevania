@@ -2,7 +2,9 @@
 #include "GameObject.h"
 
 enum ItemType {
-	heart = 1
+	heart = 1,
+	whip = 2,
+	knife=3
 };
 
 class Item :
@@ -15,9 +17,8 @@ public:
 	void checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks);
 
 	void update(DWORD dt, vector<LPGameObject>* bricks) override;
+	virtual void render()=0;
+	virtual void getBoundingBox(float& left, float& top, float& right, float& bottom)=0;
 	// Inherited via GameObject
-	virtual void render() override;
-	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
-
 };
 

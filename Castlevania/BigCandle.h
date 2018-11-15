@@ -1,6 +1,5 @@
 #pragma once
 #include "GameObject.h"
-#include "GameObjectManger.h"
 constexpr auto BIG_CANDLE_WIDTH = 32;
 constexpr auto BIG_CANDLE_HEIGHT= 64;
 constexpr auto BIG_CANDLE_ANIMATION_FRAME_TIME = 100;

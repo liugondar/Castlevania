@@ -1,7 +1,13 @@
 #pragma once
 // huong mat. object dang nhin
 enum FaceSide {
-	left=-1,right=1
+	left = -1, right = 1
+};
+
+enum State
+{
+	dead = -1,
+	normal = 1
 };
 
 constexpr auto BRICK_2_SIZE = 32;
@@ -70,55 +76,66 @@ constexpr auto SPRITE_WHIP_RIGHT_LV1_3 = 50006;
 constexpr auto SPRITE_EMPTY = 60001;
 constexpr auto SPRITE_BIG_CANDLE_1 = 60002;
 constexpr auto SPRITE_BIG_CANDLE_2 = 60003;
-constexpr auto SPRITE_HEART_ITEM= 60004;
+constexpr auto SPRITE_HEART_ITEM = 60004;
+constexpr auto SPRITE_WHIP_ITEM = 60005;
+constexpr auto SPRITE_KNIFE_ITEM = 60006;
 
 
-/* 
+/*
 	texture constants
 */
 
 constexpr auto ID_TEX_SIMON = 101;
-constexpr auto ID_TEX_EMPTY= 501;
-constexpr auto ID_TEX_BIG_CANDLE= 502;		//
+constexpr auto ID_TEX_EMPTY = 501;
+constexpr auto ID_TEX_BIG_CANDLE = 502;		//
 constexpr auto ID_TEX_WHIP = 401;
 constexpr auto ID_TEX_MARIO = 0;
 constexpr auto ID_TEX_ENEMY = 10;
 constexpr auto ID_TEX_MISC = 20;
 constexpr auto ID_TEX_BBOX = -101;		//
-constexpr auto ID_TEX_BRICK_2= 201;		//
-constexpr auto ID_TEX_HEART_ITEM= 202;		//
-constexpr auto ID_TEX_BACKGROUND_LV1=301;		//
-constexpr auto ID_TEX_ENTRANCE_BACKGROUND= 302;		//
+constexpr auto ID_TEX_BRICK_2 = 201;		//
+constexpr auto ID_TEX_HEART_ITEM = 202;		//
+constexpr auto ID_TEX_WHIP_ITEM = 203;
+constexpr auto ID_TEX_KNIFE_ITEM = 204;
+
+constexpr auto ID_TEX_BACKGROUND_LV1 = 301;		//
+constexpr auto ID_TEX_ENTRANCE_BACKGROUND = 302;		//
 
 
-/* Animation constans */
+/* Animation constants */
 
 constexpr auto ANIMATION_BRICK_IDLE = 201;
 
 constexpr auto ANIM_SIM_WALKING_RIGHT = 101;
-constexpr auto ANIM_SIM_WALKING_LEFT= 111;
+constexpr auto ANIM_SIM_WALKING_LEFT = 111;
 constexpr auto ANIM_SIM_IDLE_FACE_RIGHT = 102;
-constexpr auto ANIM_SIM_IDLE_FACE_LEFT= 112;
+constexpr auto ANIM_SIM_IDLE_FACE_LEFT = 112;
 constexpr auto ANIM_SIM_SIT_FACE_RIGHT = 103;
-constexpr auto ANIM_SIM_SIT_FACE_LEFT= 113;
-constexpr auto ANIM_SIM_HIT_LEFT= 121;
-constexpr auto ANIM_SIM_HIT_RIGHT= 122;
+constexpr auto ANIM_SIM_SIT_FACE_LEFT = 113;
+constexpr auto ANIM_SIM_HIT_LEFT = 121;
+constexpr auto ANIM_SIM_HIT_RIGHT = 122;
 constexpr auto ANIM_SIM_HIT_WHEN_SIT_LEFT = 123;
-constexpr auto ANIM_SIM_HIT_WHEN_SIT_RIGHT= 124;
+constexpr auto ANIM_SIM_HIT_WHEN_SIT_RIGHT = 124;
 
 constexpr auto ANIMATION_WHIP_LV1_LEFT = 501;
-constexpr auto ANIMATION_WHIP_LV1_RIGHT= 502;
+constexpr auto ANIMATION_WHIP_LV1_RIGHT = 502;
 constexpr auto ANIMATION_BIG_CANDLE_IDLE = 503;
-constexpr auto ANIM_HEART_ITEM_IDLE= 504;
+constexpr auto ANIM_HEART_ITEM_IDLE = 504;
+constexpr auto ANIM_WHIP_ITEM_IDLE = 505;
+constexpr auto ANIM_KNIFE_ITEM_IDLE = 506;
 
 /*
 	image resources
 */
-constexpr auto TEXTURE_SIMON_PATH = L"Resources\\sprites\\simon\\simon.png"; 
-constexpr auto TEXTURE_EMPTY_PATH = L"Resources\\sprites\\EmptySprite.png"; 
+constexpr auto TEXTURE_SIMON_PATH = L"Resources\\sprites\\simon\\simon.png";
+constexpr auto TEXTURE_EMPTY_PATH = L"Resources\\sprites\\EmptySprite.png";
 constexpr auto TEXTURE_WHIP_PATH = L"Resources\\sprites\\weapon\\whip.png";
-constexpr auto TEXTURE_HEART_ITEM_PATH= L"Resources\\sprites\\item\\1.png";
-constexpr auto TEXTURE_BIG_CANDLE_PATH = L"Resources\\sprites\\ground\\0.png";
-constexpr auto TEXTURE_LVL1_BACKGROUND_PATH= L"Resources\\sprites\\background\\lv1.png"; 
+constexpr auto TEXTURE_LVL1_BACKGROUND_PATH = L"Resources\\sprites\\background\\lv1.png";
 constexpr auto TEXTURE_ENTRANCE_BACKGROUND_PATH = L"Resources\\sprites\\background\\entranceBackground.png";
 constexpr auto ENTRANCE_GROUND_BRICK_SCREEN_2 = L"Resources\\sprites\\ground\\2.png";
+
+constexpr auto TEXTURE_BIG_CANDLE_PATH = L"Resources\\sprites\\ground\\0.png";
+
+constexpr auto TEXTURE_HEART_ITEM_PATH = L"Resources\\sprites\\item\\1.png";
+constexpr auto TEXTURE_WHIP_ITEM_PATH = L"Resources\\sprites\\item\\3.png";
+constexpr auto TEXTURE_KNIFE_ITEM_PATH = L"Resources\\sprites\\item\\4.png";

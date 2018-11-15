@@ -1,5 +1,5 @@
 #include "Item.h"
-
+#include "GameObjectManger.h"
 
 
 Item::Item()
@@ -46,16 +46,3 @@ void Item::update(DWORD dt, vector<LPGameObject>* bricks)
 	vy += 0.002f* dt;
 }
 
-
-void Item::render()
-{
-	animations[ANIM_HEART_ITEM_IDLE]->render(x, y);
-}
-
-void Item::getBoundingBox(float & left, float & top, float & right, float & bottom)
-{
-	left = x;
-	top = y;
-	right = x + 24;
-	bottom = y + 20;
-}

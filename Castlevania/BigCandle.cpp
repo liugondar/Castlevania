@@ -1,6 +1,8 @@
 #include "BigCandle.h"
-
-
+#include "HeartItem.h"
+#include "GameObjectManger.h"
+#include "WhipItem.h"
+#include "KnifeItem.h"
 
 BigCandle::BigCandle()
 {
@@ -13,13 +15,29 @@ BigCandle::~BigCandle()
 
 void BigCandle::render()
 {
-	if (getState() != -1) animations[ANIMATION_BIG_CANDLE_IDLE]->render(x, y);
+	if (currentState != State::dead) animations[ANIMATION_BIG_CANDLE_IDLE]->render(x, y);
 	else {
-		auto heart = new Item();
-		heart->setPosition(x+BIG_CANDLE_WIDTH/2, y+BIG_CANDLE_HEIGHT/2);
-		heart->setType(ItemType::heart);
-		GameObjectManger::getInstance()->addItem(heart);
-		GameObjectManger::getInstance()->removeGameObject(this);
+		auto gameObjectManger = GameObjectManger::getInstance();
+		Item * item = nullptr;
+		if (id == BIG_CANDLE1_ID) {
+			item = new HeartItem();
+			item->setType(ItemType::heart);
+		}
+		else if (id == BIG_CANDLE2_ID) {
+			item = new WhipItem();
+			item->setType(ItemType::whip);
+		}
+		else if(id== BIG_CANDLE3_ID)
+		{
+			item = new KnifeItem();
+			item->setType(ItemType::knife);
+		}
+
+		if (item) {
+			item->setPosition(x, y);
+			gameObjectManger->addItem(item);
+		}
+		gameObjectManger->removeGameObject(this);
 	}
 }
 

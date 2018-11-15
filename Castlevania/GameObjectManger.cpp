@@ -1,6 +1,8 @@
 #include "GameObjectManger.h"
 #include "BigCandle.h"
+#include "KnifeItem.h"
 
+class KnifeItem;
 GameObjectManger* GameObjectManger::instance = nullptr;
 
 void GameObjectManger::updateCamera(const DWORD dt) const
@@ -71,6 +73,8 @@ void GameObjectManger::loadGameObjects()
 	Whip::addAnimation(ANIMATION_WHIP_LV1_RIGHT);
 	BigCandle::addAnimation(ANIMATION_BIG_CANDLE_IDLE);
 	Item::addAnimation(ANIM_HEART_ITEM_IDLE);
+	Item::addAnimation(ANIM_WHIP_ITEM_IDLE);
+	Item::addAnimation(ANIM_KNIFE_ITEM_IDLE);
 
 	for (auto i = 0; i < 100; i++)
 	{
@@ -102,7 +106,7 @@ void GameObjectManger::removeGameObject(const int id)
 	{
 		index++;
 		if (index == gameObjects.size()) break;
-		if (gameObjects[index]->getId()==id) {
+		if (gameObjects[index]->getId() == id) {
 			i = gameObjects.erase(i);
 		}
 		else {
@@ -118,7 +122,7 @@ void GameObjectManger::removeGameObject(GameObject * gameObject)
 	{
 		index++;
 		if (index == gameObjects.size()) break;
-		if (gameObjects[index]== gameObject) {
+		if (gameObjects[index] == gameObject) {
 			i = gameObjects.erase(i);
 		}
 		else {
@@ -166,10 +170,10 @@ void GameObjectManger::render()
 
 void GameObjectManger::update(const DWORD dt)
 {
-	simon->update(dt, &bricks, &gameObjects,&items);
+	simon->update(dt, &bricks, &gameObjects, &items);
 	for (auto i = 0; i < items.size(); i++)
 	{
-		items[i]->update(dt,&bricks);
+		items[i]->update(dt, &bricks);
 	}
 	updateCamera(dt);
 }
