@@ -2,9 +2,9 @@
 #include "GameObject.h"
 
 enum ItemType {
-	heart = 1,
-	whip = 2,
-	knife=3
+	heartItem = 1,
+	whipItem = 2,
+	knifeItem=3
 };
 
 class Item :

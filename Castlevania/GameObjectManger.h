@@ -7,9 +7,6 @@ using namespace std;
 constexpr auto SCENE_WIDTH = 1536;
 constexpr auto SCENE_HEIGHT = 384;
 constexpr auto SIMON_ID = 1;
-constexpr auto BIG_CANDLE1_ID = 2;
-constexpr auto BIG_CANDLE2_ID= 3;
-constexpr auto BIG_CANDLE3_ID= 4;
 
 class GameObjectManger
 {
@@ -38,22 +35,10 @@ public:
 	// manager objects methods
 	void loadGameObjects();
 
-	void add(GameObject* gameObject) {
-		gameObjects.push_back(gameObject);
-	}
-	
-	void addBrick(Brick* brick) {
-		bricks.push_back(brick);
-	}
-
-	void addItem(Item* item) {
-		items.push_back(item);
-	}
-
-	void addSimon(Simon * simon) {
-		this->simon = simon;
-	}
-
+	void add(GameObject* gameObject);
+	void addBrick(Brick* brick);
+	void addItem(Item* item);
+	void addSimon(Simon* simon);
 	void removeGameObject(int id);
 	void removeGameObject(GameObject* gameObject);
 	void removeItem(GameObject* item);

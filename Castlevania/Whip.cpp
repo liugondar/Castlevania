@@ -4,6 +4,8 @@
 
 Whip::Whip()
 {
+	lv = 1;
+	animationId = -1;
 }
 
 
@@ -17,8 +19,6 @@ void Whip::checkEnemyCollisions(vector<LPGameObject> coObjects)
 	{
 		float bl, bt, br, bb;
 		float sl, st, sr, sb;
-
-
 		coObjects[i]->getBoundingBox(sl, st, sr, sb);
 		getBoundingBox(bl, bt, br, bb);
 		if (isColliding(bl, bt, br, bb, sl, st, sr, sb)) {
@@ -29,13 +29,28 @@ void Whip::checkEnemyCollisions(vector<LPGameObject> coObjects)
 
 void Whip::render()
 {
-	animationId = faceSide == FaceSide::left
-		? ANIMATION_WHIP_LV1_LEFT
-		: ANIMATION_WHIP_LV1_RIGHT;
+	if (lv == 3)
+	{
+		animationId = faceSide == FaceSide::left
+			? ANIM_WHIP_LV3_L
+			: ANIM_WHIP_LV3_R;
+	}
+	else if (lv == 2)
+	{
+		animationId = faceSide == FaceSide::left
+			? ANIM_WHIP_LV2_L
+			: ANIM_WHIP_LV2_R;
+	}
+	else
+	{
+		animationId = faceSide == FaceSide::left
+			? ANIM_WHIP_LV1_L
+			: ANIM_WHIP_LV1_R;
+	}
 
-	animations[animationId]->render(x, y,true);
+	animations[animationId]->render(x, y, true);
 
-	auto frame = animations[animationId]->getFrame();
+	const auto frame = animations[animationId]->getFrame();
 
 	if (frame == 0) setState(STATE_WHIP_READY_HIT);
 	else if (frame == 1) setState(STATE_WHIP_START_HIT);
@@ -62,27 +77,37 @@ void Whip::setSide(int side)
 
 void Whip::refreshAnim()
 {
-	animations[ANIMATION_WHIP_LV1_LEFT]->refresh();
-	animations[ANIMATION_WHIP_LV1_RIGHT]->refresh();
+	//if(animations[ANIM_WHIP_LV1_L])animations[ANIM_WHIP_LV1_L]->refresh();
+	//if(animations[ANIM_WHIP_LV1_L])animations[ANIM_WHIP_LV1_R]->refresh();
+	//if(animations[ANIM_WHIP_LV2_L])animations[ANIM_WHIP_LV2_L]->refresh();
+	//if(animations[ANIM_WHIP_LV2_L])animations[ANIM_WHIP_LV2_R]->refresh();
+
+	if (animations[animationId]) animations[animationId]->refresh();
 }
 
 
 void Whip::getBoundingBox(float & left, float & top, float & right, float & bottom)
 {
 	if (currentState == STATE_WHIP_HITTING) {
-		auto width = x;
-		auto height = y;
-
 		if (faceSide == FaceSide::left) {
-			left = x - WHIP_HITTING_WIDTH;
-			right = x + 10;
+			if (lv == 1) left = x - WHIP_LV1_HITTING_W;
+			else if (lv == 2) left = x - WHIP_LV2_HITTING_W;
+			else if (lv == 3) left = x - WHIP_LV3_HITTING_W;
+			else left = 0;
+
+			right = x + 5;
+			top = y + 16;
 		}
 		else {
-			left = x + SIM_HIT_W - 10;
-			right = left + WHIP_HITTING_WIDTH;
+			left = x + SIM_HIT_W - 5;
+			if (lv == 1) right = x + SIM_HIT_W + WHIP_LV1_HITTING_W - 5;
+			else if (lv == 2) right = x + SIM_HIT_W + WHIP_LV2_HITTING_W - 5;
+			else if (lv == 3) right = x + SIM_HIT_W + WHIP_LV3_HITTING_W - 5;
+			else right = 0;
 		}
-		top = y + 13;
-		bottom = top + WHIP_HITTING_HEIGHT;
+
+		top = y + 20;
+		bottom = top + WHIP_LV1_HITTING_H;
 	}
 	else {
 		left = 0;
@@ -90,4 +115,9 @@ void Whip::getBoundingBox(float & left, float & top, float & right, float & bott
 		right = 0;
 		bottom = 0;
 	}
+}
+
+void Whip::upgradeWhipLv()
+{
+	if (lv < MAX_WHIP_LV) lv++;
 }

@@ -1,5 +1,5 @@
 #include"main.h"
-#include "KnifeItem.h"
+#include "DaggerItem.h"
 
 Game* game;
 SampleKeyHander * keyHandler;
@@ -161,13 +161,6 @@ void loadTextures()
 
 	auto spriteManager = SpriteManager::getInstance();
 	const auto texSim = textureManager->get(ID_TEX_SIMON);
-	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_1, 305*2, 9*2, 305*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
-	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_2, 279*2, 9*2, 279*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
-	// spriteManager->add(SPRITE_SIMON_MOVING_RIGHT_3, 251*2, 9*2, 254*2 + SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
-	// spriteManager->add(SPRITE_SIMON_MOVING_LEFT_1, 979, 18, 979+ SIMON_MOVING_WIDTH, 16+ SIMON_MOVING_HEIGHT, textureSimon);
-	// spriteManager->add(SPRITE_SIMON_MOVING_LEFT_2, 1033, 18, 1033+ SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
-	// spriteManager->add(SPRITE_SIMON_MOVING_LEFT_3, 1083, 18, 1083+ SIMON_MOVING_WIDTH, 16 + SIMON_MOVING_HEIGHT, textureSimon);
-
 
 	spriteManager->add(SPRITE_SIM_MOVE_R1, 436, 2, 468, 64, texSim);
 	spriteManager->add(SPRITE_SIM_MOVE_R2, 375, 2, 404, 64, texSim);
@@ -205,12 +198,29 @@ void loadTextures()
 	spriteManager->add(SPRITE_BRICK_2, 0, 0, BRICK_2_SIZE, BRICK_2_SIZE, texBrick2);
 
 	const auto texWhip = textureManager->get(ID_TEX_WHIP);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_1, 158 - SIM_HIT_W, 0, 148 + WHIP_READY_WIDTH, 0 + SIM_HIT_W, texWhip);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_2, 390 - SIM_HIT_W, 0, 372 + WHIP_START_HIT_WIDTH, 0 + SIM_HIT_W, texWhip);
-	spriteManager->add(SPRITE_WHIP_LEFT_LV1_3, 531 + 40, 0, 531, 0 + SIM_HIT_W, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_1, 1273 + WHIP_READY_WIDTH, 0, 1273, 0 + SIM_HIT_W, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_2, 1034 + WHIP_START_HIT_WIDTH, 0, 1032, 0 + SIM_HIT_W, texWhip);
-	spriteManager->add(SPRITE_WHIP_RIGHT_LV1_3, 826, 0, 826 + 81, 0 + SIM_HIT_W, texWhip);
+	
+	spriteManager->add(SPRITE_WHIP_LV1_L1, 24, 2, 24 + 99, 2 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV1_L2, 179, 2, 179 + 63, 2 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV1_L3, 282 + WHIP_LV1_HITTING_W, 2, 282, 2 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV1_R1, 734, 2, 734 - WHIP_LV1_READY_W, 2 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV1_R2, 589, 2, 589 - WHIP_LV1_START_HIT_W, 2 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV1_R3, 430, 2, 430 + 88, 2 + SIM_HIT_H, texWhip);
+
+	spriteManager->add(SPRITE_WHIP_LV2_L1, 24, 70, 24 + 99, 70 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV2_L2, 179, 70, 179 + 63, 70 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV2_L3, 282 + WHIP_LV2_HITTING_W, 70, 282, 70 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV2_R1, 734, 70, 734 - WHIP_LV2_READY_W, 70 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV2_R2, 589, 70, 589 - WHIP_LV2_START_HIT_W, 70 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV2_R3, 430, 70, 430 + 88, 70 + SIM_HIT_H, texWhip);
+
+
+	spriteManager->add(SPRITE_WHIP_LV3_L1, 24, 138, 24 + 99, 138 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV3_L2, 179, 138, 179 + 63, 138  + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV3_L3, 250+ WHIP_LV3_HITTING_W, 138, 250, 138 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV3_R1, 734, 138, 734 - WHIP_LV3_READY_W, 138 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV3_R2, 589, 138, 589 - WHIP_LV3_START_HIT_W, 138 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV3_R3, 430, 138, 430 + 120, 138 + SIM_HIT_H, texWhip);
+
 
 	const auto texEmpty = textureManager->get(ID_TEX_EMPTY);
 	spriteManager->add(SPRITE_EMPTY, 0, 0, 10, 10, texEmpty);
@@ -237,23 +247,51 @@ void loadAnimations()
 	animationManager->add(ANIMATION_BRICK_IDLE, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
-	animation->add(SPRITE_WHIP_LEFT_LV1_1);
-	animation->add(SPRITE_WHIP_LEFT_LV1_2);
-	animation->add(SPRITE_WHIP_LEFT_LV1_3);
+	animation->add(SPRITE_WHIP_LV1_L1);
+	animation->add(SPRITE_WHIP_LV1_L2);
+	animation->add(SPRITE_WHIP_LV1_L3);
 	animation->add(SPRITE_EMPTY);
-	animationManager->add(ANIMATION_WHIP_LV1_LEFT, animation);
+	animationManager->add(ANIM_WHIP_LV1_L, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
-	animation->add(SPRITE_WHIP_RIGHT_LV1_1);
-	animation->add(SPRITE_WHIP_RIGHT_LV1_2);
-	animation->add(SPRITE_WHIP_RIGHT_LV1_3);
+	animation->add(SPRITE_WHIP_LV1_R1);
+	animation->add(SPRITE_WHIP_LV1_R2);
+	animation->add(SPRITE_WHIP_LV1_R3);
 	animation->add(SPRITE_EMPTY);
-	animationManager->add(ANIMATION_WHIP_LV1_RIGHT, animation);
+	animationManager->add(ANIM_WHIP_LV1_R, animation);
+
+	animation = new Animation(SIMON_HITTING_TIME);
+	animation->add(SPRITE_WHIP_LV2_L1);
+	animation->add(SPRITE_WHIP_LV2_L2);
+	animation->add(SPRITE_WHIP_LV2_L3);
+	animation->add(SPRITE_EMPTY);
+	animationManager->add(ANIM_WHIP_LV2_L, animation);
+
+	animation = new Animation(SIMON_HITTING_TIME);
+	animation->add(SPRITE_WHIP_LV2_R1);
+	animation->add(SPRITE_WHIP_LV2_R2);
+	animation->add(SPRITE_WHIP_LV2_R3);
+	animation->add(SPRITE_EMPTY);
+	animationManager->add(ANIM_WHIP_LV2_R, animation);
+
+	animation = new Animation(SIMON_HITTING_TIME);
+	animation->add(SPRITE_WHIP_LV3_L1);
+	animation->add(SPRITE_WHIP_LV3_L2);
+	animation->add(SPRITE_WHIP_LV3_L3);
+	animation->add(SPRITE_EMPTY);
+	animationManager->add(ANIM_WHIP_LV3_L, animation);
+
+	animation = new Animation(SIMON_HITTING_TIME);
+	animation->add(SPRITE_WHIP_LV3_R1);
+	animation->add(SPRITE_WHIP_LV3_R2);
+	animation->add(SPRITE_WHIP_LV3_R3);
+	animation->add(SPRITE_EMPTY);
+	animationManager->add(ANIM_WHIP_LV3_R, animation);
 
 	animation = new Animation(BIG_CANDLE_ANIMATION_FRAME_TIME);
 	animation->add(SPRITE_BIG_CANDLE_1);
 	animation->add(SPRITE_BIG_CANDLE_2);
-	animationManager->add(ANIMATION_BIG_CANDLE_IDLE, animation);
+	animationManager->add(ANIM_BIG_CANDLE_IDLE, animation);
 
 	animation = new Animation(100);
 	animation->add(SPRITE_HEART_ITEM);

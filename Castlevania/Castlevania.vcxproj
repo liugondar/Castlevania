@@ -133,7 +133,7 @@
     <ClCompile Include="GameObjectManger.cpp" />
     <ClCompile Include="HeartItem.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="KnifeItem.cpp" />
+    <ClCompile Include="DaggerItem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -158,7 +158,7 @@
     <ClInclude Include="HeartItem.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="KeyboardHandler.h" />
-    <ClInclude Include="KnifeItem.h" />
+    <ClInclude Include="DaggerItem.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Simon.h" />

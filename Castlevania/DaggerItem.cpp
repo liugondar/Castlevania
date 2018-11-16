@@ -1,18 +1,18 @@
-#include "KnifeItem.h"
+#include "DaggerItem.h"
 #include "GameObjectManger.h"
 #include "WhipItem.h"
 
 
-KnifeItem::KnifeItem()
+DaggerItem::DaggerItem()
 {
 }
 
 
-KnifeItem::~KnifeItem()
+DaggerItem::~DaggerItem()
 {
 }
 
-void KnifeItem::render()
+void DaggerItem::render()
 {
 	if (currentState != State::dead)animations[ANIM_KNIFE_ITEM_IDLE]->render(x, y, true);
 	else
@@ -21,7 +21,7 @@ void KnifeItem::render()
 	}
 }
 
-void KnifeItem::getBoundingBox(float& left, float& top, float& right, float& bottom)
+void DaggerItem::getBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
 	top = y;
@@ -29,7 +29,7 @@ void KnifeItem::getBoundingBox(float& left, float& top, float& right, float& bot
 	bottom = y + KNIFE_ITEM_H;
 }
 
-void KnifeItem::update(DWORD dt, vector<LPGameObject>* bricks)
+void DaggerItem::update(DWORD dt, vector<LPGameObject>* bricks)
 {
 	Item::update(dt, bricks);
 }

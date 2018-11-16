@@ -1,8 +1,8 @@
 #include "GameObjectManger.h"
 #include "BigCandle.h"
-#include "KnifeItem.h"
+#include "DaggerItem.h"
 
-class KnifeItem;
+class DaggerItem;
 GameObjectManger* GameObjectManger::instance = nullptr;
 
 void GameObjectManger::updateCamera(const DWORD dt) const
@@ -69,9 +69,13 @@ void GameObjectManger::loadGameObjects()
 
 	Brick::addAnimation(ANIMATION_BRICK_IDLE);
 
-	Whip::addAnimation(ANIMATION_WHIP_LV1_LEFT);
-	Whip::addAnimation(ANIMATION_WHIP_LV1_RIGHT);
-	BigCandle::addAnimation(ANIMATION_BIG_CANDLE_IDLE);
+	Whip::addAnimation(ANIM_WHIP_LV1_L);
+	Whip::addAnimation(ANIM_WHIP_LV1_R);
+	Whip::addAnimation(ANIM_WHIP_LV2_L);
+	Whip::addAnimation(ANIM_WHIP_LV2_R);
+	Whip::addAnimation(ANIM_WHIP_LV3_L);
+	Whip::addAnimation(ANIM_WHIP_LV3_R);
+	BigCandle::addAnimation(ANIM_BIG_CANDLE_IDLE);
 	Item::addAnimation(ANIM_HEART_ITEM_IDLE);
 	Item::addAnimation(ANIM_WHIP_ITEM_IDLE);
 	Item::addAnimation(ANIM_KNIFE_ITEM_IDLE);
@@ -84,19 +88,49 @@ void GameObjectManger::loadGameObjects()
 	}
 
 	auto candle = new BigCandle();
-	candle->setPosition(0 + 5 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
-	candle->setId(BIG_CANDLE1_ID);
+	candle->setPosition(190, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setItemContain(ItemBigCandleContain::heart);
 	add(candle);
 
 	candle = new BigCandle();
-	candle->setPosition(0 + 6 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
-	candle->setId(BIG_CANDLE2_ID);
+	candle->setPosition(448+64, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setItemContain(ItemBigCandleContain::whipUpgrade);
 	add(candle);
 
 	candle = new BigCandle();
-	candle->setPosition(0 + 7 * 75.f, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
-	candle->setId(BIG_CANDLE3_ID);
+	candle->setPosition(702, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setItemContain(ItemBigCandleContain::whipUpgrade);
 	add(candle);
+
+	candle = new BigCandle();
+	candle->setPosition(960+64, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setItemContain(ItemBigCandleContain::heart);
+	add(candle);
+
+	candle = new BigCandle();
+	candle->setPosition(1199, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setItemContain(ItemBigCandleContain::dagger);
+	add(candle);
+}
+
+void GameObjectManger::add(GameObject* gameObject)
+{
+	gameObjects.push_back(gameObject);
+}
+
+void GameObjectManger::addBrick(Brick* brick)
+{
+	bricks.push_back(brick);
+}
+
+void GameObjectManger::addItem(Item* item)
+{
+	items.push_back(item);
+}
+
+void GameObjectManger::addSimon(Simon* simon)
+{
+	this->simon = simon;
 }
 
 void GameObjectManger::removeGameObject(const int id)

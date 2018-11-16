@@ -24,7 +24,6 @@ void Simon::handleOnKeyRelease(int KeyCode)
 	if (KeyCode == DIK_DOWN) {
 		isReleaseSitButton = true;
 		if (isInGround && !isHitting) {
-			DebugOut(L"is hitting %d\n", isHitting);
 			standUp();
 		}
 	}
@@ -52,6 +51,7 @@ void Simon::handleOnKeyPress(BYTE * states)
 				&& simonState != STATE_SIMON_JUMPING
 				&& !isHitting)
 			{
+				DebugOut(L"is in ground %d\n", isInGround);
 				isReleaseSitButton = false;
 				sit();
 			}
@@ -165,9 +165,10 @@ void Simon::checkCollisionWithItems(vector<GameObject*>* items)
 		for (auto& i : coEventsResult)
 		{
 			const auto item = i->obj;
-			if (item->getType() == ItemType::heart) {
+			if (item->getType() == ItemType::heartItem) {
 			}
-			else if (item->getType() == ItemType::whip) {
+			else if (item->getType() == ItemType::whipItem) {
+				if(whip)whip->upgradeWhipLv();
 			}
 			item->setState(State::dead);
 		}

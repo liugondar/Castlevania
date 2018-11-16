@@ -117,7 +117,7 @@
     <ClCompile Include="WhipItem.cpp">
       <Filter>Source Files\StaticObjects</Filter>
     </ClCompile>
-    <ClCompile Include="KnifeItem.cpp">
+    <ClCompile Include="DaggerItem.cpp">
       <Filter>Source Files\StaticObjects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,7 +194,7 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KnifeItem.h">
+    <ClInclude Include="DaggerItem.h">
       <Filter>Header Files\StaticObjects</Filter>
     </ClInclude>
   </ItemGroup>

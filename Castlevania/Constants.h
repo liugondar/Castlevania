@@ -66,12 +66,26 @@ constexpr auto SPRITE_SIM_HIT_WHEN_SIT_R3 = 10020;
 constexpr auto SPRITE_BRICK = 40001;
 constexpr auto SPRITE_BRICK_2 = 40002;
 
-constexpr auto SPRITE_WHIP_LEFT_LV1_1 = 50001;
-constexpr auto SPRITE_WHIP_LEFT_LV1_2 = 50002;
-constexpr auto SPRITE_WHIP_LEFT_LV1_3 = 50003;
-constexpr auto SPRITE_WHIP_RIGHT_LV1_1 = 50004;
-constexpr auto SPRITE_WHIP_RIGHT_LV1_2 = 50005;
-constexpr auto SPRITE_WHIP_RIGHT_LV1_3 = 50006;
+constexpr auto SPRITE_WHIP_LV1_L1 = 50001;
+constexpr auto SPRITE_WHIP_LV1_L2 = 50002;
+constexpr auto SPRITE_WHIP_LV1_L3 = 50003;
+constexpr auto SPRITE_WHIP_LV1_R1 = 50004;
+constexpr auto SPRITE_WHIP_LV1_R2 = 50005;
+constexpr auto SPRITE_WHIP_LV1_R3 = 50006;
+
+constexpr auto SPRITE_WHIP_LV2_L1 = 50011;
+constexpr auto SPRITE_WHIP_LV2_L2 = 50012;
+constexpr auto SPRITE_WHIP_LV2_L3 = 50013;
+constexpr auto SPRITE_WHIP_LV2_R1 = 50014;
+constexpr auto SPRITE_WHIP_LV2_R2 = 50015;
+constexpr auto SPRITE_WHIP_LV2_R3 = 50016;
+
+constexpr auto SPRITE_WHIP_LV3_L1 = 50021;
+constexpr auto SPRITE_WHIP_LV3_L2 = 50022;
+constexpr auto SPRITE_WHIP_LV3_L3 = 50023;
+constexpr auto SPRITE_WHIP_LV3_R1 = 50024;
+constexpr auto SPRITE_WHIP_LV3_R2 = 50025;
+constexpr auto SPRITE_WHIP_LV3_R3 = 50026;
 
 constexpr auto SPRITE_EMPTY = 60001;
 constexpr auto SPRITE_BIG_CANDLE_1 = 60002;
@@ -117,19 +131,23 @@ constexpr auto ANIM_SIM_HIT_RIGHT = 122;
 constexpr auto ANIM_SIM_HIT_WHEN_SIT_LEFT = 123;
 constexpr auto ANIM_SIM_HIT_WHEN_SIT_RIGHT = 124;
 
-constexpr auto ANIMATION_WHIP_LV1_LEFT = 501;
-constexpr auto ANIMATION_WHIP_LV1_RIGHT = 502;
-constexpr auto ANIMATION_BIG_CANDLE_IDLE = 503;
-constexpr auto ANIM_HEART_ITEM_IDLE = 504;
-constexpr auto ANIM_WHIP_ITEM_IDLE = 505;
-constexpr auto ANIM_KNIFE_ITEM_IDLE = 506;
+constexpr auto ANIM_WHIP_LV1_L = 501;
+constexpr auto ANIM_WHIP_LV1_R = 502;
+constexpr auto ANIM_WHIP_LV2_L = 503;
+constexpr auto ANIM_WHIP_LV2_R = 504;
+constexpr auto ANIM_WHIP_LV3_L = 505;
+constexpr auto ANIM_WHIP_LV3_R = 506;
+constexpr auto ANIM_BIG_CANDLE_IDLE = 701;
+constexpr auto ANIM_HEART_ITEM_IDLE = 702;
+constexpr auto ANIM_WHIP_ITEM_IDLE = 703;
+constexpr auto ANIM_KNIFE_ITEM_IDLE = 706;
 
 /*
 	image resources
 */
 constexpr auto TEXTURE_SIMON_PATH = L"Resources\\sprites\\simon\\simon.png";
 constexpr auto TEXTURE_EMPTY_PATH = L"Resources\\sprites\\EmptySprite.png";
-constexpr auto TEXTURE_WHIP_PATH = L"Resources\\sprites\\weapon\\whip.png";
+constexpr auto TEXTURE_WHIP_PATH = L"Resources\\sprites\\weapon\\morningstar.png";
 constexpr auto TEXTURE_LVL1_BACKGROUND_PATH = L"Resources\\sprites\\background\\lv1.png";
 constexpr auto TEXTURE_ENTRANCE_BACKGROUND_PATH = L"Resources\\sprites\\background\\entranceBackground.png";
 constexpr auto ENTRANCE_GROUND_BRICK_SCREEN_2 = L"Resources\\sprites\\ground\\2.png";

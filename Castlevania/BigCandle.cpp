@@ -2,10 +2,12 @@
 #include "HeartItem.h"
 #include "GameObjectManger.h"
 #include "WhipItem.h"
-#include "KnifeItem.h"
+#include "DaggerItem.h"
+#include <stdlib.h>
 
 BigCandle::BigCandle()
 {
+	itemContain = -1;
 }
 
 
@@ -15,22 +17,27 @@ BigCandle::~BigCandle()
 
 void BigCandle::render()
 {
-	if (currentState != State::dead) animations[ANIMATION_BIG_CANDLE_IDLE]->render(x, y);
+	if (currentState != State::dead) animations[ANIM_BIG_CANDLE_IDLE]->render(x, y);
 	else {
 		auto gameObjectManger = GameObjectManger::getInstance();
 		Item * item = nullptr;
-		if (id == BIG_CANDLE1_ID) {
-			item = new HeartItem();
-			item->setType(ItemType::heart);
-		}
-		else if (id == BIG_CANDLE2_ID) {
-			item = new WhipItem();
-			item->setType(ItemType::whip);
-		}
-		else if(id== BIG_CANDLE3_ID)
+		if (itemContain == -1)
 		{
-			item = new KnifeItem();
-			item->setType(ItemType::knife);
+			itemContain = rand() % 3 + 1;
+			DebugOut(L"item %d\n", itemContain);
+		}
+		if (itemContain == ItemBigCandleContain::heart) {
+			item = new HeartItem();
+			item->setType(ItemType::heartItem);
+		}
+		else if (itemContain == ItemBigCandleContain::whipUpgrade) {
+			item = new WhipItem();
+			item->setType(ItemType::whipItem);
+		}
+		else if (itemContain == ItemBigCandleContain::dagger)
+		{
+			item = new DaggerItem();
+			item->setType(ItemType::knifeItem);
 		}
 
 		if (item) {
@@ -49,4 +56,9 @@ void BigCandle::getBoundingBox(float & left, float & top, float & right, float &
 	top = y;
 	right = x + BIG_CANDLE_WIDTH;
 	bottom = y + BIG_CANDLE_HEIGHT;
+}
+
+void BigCandle::setItemContain(int item)
+{
+	itemContain = item;
 }

@@ -4,7 +4,6 @@
 constexpr auto WHIP_ITEM_W = 32;
 constexpr auto WHIP_ITEM_H = 32;
 
-
 class WhipItem :
 	public Item
 {
