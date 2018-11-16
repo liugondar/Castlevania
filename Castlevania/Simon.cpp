@@ -20,7 +20,6 @@ void Simon::setState(int state)
 
 void Simon::handleOnKeyRelease(int KeyCode)
 {
-	auto game = Game::getInstance();
 	if (KeyCode == DIK_DOWN) {
 		isReleaseSitButton = true;
 		if (isInGround && !isHitting) {
@@ -31,50 +30,56 @@ void Simon::handleOnKeyRelease(int KeyCode)
 
 void Simon::handleOnKeyPress(BYTE * states)
 {
-	auto simonState = getState();
 	auto game = Game::getInstance();
 
-	if (simonState == STATE_SIMON_SITTING
-		|| simonState == STATE_SIMON_JUMPING) {
-		return;
+	if (isHitting) return;
+	if (currentState == STATE_SIMON_SITTING) return;
+	if (currentState == STATE_SIMON_JUMPING) return;
+
+	if (game->isKeyDown(DIK_RIGHT)) {
+		move(FaceSide::right);
+	}
+	else if (game->isKeyDown(DIK_LEFT)) {
+		move(FaceSide::left);
+	}
+	else if (game->isKeyDown(DIK_DOWN)) {
+		if (isInGround) {
+			isReleaseSitButton = false;
+			sit();
+		}
 	}
 	else {
-		if (game->isKeyDown(DIK_RIGHT)) {
-			if (!isHitting) move(FaceSide::right);
-		}
-		else if (game->isKeyDown(DIK_LEFT)) {
-			if (!isHitting) move(FaceSide::left);
-		}
-		else if (game->isKeyDown(DIK_DOWN)) {
-			if (simonState != STATE_SIMON_SITTING
-				&& isInGround
-				&& simonState != STATE_SIMON_JUMPING
-				&& !isHitting)
-			{
-				DebugOut(L"is in ground %d\n", isInGround);
-				isReleaseSitButton = false;
-				sit();
-			}
-		}
-		else {
-			if (!isHitting) stand();
-		}
+		stand();
 	}
 }
 
-void Simon::handleOnKeyDown(int KeyCode)
+void Simon::handleOnKeyDown(int keyCode)
 {
-	if (KeyCode == DIK_SPACE) {
+	if (isHitting) return;
+
+	if (keyCode == DIK_SPACE) {
 		if (previousState != STATE_SIMON_JUMPING && isInGround && !isHitting) {
 			jump();
 		}
 	}
-	else if (KeyCode == DIK_LCONTROL) {
+	else if (keyCode == DIK_LCONTROL) {
 		if (!isReleaseSitButton) {
 			hitWhenSitting();
 		}
 		else {
 			hit();
+		}
+	}
+	else if (keyCode == DIK_DOWN)
+	{
+		if (isInGround
+			&& currentState!= STATE_SIMON_SITTING
+			&& currentState!= STATE_SIMON_JUMPING
+			)
+		{
+			DebugOut(L"is in ground %d\n", isInGround);
+			isReleaseSitButton = false;
+			sit();
 		}
 	}
 }
@@ -168,7 +173,7 @@ void Simon::checkCollisionWithItems(vector<GameObject*>* items)
 			if (item->getType() == ItemType::heartItem) {
 			}
 			else if (item->getType() == ItemType::whipItem) {
-				if(whip)whip->upgradeWhipLv();
+				if (whip)whip->upgradeWhipLv();
 			}
 			item->setState(State::dead);
 		}
