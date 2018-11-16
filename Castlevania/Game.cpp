@@ -4,8 +4,10 @@ Game* Game::instance = NULL;
 
 void Game::init(HWND hWnd)
 {
-	auto d3d = Direct3DCreate9(D3D_SDK_VERSION);
+	LPDIRECT3D9 d3d = Direct3DCreate9(D3D_SDK_VERSION);
+
 	this->hWnd = hWnd;
+
 	D3DPRESENT_PARAMETERS d3dpp;
 
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
@@ -16,7 +18,7 @@ void Game::init(HWND hWnd)
 	d3dpp.BackBufferCount = 1;
 
 	RECT r;
-	GetClientRect(hWnd, &r);
+	GetClientRect(hWnd, &r);	// retrieve Window width & height 
 
 	d3dpp.BackBufferHeight = r.bottom + 1;
 	d3dpp.BackBufferWidth = r.right + 1;
@@ -27,16 +29,20 @@ void Game::init(HWND hWnd)
 		hWnd,
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
 		&d3dpp,
-		&d3ddv
-	);
+		&d3ddv);
 
-	if (d3d == NULL) {
+	if (d3ddv == NULL)
+	{
+		OutputDebugString(L"[ERROR] CreateDevice failed\n");
 		return;
 	}
 
 	d3ddv->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backBuffer);
+
 	// Initialize sprite helper from Direct3DX helper library
 	D3DXCreateSprite(d3ddv, &spriteHandler);
+
+	OutputDebugString(L"[INFO] InitGame done;\n");
 
 	xCamera=0;
 	yCamera=0;
@@ -131,47 +137,34 @@ int Game::isKeyUp(int keyCode)
 
 void Game::initKeyboard(KeyboardHandler * handler)
 {
-	auto hr = DirectInput8Create(
+	HRESULT
+		hr = DirectInput8Create
+		(
 		(HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE),
-		DIRECTINPUT_VERSION,
-		IID_IDirectInput8, (VOID**)&di, NULL
-	);
+			DIRECTINPUT_VERSION,
+			IID_IDirectInput8, (VOID**)&di, NULL
+		);
 
-	if (hr != DI_OK) return;
+	if (hr != DI_OK)
+	{
+		return;
+	}
 
 	hr = di->CreateDevice(GUID_SysKeyboard, &didv, NULL);
-
-	if (hr != DI_OK) return;
-
-	// Set the data format to "keyboard format" - a predefined data format 
-	//
-	// A data format specifies which controls on a device we
-	// are interested in, and how they should be reported.
-	//
-	// This tells DirectInput that we will be passing an array
-	// of 256 bytes to IDirectInputDevice::GetDeviceState.
+	if (hr != DI_OK)
+	{
+		return;
+	}
 
 	hr = didv->SetDataFormat(&c_dfDIKeyboard);
-
 	hr = didv->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 
-
-	// IMPORTANT STEP TO USE BUFFERED DEVICE DATA!
-	//
-	// DirectInput uses unbuffered I/O (buffer size = 0) by default.
-	// If you want to read buffered data, you need to set a nonzero
-	// buffer size.
-	//
-	// Set the buffer size to DINPUT_BUFFERSIZE (defined above) elements.
-	//
-	// The buffer size is a DWORD property associated with the device.
 	DIPROPDWORD dipdw;
-
 	dipdw.diph.dwSize = sizeof(DIPROPDWORD);
 	dipdw.diph.dwHeaderSize = sizeof(DIPROPHEADER);
 	dipdw.diph.dwObj = 0;
 	dipdw.diph.dwHow = DIPH_DEVICE;
-	dipdw.dwData = KEYBOARD_BUFFER_SIZE; // Arbitary buffer size
+	dipdw.dwData = KEYBOARD_BUFFER_SIZE;
 
 	hr = didv->SetProperty(DIPROP_BUFFERSIZE, &dipdw.diph);
 

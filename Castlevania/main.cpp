@@ -171,8 +171,8 @@ void loadTextures()
 	spriteManager->add(SPRITE_SIM_MOVE_L3, 616, 2, 616 + SIM_MOVE_W, 64, texSim);
 
 
-	spriteManager->add(SPRITE_SIM_SIT_R, 196, 18, 196 + SIM_SIT_W, 18 + SIM_SIT_H, texSim);
-	spriteManager->add(SPRITE_SIM_SIT_L, 732, 18, 732 + SIM_SIT_W, 18 + SIM_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_SIT_R, 196, 16, 196 + SIM_SIT_W, 16 + SIM_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_SIT_L, 732, 16, 732 + SIM_SIT_W, 16 + SIM_SIT_H, texSim);
 
 	spriteManager->add(SPRITE_SIM_HIT_L1, 792, 2, 792 + SIM_HIT_W, 2 + SIM_HIT_H, texSim);
 	spriteManager->add(SPRITE_SIM_HIT_L2, 852, 2, 852 + SIM_HIT_W, 2 + SIM_HIT_H, texSim);
@@ -182,13 +182,13 @@ void loadTextures()
 	spriteManager->add(SPRITE_SIM_HIT_R2, 76, 0, 76 + 32, 0 + SIM_HIT_H, texSim);
 	spriteManager->add(SPRITE_SIM_HIT_R3, 14, 0, 14 + 45, 0 + SIM_HIT_H, texSim);
 
-	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L1, 912, 84, 912 + SIM_HIT_WHEN_SIT_W, 84 + SIM_HIT_WHEN_SIT_H, texSim);
-	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L2, 492, 150, 492 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
-	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L3, 540, 150, 540 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L1, 912, 82, 912 + SIM_HIT_WHEN_SIT_W, 82 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L2, 492, 148, 492 + SIM_HIT_WHEN_SIT_W, 148 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_L3, 540, 148, 540 + SIM_HIT_WHEN_SIT_W, 148 + SIM_HIT_WHEN_SIT_H, texSim);
 
-	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R1, 0, 84, 0 + SIM_HIT_WHEN_SIT_W, 84 + SIM_HIT_WHEN_SIT_H, texSim);
-	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R2, 436, 150, 436 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
-	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R3, 376, 150, 376 + SIM_HIT_WHEN_SIT_W, 150 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R1, 0, 82, 0 + SIM_HIT_WHEN_SIT_W, 82 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R2, 436, 148, 436 + SIM_HIT_WHEN_SIT_W, 148 + SIM_HIT_WHEN_SIT_H, texSim);
+	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R3, 376, 148, 376 + SIM_HIT_WHEN_SIT_W, 148 + SIM_HIT_WHEN_SIT_H, texSim);
 
 
 	const auto texMisc = textureManager->get(ID_TEX_MISC);
@@ -204,7 +204,7 @@ void loadTextures()
 	spriteManager->add(SPRITE_WHIP_LV1_L3, 282 + WHIP_LV1_HITTING_W, 2, 282, 2 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV1_R1, 734, 2, 734 - WHIP_LV1_READY_W, 2 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV1_R2, 589, 2, 589 - WHIP_LV1_START_HIT_W, 2 + SIM_HIT_H, texWhip);
-	spriteManager->add(SPRITE_WHIP_LV1_R3, 430, 2, 430 + 88, 2 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV1_R3, 430, 0, 430 + 88, 2 + SIM_HIT_H, texWhip);
 
 	spriteManager->add(SPRITE_WHIP_LV2_L1, 24, 70, 24 + 99, 70 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV2_L2, 179, 70, 179 + 63, 70 + SIM_HIT_H, texWhip);
