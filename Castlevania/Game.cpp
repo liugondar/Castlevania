@@ -68,7 +68,11 @@ void Game::draw(float x, float y, LPDIRECT3DTEXTURE9 texture,
 
 void Game::processKeyboard()
 {
-	if (keyHandler == nullptr) return;
+	if (keyHandler == nullptr)
+	{
+		DebugOut(L"Cannot connect keyboard device\n");
+		return;
+	}
 	HRESULT hr;
 
 	// Collect all key states first

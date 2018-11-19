@@ -18,7 +18,7 @@ void WhipItem::update(DWORD dt, vector<LPGameObject>* bricks)
 
 void WhipItem::render()
 {
-	if (currentState != State::dead)animations[ANIM_WHIP_ITEM_IDLE]->render(x, y, true);
+	if (currentState != State::dead)animations[ANIM_WHIP_ITEM_IDLE]->render(x, y);
 	else
 	{
 		GameObjectManger::getInstance()->removeItem(this);

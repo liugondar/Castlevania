@@ -36,7 +36,7 @@ void Item::checkCollisionWithGround(DWORD dt, vector<LPGameObject>* bricks)
 		}
 	}
 
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+	for (auto& coEvent : coEvents) delete coEvent;
 }
 
 void Item::update(DWORD dt, vector<LPGameObject>* bricks)

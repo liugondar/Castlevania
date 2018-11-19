@@ -1,5 +1,6 @@
 #include"main.h"
 #include "DaggerItem.h"
+#include "DaggerSubWeapon.h"
 
 Game* game;
 SampleKeyHander * keyHandler;
@@ -146,15 +147,17 @@ void loadTextures()
 {
 	auto textureManager = TextureManager::getInstance();
 
-	textureManager->add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
 	textureManager->add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 	textureManager->add(ID_TEX_SIMON, TEXTURE_SIMON_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_EMPTY, TEXTURE_EMPTY_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_WHIP, TEXTURE_WHIP_PATH, D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_DAGGER, TEXTURE_DAGGER_PATH, D3DCOLOR_XRGB(255, 0, 255));
+
 	textureManager->add(ID_TEX_BIG_CANDLE, TEXTURE_BIG_CANDLE_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_BRICK_2, ENTRANCE_GROUND_BRICK_SCREEN_2);
 	textureManager->add(ID_TEX_BACKGROUND_LV1, TEXTURE_LVL1_BACKGROUND_PATH);
 	textureManager->add(ID_TEX_ENTRANCE_BACKGROUND, TEXTURE_ENTRANCE_BACKGROUND_PATH);
+
 	textureManager->add(ID_TEX_HEART_ITEM, TEXTURE_HEART_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_WHIP_ITEM, TEXTURE_WHIP_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_KNIFE_ITEM, TEXTURE_KNIFE_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
@@ -191,9 +194,6 @@ void loadTextures()
 	spriteManager->add(SPRITE_SIM_HIT_WHEN_SIT_R3, 376, 148, 376 + SIM_HIT_WHEN_SIT_W, 148 + SIM_HIT_WHEN_SIT_H, texSim);
 
 
-	const auto texMisc = textureManager->get(ID_TEX_MISC);
-	spriteManager->add(SPRITE_BRICK, 408, 225, 424, 241, texMisc);
-
 	const auto texBrick2 = textureManager->get(ID_TEX_BRICK_2);
 	spriteManager->add(SPRITE_BRICK_2, 0, 0, BRICK_2_SIZE, BRICK_2_SIZE, texBrick2);
 
@@ -221,6 +221,9 @@ void loadTextures()
 	spriteManager->add(SPRITE_WHIP_LV3_R2, 589, 138, 589 - WHIP_LV3_START_HIT_W, 138 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV3_R3, 430, 138, 430 + 120, 138 + SIM_HIT_H, texWhip);
 
+	const auto texDagger = textureManager->get(ID_TEX_DAGGER);
+	spriteManager->add(SPRITE_DAGGER_L, 0, 0, 32,18, texDagger);
+	spriteManager->add(SPRITE_DAGGER_R, 32, 0, 64,18, texDagger);
 
 	const auto texEmpty = textureManager->get(ID_TEX_EMPTY);
 	spriteManager->add(SPRITE_EMPTY, 0, 0, 10, 10, texEmpty);
@@ -236,7 +239,7 @@ void loadTextures()
 	spriteManager->add(SPRITE_WHIP_ITEM, 0, 0, 32, 32, texWhipItem);
 
 	const auto texKnifeItem = textureManager->get(ID_TEX_KNIFE_ITEM);
-	spriteManager->add(SPRITE_KNIFE_ITEM, 0, 0, KNIFE_ITEM_W, KNIFE_ITEM_H, texKnifeItem);
+	spriteManager->add(SPRITE_KNIFE_ITEM, 0, 0, DAGGER_ITEM_W, DAGGER_ITEM_H, texKnifeItem);
 }
 
 void loadAnimations()
@@ -251,6 +254,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV1_L2);
 	animation->add(SPRITE_WHIP_LV1_L3);
 	animation->add(SPRITE_EMPTY);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_WHIP_LV1_L, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -258,6 +262,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV1_R2);
 	animation->add(SPRITE_WHIP_LV1_R3);
 	animation->add(SPRITE_EMPTY);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_WHIP_LV1_R, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -265,6 +270,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV2_L2);
 	animation->add(SPRITE_WHIP_LV2_L3);
 	animation->add(SPRITE_EMPTY);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_WHIP_LV2_L, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -272,6 +278,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV2_R2);
 	animation->add(SPRITE_WHIP_LV2_R3);
 	animation->add(SPRITE_EMPTY);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_WHIP_LV2_R, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -279,6 +286,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV3_L2);
 	animation->add(SPRITE_WHIP_LV3_L3);
 	animation->add(SPRITE_EMPTY);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_WHIP_LV3_L, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -286,7 +294,15 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV3_R2);
 	animation->add(SPRITE_WHIP_LV3_R3);
 	animation->add(SPRITE_EMPTY);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_WHIP_LV3_R, animation);
+
+	animation = new Animation(100);
+	animation->add(SPRITE_DAGGER_L);
+	animationManager->add(ANIM_DAGGER_L, animation);
+	animation = new Animation(100);
+	animation->add(SPRITE_DAGGER_R);
+	animationManager->add(ANIM_DAGGER_R, animation);
 
 	animation = new Animation(BIG_CANDLE_ANIMATION_FRAME_TIME);
 	animation->add(SPRITE_BIG_CANDLE_1);
@@ -307,6 +323,32 @@ void loadAnimations()
 
 	/* Simon animations */
 	loadSimonAnimations();
+
+	Simon::addAnimation(ANIM_SIM_WALKING_RIGHT);
+	Simon::addAnimation(ANIM_SIM_WALKING_LEFT);
+	Simon::addAnimation(ANIM_SIM_IDLE_FACE_LEFT);
+	Simon::addAnimation(ANIM_SIM_IDLE_FACE_RIGHT);
+	Simon::addAnimation(ANIM_SIM_SIT_FACE_LEFT);
+	Simon::addAnimation(ANIM_SIM_SIT_FACE_RIGHT);
+	Simon::addAnimation(ANIM_SIM_HIT_LEFT);
+	Simon::addAnimation(ANIM_SIM_HIT_RIGHT);
+	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SIT_LEFT);
+	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SIT_RIGHT);
+	Simon::addAnimation(ANIM_SIM_THROW_L);
+	Simon::addAnimation(ANIM_SIM_THROW_R);
+	Brick::addAnimation(ANIMATION_BRICK_IDLE);
+	Whip::addAnimation(ANIM_WHIP_LV1_L);
+	Whip::addAnimation(ANIM_WHIP_LV1_R);
+	Whip::addAnimation(ANIM_WHIP_LV2_L);
+	Whip::addAnimation(ANIM_WHIP_LV2_R);
+	Whip::addAnimation(ANIM_WHIP_LV3_L);
+	Whip::addAnimation(ANIM_WHIP_LV3_R);
+	BigCandle::addAnimation(ANIM_BIG_CANDLE_IDLE);
+	Item::addAnimation(ANIM_HEART_ITEM_IDLE);
+	Item::addAnimation(ANIM_WHIP_ITEM_IDLE);
+	Item::addAnimation(ANIM_KNIFE_ITEM_IDLE);
+	DaggerItem::addAnimation(ANIM_DAGGER_L);
+	DaggerItem::addAnimation(ANIM_DAGGER_R);
 }
 
 void loadSimonAnimations()
@@ -331,6 +373,7 @@ void loadSimonAnimations()
 	animation->add(SPRITE_SIM_HIT_L2);
 	animation->add(SPRITE_SIM_HIT_L3);
 	animation->add(SPRITE_SIM_MOVE_L1);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_SIM_HIT_LEFT, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -338,6 +381,7 @@ void loadSimonAnimations()
 	animation->add(SPRITE_SIM_HIT_R2);
 	animation->add(SPRITE_SIM_HIT_R3);
 	animation->add(SPRITE_SIM_MOVE_R1);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_SIM_HIT_RIGHT, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -345,6 +389,7 @@ void loadSimonAnimations()
 	animation->add(SPRITE_SIM_HIT_WHEN_SIT_L2);
 	animation->add(SPRITE_SIM_HIT_WHEN_SIT_L3);
 	animation->add(SPRITE_SIM_SIT_L);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_SIM_HIT_WHEN_SIT_LEFT, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -352,7 +397,43 @@ void loadSimonAnimations()
 	animation->add(SPRITE_SIM_HIT_WHEN_SIT_R2);
 	animation->add(SPRITE_SIM_HIT_WHEN_SIT_R3);
 	animation->add(SPRITE_SIM_SIT_R);
+	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_SIM_HIT_WHEN_SIT_RIGHT, animation);
+
+	/// throwing anim
+	animation = new Animation(SIMON_THROWING_TIME);
+	animation->add(SPRITE_SIM_HIT_L1);
+	animation->add(SPRITE_SIM_HIT_L2);
+	animation->add(SPRITE_SIM_HIT_L3);
+	animation->add(SPRITE_SIM_MOVE_L1);
+	animation->setIsOneTimeAnim(true);
+	animationManager->add(ANIM_SIM_THROW_L, animation);
+
+	animation = new Animation(SIMON_THROWING_TIME);
+	animation->add(SPRITE_SIM_HIT_R1);
+	animation->add(SPRITE_SIM_HIT_R2);
+	animation->add(SPRITE_SIM_HIT_R3);
+	animation->add(SPRITE_SIM_MOVE_R1);
+	animation->setIsOneTimeAnim(true);
+	animationManager->add(ANIM_SIM_THROW_R, animation);
+
+	animation = new Animation(SIMON_THROWING_TIME);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_L1);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_L2);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_L3);
+	animation->add(SPRITE_SIM_SIT_L);
+	animation->setIsOneTimeAnim(true);
+	animationManager->add(ANIM_SIM_THROW_WHEN_SIT_L, animation);
+
+	animation = new Animation(SIMON_THROWING_TIME);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_R1);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_R2);
+	animation->add(SPRITE_SIM_HIT_WHEN_SIT_R3);
+	animation->add(SPRITE_SIM_SIT_R);
+	animation->setIsOneTimeAnim(true);
+	animationManager->add(ANIM_SIM_THROW_WHEN_SIT_R, animation);
+
+
 
 	/// Idle anim
 	animation = new Animation(100);

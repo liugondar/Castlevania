@@ -1,5 +1,10 @@
 #include "Animation.h"
 
+int Animation::getFrame()
+{
+	return currentFrame;
+}
+
 void Animation::add(int spriteId, DWORD time) {
 	int t = time;
 	if (time == 0) t = this->defaultTime;
@@ -9,25 +14,24 @@ void Animation::add(int spriteId, DWORD time) {
 	frames.push_back(frame);
 }
 
-void Animation::render(float x, float y,bool isOneTimeAnim) {
-	auto now = GetTickCount();
+void Animation::render(float x, float y) {
+	const auto now = GetTickCount();
 	if (currentFrame == -1) {
 		currentFrame = 0;
 		lastFrameTime = now;
 	}
 	else {
-		auto t = frames[currentFrame]->getTime();
+		const auto t = frames[currentFrame]->getTime();
 		if (now - lastFrameTime > t) {
 			currentFrame++;
 			lastFrameTime = now;
-			if (isOneTimeAnim) {
-			}
 			if (currentFrame == frames.size()) {
-				if (isOneTimeAnim ) {
+				if (!isOneTimeAnim) currentFrame = 0;
+				else
+				{
 					currentFrame = currentFrame - 1;
-					state =1;
+					state = AnimState::rendered;
 				}
-					else currentFrame = 0;
 			}
 		}
 	}
@@ -36,12 +40,17 @@ void Animation::render(float x, float y,bool isOneTimeAnim) {
 
 bool Animation::isDone()
 {
-	if (state == 1) return true;
-	return false;
+	if (isOneTimeAnim) return currentFrame == frames.size() - 1;
+	return currentFrame == frames.size();
+}
+
+void Animation::setIsOneTimeAnim(bool isOnetimeAnim)
+{
+	this->isOneTimeAnim = isOnetimeAnim;
 }
 
 void Animation::refresh()
 {
 	currentFrame = -1;
-	state = -1;
+	state = AnimState::notRenderedYet;
 }

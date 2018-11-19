@@ -76,9 +76,9 @@ LPCollisionEvent GameObject::sweptAABBEx(LPGameObject coO)
 	void GameObject::calcPotentialCollisions
 (vector<LPGameObject>* coObjects, vector<LPCollisionEvent>& coEvents)
 {
-	for (UINT i = 0; i < coObjects->size(); i++)
+	for (auto& coObject : *coObjects)
 	{
-		LPCollisionEvent e = sweptAABBEx(coObjects->at(i));
+		LPCollisionEvent e = sweptAABBEx(coObject);
 
 		if (e->t > 0 && e->t <= 1.0f)
 			coEvents.push_back(e);

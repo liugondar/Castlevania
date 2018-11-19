@@ -20,6 +20,7 @@ constexpr auto SIM_HIT_WHEN_SIT_W = 48;
 constexpr auto SIM_HIT_WHEN_SIT_H = 48;
 
 constexpr auto SIMON_HITTING_TIME = 150;
+constexpr auto SIMON_THROWING_TIME = 150;
 
 // trong luc luc nhay
 #define SIMON_GRAVITY 0.002f;
@@ -30,11 +31,3 @@ constexpr auto SIMON_VX = 0.15f;;
 //len xuong cau thang
 #define SIMON_VX_STAIR 43	
 #define SIMON_VY_STAIR 43
-
-//states
-constexpr auto STATE_SIMON_IDLE = 1;
-constexpr auto STATE_SIMON_WALKING= 2;
-constexpr auto STATE_SIMON_SITTING = 3;
-constexpr auto STATE_SIMON_JUMPING = 4;
-constexpr auto STATE_SIMON_HITTING = 5;
-constexpr auto STATE_SIMON_HIT_WHEN_SITTING = 6;

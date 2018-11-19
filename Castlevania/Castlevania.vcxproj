@@ -126,6 +126,7 @@
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="BigCandle.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="DaggerSubWeapon.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
+    <ClCompile Include="SubWeapon.cpp" />
     <ClCompile Include="SweptAABB.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Whip.cpp" />
@@ -149,6 +151,7 @@
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="BigCandle.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="DaggerSubWeapon.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
@@ -165,6 +168,7 @@
     <ClInclude Include="SimonConstants.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
+    <ClInclude Include="SubWeapon.h" />
     <ClInclude Include="SweptAABB.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Whip.h" />

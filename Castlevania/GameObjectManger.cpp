@@ -1,6 +1,7 @@
 #include "GameObjectManger.h"
 #include "BigCandle.h"
 #include "DaggerItem.h"
+#include "DaggerSubWeapon.h"
 
 class DaggerItem;
 GameObjectManger* GameObjectManger::instance = nullptr;
@@ -49,36 +50,14 @@ void GameObjectManger::keyState(BYTE * states) const
 void GameObjectManger::loadGameObjects()
 {
 	auto simon = new Simon();
-	Simon::addAnimation(ANIM_SIM_WALKING_RIGHT);
-	Simon::addAnimation(ANIM_SIM_WALKING_LEFT);
-	Simon::addAnimation(ANIM_SIM_IDLE_FACE_LEFT);
-	Simon::addAnimation(ANIM_SIM_IDLE_FACE_RIGHT);
-	Simon::addAnimation(ANIM_SIM_SIT_FACE_LEFT);
-	Simon::addAnimation(ANIM_SIM_SIT_FACE_RIGHT);
-	Simon::addAnimation(ANIM_SIM_HIT_LEFT);
-	Simon::addAnimation(ANIM_SIM_HIT_RIGHT);
-	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SIT_LEFT);
-	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SIT_RIGHT);
 
 	simon->setId(SIMON_ID);
 	simon->setPosition(10.f, 100.f);
-	simon->setState(STATE_SIMON_IDLE);
+	simon->setState(SimonState::idle);
 	simon->setBoundingGame(SCENE_WIDTH, SCENE_HEIGHT);
 
 	addSimon(simon);
 
-	Brick::addAnimation(ANIMATION_BRICK_IDLE);
-
-	Whip::addAnimation(ANIM_WHIP_LV1_L);
-	Whip::addAnimation(ANIM_WHIP_LV1_R);
-	Whip::addAnimation(ANIM_WHIP_LV2_L);
-	Whip::addAnimation(ANIM_WHIP_LV2_R);
-	Whip::addAnimation(ANIM_WHIP_LV3_L);
-	Whip::addAnimation(ANIM_WHIP_LV3_R);
-	BigCandle::addAnimation(ANIM_BIG_CANDLE_IDLE);
-	Item::addAnimation(ANIM_HEART_ITEM_IDLE);
-	Item::addAnimation(ANIM_WHIP_ITEM_IDLE);
-	Item::addAnimation(ANIM_KNIFE_ITEM_IDLE);
 
 	for (auto i = 0; i < 100; i++)
 	{
@@ -93,7 +72,7 @@ void GameObjectManger::loadGameObjects()
 	add(candle);
 
 	candle = new BigCandle();
-	candle->setPosition(448+64, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setPosition(448 + 64, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
 	candle->setItemContain(ItemBigCandleContain::whipUpgrade);
 	add(candle);
 
@@ -103,7 +82,7 @@ void GameObjectManger::loadGameObjects()
 	add(candle);
 
 	candle = new BigCandle();
-	candle->setPosition(960+64, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
+	candle->setPosition(960 + 64, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
 	candle->setItemContain(ItemBigCandleContain::heart);
 	add(candle);
 
@@ -132,6 +111,7 @@ void GameObjectManger::addSimon(Simon* simon)
 {
 	this->simon = simon;
 }
+
 
 void GameObjectManger::removeGameObject(const int id)
 {
@@ -187,27 +167,30 @@ void GameObjectManger::render()
 	const auto texture = TextureManager::getInstance()->get(ID_TEX_BACKGROUND_LV1);
 	game->draw(0, 60, texture, 0, 0, SCENE_WIDTH, 384, 255);
 
-	for (auto i = 0; i < gameObjects.size(); i++)
+	for (auto& gameObject : gameObjects)
 	{
-		gameObjects[i]->render();
+		gameObject->render();
 	}
 	this->simon->render();
-	for (auto i = 0; i < bricks.size(); i++)
+	for (auto& brick : bricks)
 	{
-		bricks[i]->render();
+		brick->render();
 	}
-	for (auto i = 0; i < items.size(); i++)
+	for (auto& item : items)
 	{
-		items[i]->render();
+		item->render();
 	}
+
+	
 }
 
 void GameObjectManger::update(const DWORD dt)
 {
 	simon->update(dt, &bricks, &gameObjects, &items);
-	for (auto i = 0; i < items.size(); i++)
+	for (auto& item : items)
 	{
-		items[i]->update(dt, &bricks);
+		item->update(dt, &bricks);
 	}
+
 	updateCamera(dt);
 }

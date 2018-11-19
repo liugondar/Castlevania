@@ -87,6 +87,9 @@ constexpr auto SPRITE_WHIP_LV3_R1 = 50024;
 constexpr auto SPRITE_WHIP_LV3_R2 = 50025;
 constexpr auto SPRITE_WHIP_LV3_R3 = 50026;
 
+constexpr auto SPRITE_DAGGER_L= 50101;
+constexpr auto SPRITE_DAGGER_R= 50102;
+
 constexpr auto SPRITE_EMPTY = 60001;
 constexpr auto SPRITE_BIG_CANDLE_1 = 60002;
 constexpr auto SPRITE_BIG_CANDLE_2 = 60003;
@@ -103,9 +106,7 @@ constexpr auto ID_TEX_SIMON = 101;
 constexpr auto ID_TEX_EMPTY = 501;
 constexpr auto ID_TEX_BIG_CANDLE = 502;		//
 constexpr auto ID_TEX_WHIP = 401;
-constexpr auto ID_TEX_MARIO = 0;
-constexpr auto ID_TEX_ENEMY = 10;
-constexpr auto ID_TEX_MISC = 20;
+constexpr auto ID_TEX_DAGGER= 402;
 constexpr auto ID_TEX_BBOX = -101;		//
 constexpr auto ID_TEX_BRICK_2 = 201;		//
 constexpr auto ID_TEX_HEART_ITEM = 202;		//
@@ -130,6 +131,10 @@ constexpr auto ANIM_SIM_HIT_LEFT = 121;
 constexpr auto ANIM_SIM_HIT_RIGHT = 122;
 constexpr auto ANIM_SIM_HIT_WHEN_SIT_LEFT = 123;
 constexpr auto ANIM_SIM_HIT_WHEN_SIT_RIGHT = 124;
+constexpr auto ANIM_SIM_THROW_L = 125;
+constexpr auto ANIM_SIM_THROW_R = 126;
+constexpr auto ANIM_SIM_THROW_WHEN_SIT_L = 127;
+constexpr auto ANIM_SIM_THROW_WHEN_SIT_R = 128;
 
 constexpr auto ANIM_WHIP_LV1_L = 501;
 constexpr auto ANIM_WHIP_LV1_R = 502;
@@ -137,6 +142,10 @@ constexpr auto ANIM_WHIP_LV2_L = 503;
 constexpr auto ANIM_WHIP_LV2_R = 504;
 constexpr auto ANIM_WHIP_LV3_L = 505;
 constexpr auto ANIM_WHIP_LV3_R = 506;
+constexpr auto ANIM_DAGGER_L= 507;
+constexpr auto ANIM_DAGGER_R= 508;
+
+
 constexpr auto ANIM_BIG_CANDLE_IDLE = 701;
 constexpr auto ANIM_HEART_ITEM_IDLE = 702;
 constexpr auto ANIM_WHIP_ITEM_IDLE = 703;
@@ -148,6 +157,7 @@ constexpr auto ANIM_KNIFE_ITEM_IDLE = 706;
 constexpr auto TEXTURE_SIMON_PATH = L"Resources\\sprites\\simon\\simon.png";
 constexpr auto TEXTURE_EMPTY_PATH = L"Resources\\sprites\\EmptySprite.png";
 constexpr auto TEXTURE_WHIP_PATH = L"Resources\\sprites\\weapon\\morningstar.png";
+constexpr auto TEXTURE_DAGGER_PATH= L"Resources\\sprites\\weapon\\1.png";
 constexpr auto TEXTURE_LVL1_BACKGROUND_PATH = L"Resources\\sprites\\background\\lv1.png";
 constexpr auto TEXTURE_ENTRANCE_BACKGROUND_PATH = L"Resources\\sprites\\background\\entranceBackground.png";
 constexpr auto ENTRANCE_GROUND_BRICK_SCREEN_2 = L"Resources\\sprites\\ground\\2.png";

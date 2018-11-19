@@ -37,7 +37,7 @@ void BigCandle::render()
 		else if (itemContain == ItemBigCandleContain::dagger)
 		{
 			item = new DaggerItem();
-			item->setType(ItemType::knifeItem);
+			item->setType(ItemType::daggerItem);
 		}
 
 		if (item) {

@@ -1,8 +1,8 @@
 #pragma once
 #include "Item.h"
 
-constexpr auto KNIFE_ITEM_W = 32;
-constexpr auto KNIFE_ITEM_H = 18;
+constexpr auto DAGGER_ITEM_W = 32;
+constexpr auto DAGGER_ITEM_H = 18;
 
 
 class DaggerItem :

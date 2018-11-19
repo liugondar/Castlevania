@@ -15,14 +15,14 @@ Whip::~Whip()
 
 void Whip::checkEnemyCollisions(vector<LPGameObject> coObjects)
 {
-	for (int i = 0; i < coObjects.size(); i++)
+	for (auto& coObject : coObjects)
 	{
 		float bl, bt, br, bb;
 		float sl, st, sr, sb;
-		coObjects[i]->getBoundingBox(sl, st, sr, sb);
+		coObject->getBoundingBox(sl, st, sr, sb);
 		getBoundingBox(bl, bt, br, bb);
 		if (isColliding(bl, bt, br, bb, sl, st, sr, sb)) {
-			coObjects[i]->setState(-1);
+			coObject->setState(-1);
 		}
 	}
 }
@@ -48,7 +48,7 @@ void Whip::render()
 			: ANIM_WHIP_LV1_R;
 	}
 
-	animations[animationId]->render(x, y, true);
+	animations[animationId]->render(x, y);
 
 	const auto frame = animations[animationId]->getFrame();
 
@@ -96,7 +96,6 @@ void Whip::getBoundingBox(float & left, float & top, float & right, float & bott
 			else left = 0;
 
 			right = x + 5;
-			top = y + 16;
 		}
 		else {
 			left = x + SIM_HIT_W - 5;

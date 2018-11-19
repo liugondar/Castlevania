@@ -49,19 +49,28 @@
     <Filter Include="Header Files\Enemy">
       <UniqueIdentifier>{f8f3e593-9d70-44f6-aa21-52cb7e4a5b25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\StaticObjects">
+    <Filter Include="Source Files\Object\SubWeapon">
+      <UniqueIdentifier>{d1131e68-6466-404a-9db9-edeb7f867d10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\StaticObjects">
+      <UniqueIdentifier>{336b016d-50f8-4b87-b57d-a49b2c71aa88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\StaticObjects">
       <UniqueIdentifier>{4ea53c3b-eb99-4727-acac-c08ca23ca1ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\StaticObjects">
-      <UniqueIdentifier>{336b016d-50f8-4b87-b57d-a49b2c71aa88}</UniqueIdentifier>
+    <Filter Include="Header Files\Object\StaticObjects\Item">
+      <UniqueIdentifier>{e40c8812-9958-4500-8c41-1579d9be04f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\SubWeapon">
+      <UniqueIdentifier>{e421589a-8cb1-426e-bef8-fe29756d27ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\StaticObjects\Item">
+      <UniqueIdentifier>{0d7909f0-7ad2-4c66-8386-164f9506e986}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Source Files\Object</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\Animation</Filter>
@@ -106,19 +115,28 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BigCandle.cpp">
-      <Filter>Source Files\StaticObjects</Filter>
+      <Filter>Source Files\Object\StaticObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\StaticObjects</Filter>
+    <ClCompile Include="SubWeapon.cpp">
+      <Filter>Source Files\Object\SubWeapon</Filter>
     </ClCompile>
     <ClCompile Include="HeartItem.cpp">
-      <Filter>Source Files\StaticObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="WhipItem.cpp">
-      <Filter>Source Files\StaticObjects</Filter>
+      <Filter>Source Files\Object\StaticObjects\Item</Filter>
     </ClCompile>
     <ClCompile Include="DaggerItem.cpp">
-      <Filter>Source Files\StaticObjects</Filter>
+      <Filter>Source Files\Object\StaticObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="WhipItem.cpp">
+      <Filter>Source Files\Object\StaticObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Object\StaticObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files\Object\StaticObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="DaggerSubWeapon.cpp">
+      <Filter>Source Files\Object\SubWeapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +150,6 @@
       <Filter>Header Files\GameManager</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Brick.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="SweptAABB.h">
@@ -180,22 +195,31 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BigCandle.h">
-      <Filter>Header Files\StaticObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\StaticObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="HeartItem.h">
-      <Filter>Header Files\StaticObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="WhipItem.h">
-      <Filter>Header Files\StaticObjects</Filter>
+      <Filter>Header Files\Object\StaticObjects</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Header Files\Object\StaticObjects</Filter>
+    </ClInclude>
     <ClInclude Include="DaggerItem.h">
-      <Filter>Header Files\StaticObjects</Filter>
+      <Filter>Header Files\Object\StaticObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartItem.h">
+      <Filter>Header Files\Object\StaticObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="WhipItem.h">
+      <Filter>Header Files\Object\StaticObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubWeapon.h">
+      <Filter>Header Files\Object\SubWeapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Object\StaticObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="DaggerSubWeapon.h">
+      <Filter>Header Files\Object\SubWeapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

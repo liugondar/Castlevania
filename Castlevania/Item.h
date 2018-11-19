@@ -4,7 +4,7 @@
 enum ItemType {
 	heartItem = 1,
 	whipItem = 2,
-	knifeItem=3
+	daggerItem=3
 };
 
 class Item :
