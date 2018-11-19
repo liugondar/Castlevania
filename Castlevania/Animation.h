@@ -32,5 +32,5 @@ public:
 	void render(float x, float y);
 	void refresh();
 	bool isDone();
-	void setIsOneTimeAnim(bool isOnetimeAnim);
+	void setIsOneTimeAnim(bool isOnetimeAnim=true);
 };

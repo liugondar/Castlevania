@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Object\StaticObjects\Item">
       <UniqueIdentifier>{0d7909f0-7ad2-4c66-8386-164f9506e986}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Effect">
+      <UniqueIdentifier>{c5af837c-e7a9-457a-8bfa-1365f1b04958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Effect">
+      <UniqueIdentifier>{4015e134-8bd2-4f65-8e10-641fda78d684}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -137,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="DaggerSubWeapon.cpp">
       <Filter>Source Files\Object\SubWeapon</Filter>
+    </ClCompile>
+    <ClCompile Include="BurnEffect.cpp">
+      <Filter>Source Files\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="DaggerSubWeapon.h">
       <Filter>Header Files\Object\SubWeapon</Filter>
+    </ClInclude>
+    <ClInclude Include="BurnEffect.h">
+      <Filter>Header Files\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
 
 //nhay
-constexpr auto SIMON_VJUMP = 0.35f;
+constexpr auto SIMON_VJUMP = 0.4f;
 // Simon's width when moving
 constexpr auto SIM_MOVE_W = 32;
 // Simon's width when moving
@@ -24,7 +24,7 @@ constexpr auto SIMON_JUMPING_TIME= 300;
 constexpr auto SIMON_THROWING_TIME = 150;
 
 // trong luc luc nhay
-#define SIMON_GRAVITY 0.0009f;
+#define SIMON_GRAVITY 0.0013f;
 //trong luc luc roi
 constexpr auto SIMON_FALL = 180;
 //di binh thuong

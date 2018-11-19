@@ -126,6 +126,7 @@
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="BigCandle.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="BurnEffect.cpp" />
     <ClCompile Include="DaggerSubWeapon.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="BigCandle.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="BurnEffect.h" />
     <ClInclude Include="DaggerSubWeapon.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="Enemy.h" />

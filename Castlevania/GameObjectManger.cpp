@@ -2,6 +2,7 @@
 #include "BigCandle.h"
 #include "DaggerItem.h"
 #include "DaggerSubWeapon.h"
+#include "BurnEffect.h"
 
 class DaggerItem;
 GameObjectManger* GameObjectManger::instance = nullptr;
@@ -90,6 +91,10 @@ void GameObjectManger::loadGameObjects()
 	candle->setPosition(1199, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
 	candle->setItemContain(ItemBigCandleContain::dagger);
 	add(candle);
+
+	auto burn = new BurnEffect();
+	burn->setPosition(100, 100);
+	add(burn);
 }
 
 void GameObjectManger::add(GameObject* gameObject)
@@ -167,6 +172,8 @@ void GameObjectManger::render()
 	const auto texture = TextureManager::getInstance()->get(ID_TEX_BACKGROUND_LV1);
 	game->draw(0, 60, texture, 0, 0, SCENE_WIDTH, 384, 255);
 
+
+
 	for (auto& gameObject : gameObjects)
 	{
 		gameObject->render();
@@ -181,7 +188,7 @@ void GameObjectManger::render()
 		item->render();
 	}
 
-	
+
 }
 
 void GameObjectManger::update(const DWORD dt)

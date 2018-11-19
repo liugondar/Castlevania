@@ -34,7 +34,6 @@ public:
 	Simon();
 	~Simon();
 
-
 	void handleOnKeyPress(BYTE *states);
 	void handleOnKeyDown(int KeyCode );
 	void handleOnKeyRelease(int KeyCode);

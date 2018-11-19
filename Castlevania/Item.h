@@ -15,10 +15,6 @@ public:
 	~Item();
 
 	void checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks);
-
 	void update(DWORD dt, vector<LPGameObject>* bricks) override;
-	virtual void render()=0;
-	virtual void getBoundingBox(float& left, float& top, float& right, float& bottom)=0;
-	// Inherited via GameObject
 };
 

@@ -8,7 +8,6 @@ Simon::Simon()
 	whip->setPosition(x, y);
 	isInGround = true;
 	isReleaseSitButton = true;
-	subWeapon = new DaggerSubWeapon();
 }
 
 Simon::~Simon()
@@ -251,36 +250,36 @@ void Simon::updateAnimId()
 
 	if (currentState == SimonState::walking) {
 		animationId = faceSide == FaceSide::left
-			? ANIM_SIM_WALKING_LEFT
-			: ANIM_SIM_WALKING_RIGHT;
+			? ANIM_SIM_WALKING_L
+			: ANIM_SIM_WALKING_R;
 	}
 	else if (currentState == SimonState::sitting) {
 		if (isReleaseSitButton) {
 			standUp();
 		}
 		animationId = faceSide == FaceSide::left
-			? ANIM_SIM_SIT_FACE_LEFT
-			: ANIM_SIM_SIT_FACE_RIGHT;
+			? ANIM_SIM_SITTING_L
+			: ANIM_SIM_SITTING_R;
 	}
 	else if (currentState == SimonState::jumping) {
 		if (vy > 0.15)
 		{
 			animationId = faceSide == FaceSide::left
-				? ANIM_SIM_IDLE_FACE_LEFT
-				: ANIM_SIM_IDLE_FACE_RIGHT;
+				? ANIM_SIM_IDLE_L
+				: ANIM_SIM_IDLE_R;
 		}
 		else
 		{
 			animationId = faceSide == FaceSide::left
-				? ANIM_SIM_SIT_FACE_LEFT
-				: ANIM_SIM_SIT_FACE_RIGHT;
+				? ANIM_SIM_SITTING_L
+				: ANIM_SIM_SITTING_R;
 		}
 	}
 	else if (currentState == SimonState::hitting) {
 		// set hitting anim
 		animationId = faceSide == FaceSide::left
-			? ANIM_SIM_HIT_LEFT
-			: ANIM_SIM_HIT_RIGHT;
+			? ANIM_SIM_HITTING_L
+			: ANIM_SIM_HITTING_R;
 		// check and process if animation hitting is done
 		if (animations[animationId]) {
 			if (animations[animationId]->isDone()) {
@@ -288,15 +287,15 @@ void Simon::updateAnimId()
 				animations[animationId]->refresh();
 				stand();
 				animationId = faceSide == FaceSide::left
-					? ANIM_SIM_IDLE_FACE_LEFT
-					: ANIM_SIM_IDLE_FACE_RIGHT;
+					? ANIM_SIM_IDLE_L
+					: ANIM_SIM_IDLE_R;
 			}
 		}
 	}
 	else if (currentState == SimonState::hittingWhenSitting) {
 		animationId = faceSide == FaceSide::left
-			? ANIM_SIM_HIT_WHEN_SIT_LEFT
-			: ANIM_SIM_HIT_WHEN_SIT_RIGHT;
+			? ANIM_SIM_HIT_WHEN_SITTING_L
+			: ANIM_SIM_HIT_WHEN_SITTING_R;
 		if (animations[animationId]) {
 			const auto frame = animations[animationId]->getFrame();
 			if (animations[animationId]->isDone()) {
@@ -305,16 +304,16 @@ void Simon::updateAnimId()
 				setState(SimonState::sitting);
 				animations[animationId]->refresh();
 				animationId = faceSide == FaceSide::left
-					? ANIM_SIM_IDLE_FACE_LEFT
-					: ANIM_SIM_IDLE_FACE_RIGHT;
+					? ANIM_SIM_IDLE_L
+					: ANIM_SIM_IDLE_R;
 			}
 		}
 	}
 	else if (currentState == SimonState::throwing)
 	{
 		animationId = faceSide == FaceSide::left
-			? ANIM_SIM_HIT_LEFT
-			: ANIM_SIM_HIT_RIGHT;
+			? ANIM_SIM_HITTING_L
+			: ANIM_SIM_HITTING_R;
 		if (animations[animationId]) {
 			const auto frame = animations[animationId]->getFrame();
 			if (frame == 2) throwSubWeapon();
@@ -328,8 +327,8 @@ void Simon::updateAnimId()
 	else if (currentState == SimonState::throwingWhenSitting)
 	{
 		animationId = faceSide == FaceSide::left
-			? ANIM_SIM_HIT_WHEN_SIT_LEFT
-			: ANIM_SIM_HIT_WHEN_SIT_RIGHT;
+			? ANIM_SIM_HIT_WHEN_SITTING_L
+			: ANIM_SIM_HIT_WHEN_SITTING_R;
 		if (animations[animationId]) {
 			const auto frame = animations[animationId]->getFrame();
 			if (frame == 2) throwSubWeapon();
@@ -339,15 +338,15 @@ void Simon::updateAnimId()
 				setState(SimonState::sitting);
 				isThrowing = false;
 				animationId = faceSide == FaceSide::left
-					? ANIM_SIM_IDLE_FACE_LEFT
-					: ANIM_SIM_IDLE_FACE_RIGHT;
+					? ANIM_SIM_IDLE_L
+					: ANIM_SIM_IDLE_R;
 			}
 		}
 	}
 	else {
 		animationId = faceSide == FaceSide::left
-			? ANIM_SIM_IDLE_FACE_LEFT
-			: ANIM_SIM_IDLE_FACE_RIGHT;
+			? ANIM_SIM_IDLE_L
+			: ANIM_SIM_IDLE_R;
 	}
 }
 

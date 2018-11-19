@@ -17,8 +17,5 @@ public:
 	{
 		faceSide = side;
 	}
-	virtual void update(DWORD dt, vector<GameObject*>* coObjects) override = 0;
-	virtual void render() override = 0;
-	virtual void getBoundingBox(float& left, float& top, float& right, float& bottom) override = 0;
 };
 
