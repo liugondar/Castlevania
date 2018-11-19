@@ -1,5 +1,5 @@
 #include "CollisionEffect.h"
-
+#include "GameObjectManger.h"
 
 
 CollisionEffect::CollisionEffect()
@@ -13,7 +13,13 @@ CollisionEffect::~CollisionEffect()
 
 void CollisionEffect::render()
 {
-	animations[ANIM_COLLISION_EFFECT]->render(x, y);
+	if (animations[ANIM_COLLISION_EFFECT]) {
+		auto frame = animations[ANIM_COLLISION_EFFECT]->getFrame();
+		if (animations[ANIM_COLLISION_EFFECT]->isDone()) {
+			GameObjectManger::getInstance()->removeGameObject(this);
+		}
+		animations[ANIM_COLLISION_EFFECT]->render(x, y);
+	}
 }
 
 void CollisionEffect::getBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -27,4 +33,5 @@ void CollisionEffect::getBoundingBox(float& left, float& top, float& right, floa
 void CollisionEffect::initAnim()
 {
 	addAnimation(ANIM_COLLISION_EFFECT);
+	animations[ANIM_COLLISION_EFFECT]->refresh();
 }

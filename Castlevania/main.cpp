@@ -266,7 +266,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV1_L2);
 	animation->add(SPRITE_WHIP_LV1_L3);
 	animation->add(SPRITE_EMPTY);
-	animation->setIsOneTimeAnim(true);
+	animation->setIsOneTimeAnim();
 	animationManager->add(ANIM_WHIP_LV1_L, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -274,7 +274,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV1_R2);
 	animation->add(SPRITE_WHIP_LV1_R3);
 	animation->add(SPRITE_EMPTY);
-	animation->setIsOneTimeAnim(true);
+	animation->setIsOneTimeAnim();
 	animationManager->add(ANIM_WHIP_LV1_R, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -282,7 +282,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV2_L2);
 	animation->add(SPRITE_WHIP_LV2_L3);
 	animation->add(SPRITE_EMPTY);
-	animation->setIsOneTimeAnim(true);
+	animation->setIsOneTimeAnim();
 	animationManager->add(ANIM_WHIP_LV2_L, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -290,7 +290,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV2_R2);
 	animation->add(SPRITE_WHIP_LV2_R3);
 	animation->add(SPRITE_EMPTY);
-	animation->setIsOneTimeAnim(true);
+	animation->setIsOneTimeAnim();
 	animationManager->add(ANIM_WHIP_LV2_R, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -298,7 +298,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV3_L2);
 	animation->add(SPRITE_WHIP_LV3_L3);
 	animation->add(SPRITE_EMPTY);
-	animation->setIsOneTimeAnim(true);
+	animation->setIsOneTimeAnim();
 	animationManager->add(ANIM_WHIP_LV3_L, animation);
 
 	animation = new Animation(SIMON_HITTING_TIME);
@@ -306,7 +306,7 @@ void loadAnimations()
 	animation->add(SPRITE_WHIP_LV3_R2);
 	animation->add(SPRITE_WHIP_LV3_R3);
 	animation->add(SPRITE_EMPTY);
-	animation->setIsOneTimeAnim(true);
+	animation->setIsOneTimeAnim();
 	animationManager->add(ANIM_WHIP_LV3_R, animation);
 
 	animation = new Animation(100);
@@ -335,12 +335,16 @@ void loadAnimations()
 
 	animation = new Animation(100);
 	animation->add(SPRITE_COLLISION_EFFECT);
+	animation->add(SPRITE_EMPTY);
+	animation->add(SPRITE_COLLISION_EFFECT);
+	animation->add(SPRITE_EMPTY);
 	animationManager->add(ANIM_COLLISION_EFFECT, animation);
 
 	animation = new Animation(100);
 	animation->add(SPRITE_BURN_EFFECT1);
 	animation->add(SPRITE_BURN_EFFECT2);
 	animation->add(SPRITE_BURN_EFFECT3);
+	animation->add(SPRITE_EMPTY);
 	animationManager->add(ANIM_BURN_EFFECT, animation);
 
 	/* Simon animations */

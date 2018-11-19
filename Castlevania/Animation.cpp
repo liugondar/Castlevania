@@ -40,8 +40,7 @@ void Animation::render(float x, float y) {
 
 bool Animation::isDone()
 {
-	if (isOneTimeAnim) return currentFrame == frames.size() - 1;
-	return currentFrame == frames.size();
+	return currentFrame == frames.size()-1;
 }
 
 void Animation::setIsOneTimeAnim(bool isOnetimeAnim)

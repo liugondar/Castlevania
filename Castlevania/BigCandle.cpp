@@ -4,6 +4,8 @@
 #include "WhipItem.h"
 #include "DaggerItem.h"
 #include <stdlib.h>
+#include "BurnEffect.h"
+#include "CollisionEffect.h"
 
 BigCandle::BigCandle()
 {
@@ -22,10 +24,16 @@ void BigCandle::render()
 	else {
 		auto gameObjectManger = GameObjectManger::getInstance();
 		Item * item = nullptr;
+		auto burn = new BurnEffect();
+		burn->setPosition(x, y);
+		gameObjectManger->add(burn);
+
+		auto collisionEffect = new CollisionEffect();
+		collisionEffect->setPosition(x,y);
+		gameObjectManger->add(collisionEffect);
 		if (itemContain == -1)
 		{
 			itemContain = rand() % 3 + 1;
-			DebugOut(L"item %d\n", itemContain);
 		}
 		if (itemContain == ItemBigCandleContain::heart) {
 			item = new HeartItem();

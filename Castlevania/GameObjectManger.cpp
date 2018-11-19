@@ -92,14 +92,6 @@ void GameObjectManger::loadGameObjects()
 	candle->setPosition(1199, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
 	candle->setItemContain(ItemBigCandleContain::dagger);
 	add(candle);
-
-	//auto burn = new BurnEffect();
-	//burn->setPosition(100, 100);
-	//add(burn);
-
-	//auto collisionEffect = new CollisionEffect();
-	//collisionEffect->setPosition(100, 200);
-	//add(collisionEffect);
 }
 
 void GameObjectManger::add(GameObject* gameObject)
@@ -178,22 +170,20 @@ void GameObjectManger::render()
 	game->draw(0, 60, texture, 0, 0, SCENE_WIDTH, 384, 255);
 
 
+	for (int i = 0; i < gameObjects.size(); i++)
+	{
+		gameObjects[i]->render();
+	}
 
-	for (auto& gameObject : gameObjects)
-	{
-		gameObject->render();
-	}
-	for (auto& brick : bricks)
-	{
-		brick->render();
-	}
-	for (auto& item : items)
-	{
+	for (auto& item : items) {
 		item->render();
 	}
 
 	this->simon->render();
 
+	for (auto& brick : bricks) {
+		brick->render();
+	}
 }
 
 void GameObjectManger::update(const DWORD dt)
