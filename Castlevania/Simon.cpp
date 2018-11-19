@@ -198,7 +198,6 @@ void Simon::update(DWORD dt, vector<LPGameObject>* bricks, vector<LPGameObject>*
 	if (newPositionX >= 0 && newPositionX + SIM_MOVE_W <= boundingGameX) {
 		x = newPositionX;
 	}
-
 	updateAnimId();
 	// simple fall down
 	vy += dt * SIMON_GRAVITY;
@@ -235,7 +234,6 @@ void Simon::checkCollisionWithItems(vector<GameObject*>* items)
 
 void Simon::render()
 {
-	renderBoundingBox();
 	if (isHitting) {
 		whip->setSide(faceSide);
 		whip->render();
@@ -265,9 +263,18 @@ void Simon::updateAnimId()
 			: ANIM_SIM_SIT_FACE_RIGHT;
 	}
 	else if (currentState == SimonState::jumping) {
-		animationId = faceSide == FaceSide::left
-			? ANIM_SIM_SIT_FACE_LEFT
-			: ANIM_SIM_SIT_FACE_RIGHT;
+		if (vy > 0.15)
+		{
+			animationId = faceSide == FaceSide::left
+				? ANIM_SIM_IDLE_FACE_LEFT
+				: ANIM_SIM_IDLE_FACE_RIGHT;
+		}
+		else
+		{
+			animationId = faceSide == FaceSide::left
+				? ANIM_SIM_SIT_FACE_LEFT
+				: ANIM_SIM_SIT_FACE_RIGHT;
+		}
 	}
 	else if (currentState == SimonState::hitting) {
 		// set hitting anim
@@ -330,7 +337,7 @@ void Simon::updateAnimId()
 			{
 				animations[animationId]->refresh();
 				setState(SimonState::sitting);
-				isThrowing= false;
+				isThrowing = false;
 				animationId = faceSide == FaceSide::left
 					? ANIM_SIM_IDLE_FACE_LEFT
 					: ANIM_SIM_IDLE_FACE_RIGHT;

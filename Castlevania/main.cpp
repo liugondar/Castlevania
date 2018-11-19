@@ -433,8 +433,6 @@ void loadSimonAnimations()
 	animation->setIsOneTimeAnim(true);
 	animationManager->add(ANIM_SIM_THROW_WHEN_SIT_R, animation);
 
-
-
 	/// Idle anim
 	animation = new Animation(100);
 	animation->add(SPRITE_SIM_MOVE_R1);
