@@ -14,7 +14,7 @@ DaggerItem::~DaggerItem()
 
 void DaggerItem::render()
 {
-	if (currentState != State::dead)animations[ANIM_KNIFE_ITEM_IDLE]->render(x, y );
+	if (currentState != State::dead)animations[ANIM_DAGGER_ITEM_IDLE]->render(x, y );
 	else
 	{
 		GameObjectManger::getInstance()->removeItem(this);
@@ -33,3 +33,4 @@ void DaggerItem::update(DWORD dt, vector<LPGameObject>* bricks)
 {
 	Item::update(dt, bricks);
 }
+

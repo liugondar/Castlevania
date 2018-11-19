@@ -158,7 +158,7 @@ constexpr auto ANIM_COLLISION_EFFECT= 802;
 constexpr auto ANIM_BIG_CANDLE_IDLE = 501;
 constexpr auto ANIM_HEART_ITEM_IDLE = 601;
 constexpr auto ANIM_WHIP_ITEM_IDLE = 602;
-constexpr auto ANIM_KNIFE_ITEM_IDLE = 603;
+constexpr auto ANIM_DAGGER_ITEM_IDLE = 603;
 
 
 /*

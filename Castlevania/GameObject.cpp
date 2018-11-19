@@ -1,7 +1,17 @@
 #include "GameObject.h"
 #include <algorithm>
 
-unordered_map<int, Animation* > GameObject::animations;
+
+GameObject::GameObject()
+{
+	x = y = 0;
+	vx = vy = 0;
+	faceSide = FaceSide::right; // right side
+	previousAmiId = -1;
+	previousAnimIsOneTimeAnim = false;
+	boundingGameX = 0;
+	boundingGameY = 0;
+}
 
 GameObject::~GameObject()
 {

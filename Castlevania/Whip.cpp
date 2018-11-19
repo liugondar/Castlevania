@@ -6,12 +6,12 @@ Whip::Whip()
 {
 	lv = 1;
 	animationId = -1;
+	Whip::initAnim();
 }
 
 
 Whip::~Whip()
-{
-}
+= default;
 
 void Whip::checkEnemyCollisions(vector<LPGameObject> coObjects)
 {
@@ -119,4 +119,14 @@ void Whip::getBoundingBox(float & left, float & top, float & right, float & bott
 void Whip::upgradeWhipLv()
 {
 	if (lv < MAX_WHIP_LV) lv++;
+}
+
+void Whip::initAnim()
+{
+	addAnimation(ANIM_WHIP_LV1_L);
+	addAnimation(ANIM_WHIP_LV2_L);
+	addAnimation(ANIM_WHIP_LV3_L);
+	addAnimation(ANIM_WHIP_LV1_R);
+	addAnimation(ANIM_WHIP_LV2_R);
+	addAnimation(ANIM_WHIP_LV3_R);
 }

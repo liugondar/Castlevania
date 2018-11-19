@@ -34,25 +34,18 @@ protected:
 
 	int currentState;
 	int previousState;
-	static unordered_map<int, Animation*> animations;
+	unordered_map<int, Animation*> animations;
 	int previousAmiId;
 	bool previousAnimIsOneTimeAnim;
 
 	LPDIRECT3DTEXTURE9 texture;
 
 public:
-	GameObject() {
-		x = y = 0;
-		vx = vy = 0;
-		faceSide = FaceSide::right; // right side
-		previousAmiId = -1;
-		previousAnimIsOneTimeAnim = false;
-		boundingGameX = 0;
-		boundingGameY = 0;
-	}
+	GameObject();
 
 	virtual ~GameObject();
 
+	virtual void initAnim()=0;
 	void setType(int type) { this->type = type; }
 	void setId(int id) { this->id = id; }
 	void setPosition(float x, float y) { this->x = x; this->y = y; }
@@ -76,7 +69,7 @@ public:
 
 	void renderBoundingBox();
 
-	static void addAnimation(int animationId);
+	void addAnimation(int animationId);
 
 	LPCollisionEvent sweptAABBEx(LPGameObject coO);
 	void calcPotentialCollisions(vector<LPGameObject> *coObjects, vector<LPCollisionEvent> & coEvents);

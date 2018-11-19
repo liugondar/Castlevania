@@ -45,5 +45,6 @@ public:
 	void refreshAnim();
 	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
 	void upgradeWhipLv();
+	void initAnim() override;
 };
 

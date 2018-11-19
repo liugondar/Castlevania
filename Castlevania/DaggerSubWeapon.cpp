@@ -6,16 +6,16 @@ DaggerSubWeapon::DaggerSubWeapon()
 {
 	vx = DAGGER_VX;
 	faceSide = FaceSide::right;
+	DaggerSubWeapon::initAnim();
 }
 
 
 DaggerSubWeapon::~DaggerSubWeapon()
-{
-}
+= default;
 
 void DaggerSubWeapon::checkEnemyCollisions(vector<LPGameObject>* coObjects)
 {
-	/*vector<LPCollisionEvent> coEvents;
+	vector<LPCollisionEvent> coEvents;
 	vector<LPCollisionEvent> coEventsResult;
 	coEvents.clear();
 
@@ -30,26 +30,29 @@ void DaggerSubWeapon::checkEnemyCollisions(vector<LPGameObject>* coObjects)
 			item->setState(-1);
 		}
 	}
-
-	for (auto& coEvent : coEvents) delete coEvent;*/
-
-	for (auto& coObject : *coObjects)
+	else
 	{
-		float bl, bt, br, bb;
-		float sl, st, sr, sb;
-		coObject->getBoundingBox(sl, st, sr, sb);
-		getBoundingBox(bl, bt, br, bb);
-		if (isColliding(bl, bt, br, bb, sl, st, sr, sb)) {
-			coObject->setState(-1);
+		for (auto& coObject : *coObjects)
+		{
+			float bl, bt, br, bb;
+			float sl, st, sr, sb;
+			coObject->getBoundingBox(sl, st, sr, sb);
+			getBoundingBox(bl, bt, br, bb);
+			if (isColliding(bl, bt, br, bb, sl, st, sr, sb)) {
+				coObject->setState(-1);
+			}
 		}
 	}
+
+	for (auto& coEvent : coEvents) delete coEvent;
+
 }
 
 void DaggerSubWeapon::render()
 {
 	float camX, camY;
 	Game::getInstance()->getCameraPosition(camX, camY);
-	if (x<camX - DAGGER_W || x>camX + SCREEN_WIDTH ) setState(SubWeaponState::inActive);
+	if (x<camX - DAGGER_W || x>camX + SCREEN_WIDTH) setState(SubWeaponState::inActive);
 	if (currentState == SubWeaponState::inActive) return;
 	animationId = faceSide == FaceSide::left ?
 		ANIM_DAGGER_L : ANIM_DAGGER_R;
@@ -71,4 +74,10 @@ void DaggerSubWeapon::update(const DWORD dt, vector<GameObject*>* coObjects)
 	vx = faceSide == FaceSide::left ? -DAGGER_VX : DAGGER_VX;
 	x += dx;
 	checkEnemyCollisions(coObjects);
+}
+
+void DaggerSubWeapon::initAnim()
+{
+	addAnimation(ANIM_DAGGER_L);
+	addAnimation(ANIM_DAGGER_R);
 }

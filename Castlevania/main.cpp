@@ -331,7 +331,7 @@ void loadAnimations()
 
 	animation = new Animation(100);
 	animation->add(SPRITE_KNIFE_ITEM);
-	animationManager->add(ANIM_KNIFE_ITEM_IDLE, animation);
+	animationManager->add(ANIM_DAGGER_ITEM_IDLE, animation);
 
 	animation = new Animation(100);
 	animation->add(SPRITE_COLLISION_EFFECT);
@@ -345,34 +345,6 @@ void loadAnimations()
 
 	/* Simon animations */
 	loadSimonAnimations();
-
-	Simon::addAnimation(ANIM_SIM_WALKING_R);
-	Simon::addAnimation(ANIM_SIM_WALKING_L);
-	Simon::addAnimation(ANIM_SIM_IDLE_L);
-	Simon::addAnimation(ANIM_SIM_IDLE_R);
-	Simon::addAnimation(ANIM_SIM_SITTING_L);
-	Simon::addAnimation(ANIM_SIM_SITTING_R);
-	Simon::addAnimation(ANIM_SIM_HITTING_L);
-	Simon::addAnimation(ANIM_SIM_HITTING_R);
-	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SITTING_L);
-	Simon::addAnimation(ANIM_SIM_HIT_WHEN_SITTING_R);
-	Simon::addAnimation(ANIM_SIM_THROW_L);
-	Simon::addAnimation(ANIM_SIM_THROW_R);
-	Brick::addAnimation(ANIMATION_BRICK_IDLE);
-	Whip::addAnimation(ANIM_WHIP_LV1_L);
-	Whip::addAnimation(ANIM_WHIP_LV1_R);
-	Whip::addAnimation(ANIM_WHIP_LV2_L);
-	Whip::addAnimation(ANIM_WHIP_LV2_R);
-	Whip::addAnimation(ANIM_WHIP_LV3_L);
-	Whip::addAnimation(ANIM_WHIP_LV3_R);
-	BigCandle::addAnimation(ANIM_BIG_CANDLE_IDLE);
-	Item::addAnimation(ANIM_HEART_ITEM_IDLE);
-	Item::addAnimation(ANIM_WHIP_ITEM_IDLE);
-	Item::addAnimation(ANIM_KNIFE_ITEM_IDLE);
-	DaggerItem::addAnimation(ANIM_DAGGER_L);
-	DaggerItem::addAnimation(ANIM_DAGGER_R);
-	BurnEffect::addAnimation(ANIM_BURN_EFFECT);
-	CollisionEffect::addAnimation(ANIM_COLLISION_EFFECT);
 }
 
 void loadSimonAnimations()

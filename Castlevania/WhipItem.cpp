@@ -32,3 +32,4 @@ void WhipItem::getBoundingBox(float& left, float& top, float& right, float& bott
 	right = x + WHIP_ITEM_W;
 	bottom = y + WHIP_ITEM_H;
 }
+

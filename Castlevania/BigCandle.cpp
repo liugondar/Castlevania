@@ -8,6 +8,7 @@
 BigCandle::BigCandle()
 {
 	itemContain = -1;
+	initAnim();
 }
 
 
@@ -61,4 +62,9 @@ void BigCandle::getBoundingBox(float & left, float & top, float & right, float &
 void BigCandle::setItemContain(int item)
 {
 	itemContain = item;
+}
+
+void BigCandle::initAnim()
+{
+	addAnimation(ANIM_BIG_CANDLE_IDLE);
 }

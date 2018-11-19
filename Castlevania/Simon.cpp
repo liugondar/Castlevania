@@ -8,11 +8,11 @@ Simon::Simon()
 	whip->setPosition(x, y);
 	isInGround = true;
 	isReleaseSitButton = true;
+	Simon::initAnim();
 }
 
 Simon::~Simon()
-{
-}
+= default;
 
 void Simon::setState(int state)
 {
@@ -371,6 +371,22 @@ void Simon::getBoundingBox(float & left, float & top, float & right, float & bot
 	top = y;
 	right = x + width;
 	bottom = y + height;
+}
+
+void Simon::initAnim()
+{
+	addAnimation(ANIM_SIM_THROW_L);
+	addAnimation(ANIM_SIM_THROW_R);
+	addAnimation(ANIM_SIM_HITTING_L);
+	addAnimation(ANIM_SIM_HITTING_R);
+	addAnimation(ANIM_SIM_WALKING_L);
+	addAnimation(ANIM_SIM_WALKING_R);
+	addAnimation(ANIM_SIM_HIT_WHEN_SITTING_L);
+	addAnimation(ANIM_SIM_HIT_WHEN_SITTING_R);
+	addAnimation(ANIM_SIM_IDLE_L);
+	addAnimation(ANIM_SIM_IDLE_R);
+	addAnimation(ANIM_SIM_SITTING_L);
+	addAnimation(ANIM_SIM_SITTING_R);
 }
 
 void Simon::checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks)

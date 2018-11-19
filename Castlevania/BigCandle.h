@@ -23,5 +23,6 @@ public:
 	virtual void render() override;
 	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
 	void setItemContain(int item);
+	void initAnim() override;
 };
 

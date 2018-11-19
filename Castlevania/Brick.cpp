@@ -3,6 +3,7 @@
 
 Brick::Brick()
 {
+	initAnim();
 }
 
 
@@ -25,4 +26,9 @@ void Brick::getBoundingBox(float & left, float & top, float & right, float & bot
 
 void Brick::update(DWORD dt, vector<GameObject*>* coObjects)
 {
+}
+
+void Brick::initAnim()
+{
+	addAnimation(ANIMATION_BRICK_IDLE);
 }

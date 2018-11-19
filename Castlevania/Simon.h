@@ -23,12 +23,12 @@ enum SimonState
 class Simon :
 	public GameObject
 {
-	bool isHitting;
-	bool isThrowing;
+	bool isHitting{};
+	bool isThrowing{};
 	bool isReleaseSitButton;
-	bool isOneTimeAnim;
+	bool isOneTimeAnim{};
 	Whip* whip;
-	SubWeapon* subWeapon;
+	SubWeapon* subWeapon{};
 	bool isInGround;
 public:
 	Simon();
@@ -54,7 +54,7 @@ public:
 	// Inherited via GameObject
 	void setState(int state);
 	virtual void update(DWORD dt, vector<LPGameObject> *bricks = nullptr, 
-		vector<LPGameObject>* gameObjects=nullptr, vector<GameObject*> *items=nullptr);
+		vector<LPGameObject>* gameObjects=nullptr, vector<GameObject*> *items=nullptr) ;
 	void checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks);
 	void checkCollisionWithItems(vector<GameObject*> * items = nullptr);
 
@@ -63,5 +63,6 @@ public:
 
 	virtual void getBoundingBox(float & left, float & top, float & right, float & bottom) override;
 
+	void initAnim() override;
 };
 

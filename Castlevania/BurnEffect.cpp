@@ -4,12 +4,12 @@
 
 BurnEffect::BurnEffect()
 {
+	BurnEffect::initAnim();
 }
 
 
 BurnEffect::~BurnEffect()
-{
-}
+= default;
 
 
 void BurnEffect::render()
@@ -28,4 +28,9 @@ void BurnEffect::getBoundingBox(float& left, float& top, float& right, float& bo
 
 void BurnEffect::update(DWORD dt, vector<GameObject*>* coObjects)
 {
+}
+
+void BurnEffect::initAnim()
+{
+	addAnimation(ANIM_BURN_EFFECT);
 }

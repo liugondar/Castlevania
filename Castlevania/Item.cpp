@@ -4,6 +4,7 @@
 
 Item::Item()
 {
+	initAnim();
 }
 
 
@@ -44,5 +45,12 @@ void Item::update(DWORD dt, vector<LPGameObject>* bricks)
 	GameObject::update(dt);
 	checkCollisionWithGround(dt,bricks);
 	vy += 0.002f* dt;
+}
+
+void Item::initAnim()
+{
+	addAnimation(ANIM_HEART_ITEM_IDLE);
+	addAnimation(ANIM_DAGGER_ITEM_IDLE);
+	addAnimation(ANIM_WHIP_ITEM_IDLE);
 }
 

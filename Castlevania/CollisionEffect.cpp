@@ -4,12 +4,12 @@
 
 CollisionEffect::CollisionEffect()
 {
+	CollisionEffect::initAnim();
 }
 
 
 CollisionEffect::~CollisionEffect()
-{
-}
+= default;
 
 void CollisionEffect::render()
 {
@@ -22,4 +22,9 @@ void CollisionEffect::getBoundingBox(float& left, float& top, float& right, floa
 	top = y;
 	right = 0;
 	bottom = 0;
+}
+
+void CollisionEffect::initAnim()
+{
+	addAnimation(ANIM_COLLISION_EFFECT);
 }

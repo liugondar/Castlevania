@@ -16,5 +16,6 @@ public:
 
 	void checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks);
 	void update(DWORD dt, vector<LPGameObject>* bricks) override;
+	void initAnim() override;
 };
 

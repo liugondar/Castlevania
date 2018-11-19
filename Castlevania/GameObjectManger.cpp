@@ -93,13 +93,13 @@ void GameObjectManger::loadGameObjects()
 	candle->setItemContain(ItemBigCandleContain::dagger);
 	add(candle);
 
-	auto burn = new BurnEffect();
-	burn->setPosition(100, 100);
-	add(burn);
+	//auto burn = new BurnEffect();
+	//burn->setPosition(100, 100);
+	//add(burn);
 
-	auto coolisionEffect = new CollisionEffect();
-	coolisionEffect->setPosition(100, 200);
-	add(coolisionEffect);
+	//auto collisionEffect = new CollisionEffect();
+	//collisionEffect->setPosition(100, 200);
+	//add(collisionEffect);
 }
 
 void GameObjectManger::add(GameObject* gameObject)
@@ -183,7 +183,6 @@ void GameObjectManger::render()
 	{
 		gameObject->render();
 	}
-	this->simon->render();
 	for (auto& brick : bricks)
 	{
 		brick->render();
@@ -193,6 +192,7 @@ void GameObjectManger::render()
 		item->render();
 	}
 
+	this->simon->render();
 
 }
 
