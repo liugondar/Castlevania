@@ -3,6 +3,7 @@
 #include "DaggerItem.h"
 #include "DaggerSubWeapon.h"
 #include "BurnEffect.h"
+#include "CollisionEffect.h"
 
 class DaggerItem;
 GameObjectManger* GameObjectManger::instance = nullptr;
@@ -95,6 +96,10 @@ void GameObjectManger::loadGameObjects()
 	auto burn = new BurnEffect();
 	burn->setPosition(100, 100);
 	add(burn);
+
+	auto coolisionEffect = new CollisionEffect();
+	coolisionEffect->setPosition(100, 200);
+	add(coolisionEffect);
 }
 
 void GameObjectManger::add(GameObject* gameObject)

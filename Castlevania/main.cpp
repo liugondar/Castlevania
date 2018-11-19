@@ -2,6 +2,7 @@
 #include "DaggerItem.h"
 #include "DaggerSubWeapon.h"
 #include "BurnEffect.h"
+#include "CollisionEffect.h"
 
 Game* game;
 SampleKeyHander * keyHandler;
@@ -163,6 +164,7 @@ void loadTextures()
 	textureManager->add(ID_TEX_WHIP_ITEM, TEXTURE_WHIP_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_KNIFE_ITEM, TEXTURE_KNIFE_ITEM_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_BURN_EFFECT, TEXTURE_BURN_EFFECT_PATH, D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_COLLISION_EFFECT, TEXTURE_COLLISION_EFFECT_PATH, D3DCOLOR_XRGB(255, 0, 255));
 
 	auto spriteManager = SpriteManager::getInstance();
 	const auto texSim = textureManager->get(ID_TEX_SIMON);
@@ -247,9 +249,9 @@ void loadTextures()
 	spriteManager->add(SPRITE_BURN_EFFECT1, 0, 0, 43, 44, texBurnEffect);
 	spriteManager->add(SPRITE_BURN_EFFECT2, 43, 0, 86, 44, texBurnEffect);
 	spriteManager->add(SPRITE_BURN_EFFECT3, 86, 0, 129, 44, texBurnEffect);
-//	const auto texCollisionEffect = textureManager->get(ID_TEX_COLLISION_EFFECT);
-//	spriteManager->add(SPRITE_COLLISION_EFFECT, 0, 0, 16, 20, texCollisionEffect);
-//
+
+	const auto texCollisionEffect = textureManager->get(ID_TEX_COLLISION_EFFECT);
+	spriteManager->add(SPRITE_COLLISION_EFFECT, 0, 0, 16, 20, texCollisionEffect);
 	}
 
 void loadAnimations()
@@ -370,6 +372,7 @@ void loadAnimations()
 	DaggerItem::addAnimation(ANIM_DAGGER_L);
 	DaggerItem::addAnimation(ANIM_DAGGER_R);
 	BurnEffect::addAnimation(ANIM_BURN_EFFECT);
+	CollisionEffect::addAnimation(ANIM_COLLISION_EFFECT);
 }
 
 void loadSimonAnimations()

@@ -150,7 +150,7 @@ constexpr auto ANIM_DAGGER_R= 408;
  * effect ani constants
  */
 constexpr auto ANIM_BURN_EFFECT = 801;
-constexpr auto ANIM_COLLISION_EFFECT= 801;
+constexpr auto ANIM_COLLISION_EFFECT= 802;
 
 /*
  * item animation constants
