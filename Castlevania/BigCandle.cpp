@@ -1,11 +1,11 @@
 #include "BigCandle.h"
 #include "HeartItem.h"
-#include "GameObjectManger.h"
 #include "WhipItem.h"
 #include "DaggerItem.h"
 #include <stdlib.h>
 #include "BurnEffect.h"
 #include "CollisionEffect.h"
+#include "StageManager.h"
 
 BigCandle::BigCandle()
 {
@@ -22,15 +22,15 @@ void BigCandle::render()
 {
 	if (currentState != State::dead) animations[ANIM_BIG_CANDLE_IDLE]->render(x, y);
 	else {
-		auto gameObjectManger = GameObjectManger::getInstance();
+		const auto stageManager = StageManager::getInstance();
 		Item * item = nullptr;
 		auto burn = new BurnEffect();
 		burn->setPosition(x, y);
-		gameObjectManger->add(burn);
+		stageManager->add(burn);
 
 		auto collisionEffect = new CollisionEffect();
 		collisionEffect->setPosition(x,y);
-		gameObjectManger->add(collisionEffect);
+		stageManager->add(collisionEffect);
 		if (itemContain == -1)
 		{
 			itemContain = rand() % 3 + 1;
@@ -49,11 +49,11 @@ void BigCandle::render()
 			item->setType(ItemType::daggerItem);
 		}
 
-		if (item) {
+		if (item ) {
 			item->setPosition(x, y);
-			gameObjectManger->addItem(item);
+			stageManager->addItem(item);
 		}
-		gameObjectManger->removeGameObject(this);
+		stageManager->removeGameObject(this);
 	}
 }
 

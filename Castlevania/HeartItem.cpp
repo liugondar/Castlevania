@@ -1,5 +1,5 @@
 #include "HeartItem.h"
-#include "GameObjectManger.h"
+#include "StageManager.h"
 
 
 HeartItem::HeartItem()
@@ -19,9 +19,8 @@ void HeartItem::update(DWORD dt, vector<LPGameObject>* bricks)
 void HeartItem::render()
 {
 	if(currentState!=State::dead)animations[ANIM_HEART_ITEM_IDLE]->render(x, y);
-	else
-	{
-		GameObjectManger::getInstance()->removeItem(this);
+	else {
+		StageManager::getInstance()->removeGameObject(this);
 	}
 }
 

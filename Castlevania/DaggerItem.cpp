@@ -1,6 +1,6 @@
 #include "DaggerItem.h"
-#include "GameObjectManger.h"
 #include "WhipItem.h"
+#include "StageManager.h"
 
 
 DaggerItem::DaggerItem()
@@ -17,7 +17,7 @@ void DaggerItem::render()
 	if (currentState != State::dead)animations[ANIM_DAGGER_ITEM_IDLE]->render(x, y );
 	else
 	{
-		GameObjectManger::getInstance()->removeItem(this);
+		StageManager::getInstance()->removeGameObject(this);
 	}
 }
 

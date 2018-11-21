@@ -73,6 +73,12 @@
     <Filter Include="Source Files\Effect">
       <UniqueIdentifier>{4015e134-8bd2-4f65-8e10-641fda78d684}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Stage">
+      <UniqueIdentifier>{69c5982b-5e75-4cc7-9f8e-79537063af0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Stage">
+      <UniqueIdentifier>{e2fe7f58-7870-4814-bcd2-9c01e82c8b25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,9 +101,6 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectManger.cpp">
-      <Filter>Source Files\GameManager</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files\Sprite</Filter>
@@ -150,15 +153,21 @@
     <ClCompile Include="CollisionEffect.cpp">
       <Filter>Source Files\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Source Files\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="StageLv1.cpp">
+      <Filter>Source Files\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>Source Files\Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Header Files\GameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectManger.h">
       <Filter>Header Files\GameManager</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -238,6 +247,15 @@
     </ClInclude>
     <ClInclude Include="CollisionEffect.h">
       <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="StageLv1.h">
+      <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>Header Files\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

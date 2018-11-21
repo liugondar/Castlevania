@@ -1,10 +1,9 @@
 #include "Item.h"
-#include "GameObjectManger.h"
 
 
 Item::Item()
 {
-	initAnim();
+	Item::initAnim();
 }
 
 
@@ -21,7 +20,7 @@ void Item::checkCollisionWithGround(DWORD dt, vector<LPGameObject>* bricks)
 	calcPotentialCollisions(bricks, coEvents);
 
 	// no collison
-	if (coEvents.size() == 0) {
+	if (coEvents.empty()) {
 		y += dy;
 	}
 	else {

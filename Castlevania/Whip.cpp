@@ -22,7 +22,7 @@ void Whip::checkEnemyCollisions(vector<LPGameObject> coObjects)
 		coObject->getBoundingBox(sl, st, sr, sb);
 		getBoundingBox(bl, bt, br, bb);
 		if (isColliding(bl, bt, br, bb, sl, st, sr, sb)) {
-			coObject->setState(-1);
+			coObject->setState(State::dead);
 		}
 	}
 }
@@ -77,11 +77,6 @@ void Whip::setSide(int side)
 
 void Whip::refreshAnim()
 {
-	//if(animations[ANIM_WHIP_LV1_L])animations[ANIM_WHIP_LV1_L]->refresh();
-	//if(animations[ANIM_WHIP_LV1_L])animations[ANIM_WHIP_LV1_R]->refresh();
-	//if(animations[ANIM_WHIP_LV2_L])animations[ANIM_WHIP_LV2_L]->refresh();
-	//if(animations[ANIM_WHIP_LV2_L])animations[ANIM_WHIP_LV2_R]->refresh();
-
 	if (animations[animationId]) animations[animationId]->refresh();
 }
 

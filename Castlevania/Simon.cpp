@@ -1,6 +1,6 @@
 #include "Simon.h"
-#include "GameObjectManger.h"
 #include "DaggerSubWeapon.h"
+#include "StageManager.h"
 
 Simon::Simon()
 {
@@ -227,7 +227,6 @@ void Simon::checkCollisionWithItems(vector<GameObject*>* items)
 			item->setState(State::dead);
 		}
 	}
-
 	for (auto& coEvent : coEvents) delete coEvent;
 }
 

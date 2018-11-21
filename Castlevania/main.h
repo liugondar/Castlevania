@@ -4,7 +4,6 @@
 #include "KeyboardHandler.h"
 
 #include "GameObject.h"
-#include "GameObjectManger.h"
 #include "Brick.h"
 #include "Simon.h"
 #include "Whip.h"

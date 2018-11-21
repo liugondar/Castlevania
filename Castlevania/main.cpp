@@ -3,6 +3,7 @@
 #include "DaggerSubWeapon.h"
 #include "BurnEffect.h"
 #include "CollisionEffect.h"
+#include "StageManager.h"
 
 Game* game;
 SampleKeyHander * keyHandler;
@@ -12,18 +13,18 @@ SampleKeyHander * keyHandler;
 void SampleKeyHander::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-	GameObjectManger::getInstance()->onKeyDown(KeyCode);
+	StageManager::getInstance()->onKeyDown(KeyCode);
 }
 
 void SampleKeyHander::OnKeyUp(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
-	GameObjectManger::getInstance()->onKeyUp(KeyCode);
+	StageManager::getInstance()->onKeyUp(KeyCode);
 }
 
 void SampleKeyHander::KeyState(BYTE *states)
 {
-	GameObjectManger::getInstance()->keyState(states);
+	StageManager::getInstance()->keyState(states);
 }
 
 /// Create a window then display and running until exit message send
@@ -142,7 +143,7 @@ void loadResources() {
 	loadTextures();
 	loadAnimations();
 	loadGameObjects();
-
+	StageManager::getInstance()->init();
 }
 
 void loadTextures()
@@ -453,12 +454,12 @@ void loadSimonAnimations()
 
 void loadGameObjects()
 {
-	auto gameObjectManager = GameObjectManger::getInstance();
-	gameObjectManager->loadGameObjects();
+	//auto gameObjectManager = GameObjectManger::getInstance();
+	//gameObjectManager->loadGameObjects();
 }
 
 void update(DWORD dt) {
-	GameObjectManger::getInstance()->update(dt);
+	StageManager::getInstance()->update(dt);
 }
 
 void render() {
@@ -471,7 +472,7 @@ void render() {
 		// Clear back buffer with a color
 		d3ddv->ColorFill(bb, NULL, BACKGROUND_COLOR);
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-		GameObjectManger::getInstance()->render();
+		StageManager::getInstance()->render();
 		spriteHandler->End();
 		d3ddv->EndScene();
 	}

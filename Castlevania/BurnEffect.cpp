@@ -1,5 +1,5 @@
 #include "BurnEffect.h"
-#include "GameObjectManger.h"
+#include "StageManager.h"
 
 
 BurnEffect::BurnEffect()
@@ -15,11 +15,8 @@ BurnEffect::~BurnEffect()
 void BurnEffect::render()
 {
 	if (animations[ANIM_BURN_EFFECT]) {
-		if (animations[ANIM_BURN_EFFECT]->isDone())
-		{
-			GameObjectManger::getInstance()->removeGameObject(this);
-		}
-		animations[ANIM_BURN_EFFECT]->render(x, y);
+		if (animations[ANIM_BURN_EFFECT]->isDone()) StageManager::getInstance()->removeGameObject(this);
+		else animations[ANIM_BURN_EFFECT]->render(x, y);
 	}
 }
 

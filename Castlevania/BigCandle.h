@@ -15,6 +15,7 @@ class BigCandle :
 	public GameObject
 {
 	int itemContain;
+	bool didInitItemContain;
 public:
 	BigCandle();
 	~BigCandle();

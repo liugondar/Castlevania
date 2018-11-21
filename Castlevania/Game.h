@@ -21,9 +21,9 @@ constexpr auto SCREEN_WIDTH = 640;
 constexpr auto SCREEN_HEIGHT = 480;
 
 constexpr auto MAX_FRAME_RATE = 90;
-// #define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0) //black
+ #define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0) //black
  //#define BACKGROUND_COLOR D3DCOLOR_XRGB(255,255,255) //white
-#define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 255, 200)
+//#define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 255, 200)
 
 
 class Game

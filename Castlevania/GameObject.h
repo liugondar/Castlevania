@@ -49,7 +49,10 @@ public:
 	void setType(int type) { this->type = type; }
 	void setId(int id) { this->id = id; }
 	void setPosition(float x, float y) { this->x = x; this->y = y; }
-	void setState(int state) { this->previousState = this->currentState; this->currentState = state; }
+	void setState(int state)
+	{
+		this->previousState = this->currentState; this->currentState = state;
+	}
 	void setSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void setBoundingGame(float x, float y) { this->boundingGameX = x; this->boundingGameY = y; }
 
