@@ -15,6 +15,7 @@ Sprite::Sprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTU
 
 void Sprite::draw(float x, float y)
 {
+	if (!this || !texture) return;
 	auto game = Game::getInstance();
 	game->draw(x, y, texture, left, top, right, bottom,255);
 }

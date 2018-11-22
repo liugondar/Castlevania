@@ -107,9 +107,9 @@ void StageLv1::loadContent()
 	candle->setItemContain(ItemBigCandleContain::dagger);
 	add(candle);
 
-	const auto texMap = TextureManager::getInstance()->get(ID_TEX_MAP_LV1);
+	const auto texMap = TextureManager::getInstance()->get(ID_TEX_BACKGROUND_LV1);
 
-	tileMap = new TileMap(L"Resources\\sprites\\background\\map1.txt", 1536, 384, 32, 32);
+	tileMap = new TileMap(MATRIX_LV1_FILE_PATH, 1536, 384, 32, 32);
 	tileMap->loadResources(texMap);
 }
 

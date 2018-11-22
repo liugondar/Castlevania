@@ -155,7 +155,6 @@ void loadTextures()
 	textureManager->add(ID_TEX_EMPTY, TEXTURE_EMPTY_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_WHIP, TEXTURE_WHIP_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_DAGGER, TEXTURE_DAGGER_PATH, D3DCOLOR_XRGB(255, 0, 255));
-	textureManager->add(ID_TEX_MAP_LV1, L"Resources\\sprites\\background\\map1.png", D3DCOLOR_XRGB(255, 0, 255));
 
 
 	textureManager->add(ID_TEX_BIG_CANDLE, TEXTURE_BIG_CANDLE_PATH, D3DCOLOR_XRGB(255, 0, 255));

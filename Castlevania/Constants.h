@@ -181,3 +181,5 @@ constexpr auto TEXTURE_COLLISION_EFFECT_PATH= L"Resources\\sprites\\other\\0.png
 constexpr auto TEXTURE_HEART_ITEM_PATH = L"Resources\\sprites\\item\\1.png";
 constexpr auto TEXTURE_WHIP_ITEM_PATH = L"Resources\\sprites\\item\\3.png";
 constexpr auto TEXTURE_KNIFE_ITEM_PATH = L"Resources\\sprites\\item\\4.png";
+
+constexpr auto MATRIX_LV1_FILE_PATH = L"Resources\\sprites\\background\\lv1.txt";

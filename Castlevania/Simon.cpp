@@ -204,16 +204,32 @@ void Simon::update(DWORD dt, vector<LPGameObject>* coObjects,
 }
 
 
-void Simon::checkCollision(DWORD dt, vector<LPGameObject>* coObject)
+void Simon::checkCollision(DWORD dt, vector<LPGameObject>* coObjects)
 {
 	vector<LPCollisionEvent> coEvents;
 	vector<LPCollisionEvent> coEventsResult;
 	coEvents.clear();
 
-	calcPotentialCollisions(coObject, coEvents);
+	calcPotentialCollisions(coObjects, coEvents);
 
 	// no collison
 	if (coEvents.empty()) {
+		// case simon is so close the candle when hit
+		for (auto& coObject : *coObjects)
+		{
+			if (coObject->getType() == GameObjectType::item)
+			{
+				float bl, bt, br, bb;
+				float sl, st, sr, sb;
+				coObject->getBoundingBox(sl, st, sr, sb);
+				getBoundingBox(bl, bt, br, bb);
+				if (isColliding(bl, bt, br, bb, sl, st, sr, sb)) {
+					{
+						processCollisionWithItem(dynamic_cast<Item*> (coObject));
+					}
+				}
+			}
+		}
 		y += dy;
 	}
 	else {
@@ -230,7 +246,7 @@ void Simon::checkCollision(DWORD dt, vector<LPGameObject>* coObject)
 			{
 				processCollisionWithItem(dynamic_cast<Item*> (object));
 			}
-			else if(object->getType()== GameObjectType::brick)
+			else if (object->getType() == GameObjectType::brick)
 			{
 				processCollisionWithGround(minTy, ny);
 			}

@@ -52,7 +52,7 @@ void Game::draw(float x, float y, LPDIRECT3DTEXTURE9 texture,
 	int left, int top, int right, int bottom,
 	int alpha)
 {
-
+	if (!texture) return;
 	if (spriteHandler && texture)
 	{
 		D3DXVECTOR3 p(x-xCamera,y, 0);
