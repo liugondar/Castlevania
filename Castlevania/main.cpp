@@ -1,9 +1,8 @@
 #include"main.h"
 #include "DaggerItem.h"
-#include "DaggerSubWeapon.h"
 #include "BurnEffect.h"
-#include "CollisionEffect.h"
 #include "StageManager.h"
+#include "BigCandle.h"
 
 Game* game;
 SampleKeyHander * keyHandler;
@@ -142,7 +141,6 @@ void loadResources() {
 
 	loadTextures();
 	loadAnimations();
-	loadGameObjects();
 	StageManager::getInstance()->init();
 }
 
@@ -452,12 +450,6 @@ void loadSimonAnimations()
 	animation->add(SPRITE_SIM_SIT_L);
 	animationManager->add(ANIM_SIM_SITTING_L, animation);
 
-}
-
-void loadGameObjects()
-{
-	//auto gameObjectManager = GameObjectManger::getInstance();
-	//gameObjectManager->loadGameObjects();
 }
 
 void update(DWORD dt) {

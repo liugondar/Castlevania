@@ -1,18 +1,6 @@
 #pragma once
 #include "Game.h"
-#include "Constants.h"
 #include "KeyboardHandler.h"
-
-#include "GameObject.h"
-#include "GameObject.h"
-#include "Simon.h"
-#include "Whip.h"
-#include "BigCandle.h"
-
-#include "AnimationManager.h"
-#include "TextureManager.h"
-#include "SpriteManager.h"
-
 
 
 HWND createGameWindow(HINSTANCE hInstance, int nCmdShow,
@@ -24,8 +12,6 @@ void loadResources();
 void loadTextures();
 void loadAnimations();
 void loadSimonAnimations();
-void loadGameObjects();
-
 
 void update(DWORD dt);
 void render();
