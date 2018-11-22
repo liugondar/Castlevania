@@ -58,8 +58,6 @@ public:
 	void processCollisionWithGround(float minTy, float ny);
 	void checkCollision(DWORD dt, vector<LPGameObject> *coObject);
 	void processCollisionWithItem(Item* item);
-	void checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks);
-	void checkCollisionWithItems(vector<GameObject*> * items = nullptr);
 
 	virtual void render() override;
 	void updateAnimId();

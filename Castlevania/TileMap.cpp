@@ -78,7 +78,6 @@ void TileMap::draw(float xCam, float yCam)
 	auto endColToDraw = static_cast<int>(xCam + SCREEN_WIDTH) / 32;
 	if (endColToDraw >= totalCol) endColToDraw = totalCol-1;
 
-	DebugOut(L"end col %d\n", endColToDraw);
 
 	for (auto i = 0; i < totalRow; i++)
 	{

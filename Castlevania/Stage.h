@@ -7,6 +7,9 @@ class Stage
 {
 protected:
 	TileMap * tileMap;
+	Simon* simon{};
+	int sceneWidth;
+	int sceneHeight;
 public:
 	Stage();
 	virtual ~Stage();
@@ -18,6 +21,7 @@ public:
 	virtual void onKeyUp(int keyCode) =0 ;
 	virtual void keyState(BYTE *states) = 0;
 
+	void updateCamera(DWORD dt) const;
 	// add object to game objects list
 	virtual void add(GameObject* gameObject) = 0;
 	void addObjectToList(GameObject* gameObject, vector<GameObject*> &container);

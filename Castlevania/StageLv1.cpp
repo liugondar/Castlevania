@@ -1,10 +1,14 @@
 #include "StageLv1.h"
 #include "BigCandle.h"
 #include "Brick.h"
+#include "StageManager.h"
+#include "StageLv2.h"
 
 
 StageLv1::StageLv1()
 {
+	sceneWidth = SCENE1_WIDTH;
+	sceneHeight = SCENE1_HEIGHT;
 	StageLv1::loadContent();
 }
 
@@ -51,6 +55,13 @@ void StageLv1::update(DWORD dt)
 	}
 
 	updateCamera(dt);
+
+	float simX, simY;
+	simon->getPosition(simX, simY);
+	if (simX > 1500) {
+		delete simon;
+		StageManager::getInstance()->setStage(new StageLv2());
+	}
 }
 
 void StageLv1::loadContent()
@@ -59,9 +70,9 @@ void StageLv1::loadContent()
 
 	simon->setPosition(10.f, 100.f);
 	simon->setState(SimonState::idle);
-	simon->setBoundingGame(SCENE_WIDTH, SCENE_HEIGHT);
+	simon->setBoundingGame(SCENE1_WIDTH, SCENE1_HEIGHT);
 
-	addSimon(simon);
+	this->simon = simon;
 
 
 	for (auto i = 0; i < 100; i++)
@@ -102,33 +113,6 @@ void StageLv1::loadContent()
 	tileMap->loadResources(texMap);
 }
 
-void StageLv1::updateCamera(DWORD dt) const
-{
-	auto game = Game::getInstance();
-	float simonX, simonY, xCamera, yCamera, simonVx, simonVy;
-	simon->getPosition(simonX, simonY);
-	simon->getSpeed(simonVx, simonVy);
-	game->getCameraPosition(xCamera, yCamera);
-
-	auto newCameraPositionX = xCamera + simonVx * dt;
-	// check if new camera postion is out of box
-	if (newCameraPositionX + SCREEN_WIDTH > SCENE_WIDTH)
-		newCameraPositionX = SCENE_WIDTH - SCREEN_WIDTH;
-	if (newCameraPositionX < 0) newCameraPositionX = 0;
-
-
-	if (simonVx >= 0) {
-		if (simonX >= (0 + SCREEN_WIDTH) / 2)
-			game->setCameraPosition(newCameraPositionX, yCamera);
-	}
-	else {
-		const auto middlePointOfEndScreen = (SCENE_WIDTH - SCREEN_WIDTH) + (SCREEN_WIDTH / 2);
-		if (simonX <= middlePointOfEndScreen)
-			game->setCameraPosition(newCameraPositionX, yCamera);
-	}
-}
-
-
 void StageLv1::onKeyDown(int keyCode)
 {
 	simon->handleOnKeyDown(keyCode);
@@ -163,7 +147,6 @@ void StageLv1::add(GameObject* gameObject)
 	else if (type == GameObjectType::canHitObject) addObjectToList(gameObject,canHitObjects);
 	else gameObjects.push_back(gameObject);
 }
-
 
 void StageLv1::addSimon(Simon* simon)
 {

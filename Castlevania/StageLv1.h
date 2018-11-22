@@ -4,12 +4,11 @@
 #include "GameObject.h"
 #include "Simon.h"
 
-constexpr auto SCENE_WIDTH = 1536;
-constexpr auto SCENE_HEIGHT = 384;
+constexpr auto SCENE1_WIDTH = 1536;
+constexpr auto SCENE1_HEIGHT = 384;
 
 class StageLv1: public Stage
 {
-	Simon* simon{};
 	vector<GameObject *> bricks;
 	vector <GameObject*> gameObjects;
 	vector <GameObject* > canHitObjects;
@@ -20,9 +19,6 @@ public:
 	StageLv1();
 	~StageLv1();
 	void loadContent() override;
-
-	// util methods
-	void updateCamera(DWORD dt) const;
 
 	// event methods
 	void onKeyDown(int keyCode) override;

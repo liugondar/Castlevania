@@ -9,6 +9,7 @@ Simon::Simon()
 	isInGround = true;
 	isReleaseSitButton = true;
 	Simon::initAnim();
+	animationId = ANIM_SIM_IDLE_R;
 }
 
 Simon::~Simon()
@@ -228,7 +229,6 @@ void Simon::checkCollision(DWORD dt, vector<LPGameObject>* coObject)
 			if (object->getType() == GameObjectType::item)
 			{
 				processCollisionWithItem(dynamic_cast<Item*> (object));
-				return;
 			}
 			else if(object->getType()== GameObjectType::brick)
 			{
@@ -240,8 +240,6 @@ void Simon::checkCollision(DWORD dt, vector<LPGameObject>* coObject)
 				x += minTx * dx + nx * 0.4;
 			}
 		}
-
-	
 	}
 
 	for (auto& coEvent : coEvents) delete coEvent;
@@ -270,66 +268,6 @@ void Simon::processCollisionWithGround(float minTy, float ny)
 		if (currentState == SimonState::jumping)
 			standUp();
 	}
-}
-
-
-
-void Simon::checkCollisionWithItems(vector<GameObject*>* items)
-{
-	vector<LPCollisionEvent> coEvents;
-	vector<LPCollisionEvent> coEventsResult;
-	coEvents.clear();
-
-	calcPotentialCollisions(items, coEvents);
-
-	if (!coEvents.empty()) {
-		float minTx, minTy, nx = 0, ny;
-		filterCollision(coEvents, coEventsResult, minTx, minTy, nx, ny);
-		for (auto& i : coEventsResult)
-		{
-			const auto item = dynamic_cast<Item*>(i->obj);
-			if (item->getItemType() == ItemType::heartItem) {
-			}
-			else if (item->getType() == ItemType::whipItem) {
-				if (whip)whip->upgradeWhipLv();
-			}
-			else if (item->getType() == ItemType::daggerItem) {
-				subWeapon = new DaggerSubWeapon();
-			}
-			item->setState(State::dead);
-		}
-	}
-	for (auto& coEvent : coEvents) delete coEvent;
-}
-
-
-void Simon::checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks)
-{
-	vector<LPCollisionEvent> coEvents;
-	vector<LPCollisionEvent> coEventsResult;
-	coEvents.clear();
-
-	calcPotentialCollisions(bricks, coEvents);
-
-	// no collison
-	if (coEvents.empty()) {
-		y += dy;
-	}
-	else {
-		float min_tx, min_ty, nx = 0, ny;
-		filterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-		// block 
-		y += min_ty * dy + ny * 0.4f;
-
-		if (ny != 0) {
-			vy = 0;
-			isInGround = true;
-			if (currentState == SimonState::jumping)
-				standUp();
-		}
-	}
-
-	for (auto& coEvent : coEvents) delete coEvent;
 }
 
 
