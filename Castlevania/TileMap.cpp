@@ -47,7 +47,7 @@ void TileMap::loadResources(LPDIRECT3DTEXTURE9 texTileMap)
 
 	if (fs.fail())
 	{
-		DebugOut(L"[ERROR] TileMap::Load_MapData failed: Id=%d", Id);
+		DebugOut(L"[ERROR] TileMap::Load_MapData failed ");
 		fs.close();
 		return;
 	}

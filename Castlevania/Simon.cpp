@@ -6,7 +6,7 @@ Simon::Simon()
 {
 	whip = new Whip();
 	whip->setPosition(x, y);
-	isInGround = true;
+	isInGround = false;
 	isReleaseSitButton = true;
 	Simon::initAnim();
 	animationId = ANIM_SIM_IDLE_R;
@@ -200,7 +200,7 @@ void Simon::update(DWORD dt, vector<LPGameObject>* coObjects,
 	}
 	updateAnimId();
 	// simple fall down
-	vy += dt * SIMON_GRAVITY;
+	if(!isInGround) vy += dt * SIMON_GRAVITY;
 }
 
 
