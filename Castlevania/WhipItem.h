@@ -9,7 +9,8 @@ class WhipItem :
 {
 public:
 	WhipItem();
-	~WhipItem();
+	~WhipItem() = default;
+
 	void update(DWORD dt, vector<LPGameObject>* bricks) override;
 	void render() override;
 	void getBoundingBox(float& left, float& top, float& right, float& bottom) override;

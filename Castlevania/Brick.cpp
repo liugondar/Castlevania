@@ -3,6 +3,7 @@
 
 Brick::Brick()
 {
+	type = GameObjectType::brick;
 	initAnim();
 }
 

@@ -1,13 +1,12 @@
 #pragma once
 #include <Windows.h>
+#include "TileMap.h"
 #include "Simon.h"
-
-class GameObject;
-constexpr auto SCENE_WIDTH = 1536;
-constexpr auto SCENE_HEIGHT = 384;
 
 class Stage
 {
+protected:
+	TileMap * tileMap;
 public:
 	Stage();
 	virtual ~Stage();
@@ -19,9 +18,12 @@ public:
 	virtual void onKeyUp(int keyCode) =0 ;
 	virtual void keyState(BYTE *states) = 0;
 
+	// add object to game objects list
 	virtual void add(GameObject* gameObject) = 0;
-	virtual void addItem(GameObject* gameObject)=0;
-	virtual void removeGameObject(GameObject* gameObject)=0;
-	virtual void removeItem(GameObject* item) = 0;
+	void addObjectToList(GameObject* gameObject, vector<GameObject*> &container);
+	// add object to item list
+	virtual void remove(GameObject* gameObject)=0;
+	void removeObjectFromList(GameObject* gameObject, vector<GameObject*>& container) const;
+
 };
 

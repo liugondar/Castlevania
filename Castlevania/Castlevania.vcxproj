@@ -146,6 +146,7 @@
     <ClCompile Include="SubWeapon.cpp" />
     <ClCompile Include="SweptAABB.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Whip.cpp" />
     <ClCompile Include="WhipItem.cpp" />
   </ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="SubWeapon.h" />
     <ClInclude Include="SweptAABB.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="TileMap.h" />
     <ClInclude Include="Whip.h" />
     <ClInclude Include="WhipItem.h" />
   </ItemGroup>

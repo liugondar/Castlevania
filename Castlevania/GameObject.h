@@ -13,6 +13,14 @@ typedef CollisionEvent* LPCollisionEvent;
 class GameObject;
 typedef GameObject* LPGameObject;
 
+enum GameObjectType {
+	simon = 1000,
+	brick = 1001,
+	coObject = 1002,
+	canHitObject=1003, // just display and not collision with simon
+	item = 1004
+};
+
 class GameObject
 {
 protected:

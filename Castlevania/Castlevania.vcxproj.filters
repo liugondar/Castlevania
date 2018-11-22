@@ -162,6 +162,9 @@
     <ClCompile Include="StageManager.cpp">
       <Filter>Source Files\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -256,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="StageManager.h">
       <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Header Files\GameManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

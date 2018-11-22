@@ -1,5 +1,6 @@
 #include "StageLv1.h"
 #include "BigCandle.h"
+#include "Brick.h"
 
 
 StageLv1::StageLv1()
@@ -15,31 +16,35 @@ StageLv1::~StageLv1()
 void StageLv1::render()
 {
 	auto game = Game::getInstance();
-	const auto texture = TextureManager::getInstance()->get(ID_TEX_BACKGROUND_LV1);
-	game->draw(0, 60, texture, 0, 0, SCENE_WIDTH, 384, 255);
+	float camX, camY;
+	game->getCameraPosition(camX, camY);
 
+	tileMap->draw(camX, camY + 60);
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->render();
 	}
 
-	auto index = -1;
-	for (auto& item : items) {
-		index++;
-		item->render();
+	for (auto i = 0; i < canHitObjects.size(); i++)
+	{
+		auto canHitOb = canHitObjects[i];
+		canHitOb->render();
 	}
-
 	this->simon->render();
 
-	for (auto& brick : bricks) {
-		brick->render();
+	for (auto i = 0; i < coObjects.size(); i++)
+	{
+		auto coOb = coObjects[i];
+		coOb->render();
 	}
+
 }
 
 void StageLv1::update(DWORD dt)
 {
-	simon->update(dt, &bricks, &gameObjects, &items);
+	simon->update(dt, &coObjects, &canHitObjects);
+
 	for (auto& item : items)
 	{
 		item->update(dt, &bricks);
@@ -63,7 +68,7 @@ void StageLv1::loadContent()
 	{
 		auto brick = new Brick();
 		brick->setPosition(0 + i * 16.0f, LV1_GROUND_Y);
-		addBrick(brick);
+		add(brick);
 	}
 
 	auto candle = new BigCandle();
@@ -90,6 +95,11 @@ void StageLv1::loadContent()
 	candle->setPosition(1199, LV1_GROUND_Y - BIG_CANDLE_HEIGHT);
 	candle->setItemContain(ItemBigCandleContain::dagger);
 	add(candle);
+
+	const auto texMap = TextureManager::getInstance()->get(ID_TEX_MAP_LV1);
+
+	tileMap = new TileMap(L"Resources\\sprites\\background\\map1.txt", 1536, 384, 32, 32);
+	tileMap->loadResources(texMap);
 }
 
 void StageLv1::updateCamera(DWORD dt) const
@@ -119,89 +129,71 @@ void StageLv1::updateCamera(DWORD dt) const
 }
 
 
-void StageLv1::onKeyDown(int keyCode) 
+void StageLv1::onKeyDown(int keyCode)
 {
 	simon->handleOnKeyDown(keyCode);
 }
 
-void StageLv1::onKeyUp(int keyCode) 
+void StageLv1::onKeyUp(int keyCode)
 {
 	simon->handleOnKeyRelease(keyCode);
 }
 
-void StageLv1::keyState(BYTE* states) 
+void StageLv1::keyState(BYTE* states)
 {
 	simon->handleOnKeyPress(states);
 }
 
 void StageLv1::add(GameObject* gameObject)
 {
-	gameObjects.push_back(gameObject);
+	const auto type = gameObject->getType();
+	if (type == GameObjectType::coObject) {
+		addObjectToList(gameObject, coObjects);
+	}
+	else if (type == GameObjectType::item)
+	{
+		addObjectToList(gameObject, coObjects);
+		addObjectToList(gameObject, items);
+	}
+	else if (type == GameObjectType::brick)
+	{
+		addObjectToList(gameObject, coObjects);
+		addObjectToList(gameObject, bricks);
+	}
+	else if (type == GameObjectType::canHitObject) addObjectToList(gameObject,canHitObjects);
+	else gameObjects.push_back(gameObject);
 }
 
-void StageLv1::addBrick(Brick* brick)
-{
-	bricks.push_back(brick);
-}
-
-void StageLv1::addItem(GameObject* item)
-{
-	items.push_back(item);
-}
 
 void StageLv1::addSimon(Simon* simon)
 {
 	this->simon = simon;
 }
 
-void StageLv1::removeGameObject(int id)
+void StageLv1::remove(GameObject* gameObject)
 {
-}
+	const auto type = gameObject->getType();
 
-void StageLv1::removeGameObject(GameObject* gameObject)
-{
-	int index = -1;
-	for (auto i = gameObjects.begin(); i < gameObjects.end(); )
+	if (type == GameObjectType::coObject) {
+		removeObjectFromList(gameObject,coObjects);
+	}
+	else if(type== GameObjectType::item)
 	{
-		index++;
-		if (index == gameObjects.size()) break;
-		if (gameObjects[index] == gameObject) {
-			i = gameObjects.erase(i);
-			delete gameObject;
-		}
-		else {
-			++i;
-		}
+		removeObjectFromList(gameObject,coObjects);
+		removeObjectFromList(gameObject,items);
+	}
+	else if (type == GameObjectType::brick)
+	{
+		removeObjectFromList(gameObject, bricks);
+	}
+	else if(type==GameObjectType::canHitObject)
+	{
+		removeObjectFromList(gameObject, canHitObjects);
+	}
+	else
+	{
+		removeObjectFromList(gameObject,gameObjects);
 	}
 
-	index = -1;
-	for (auto i = items.begin(); i < items.end(); )
-	{
-		index++;
-		if (index == items.size()) break;
-		if (items[index] == gameObject) {
-			i = items.erase(i);
-			delete gameObject;
-		}
-		else {
-			++i;
-		}
-	}
-}
-
-void StageLv1::removeItem(GameObject* item)
-{
-	auto index = -1;
-	for (auto i = items.begin(); i < items.end(); )
-	{
-		index++;
-		if (index == items.size()) break;
-		if (items[index] == item) {
-			i = items.erase(i);
-			delete item;
-		}
-		else {
-			++i;
-		}
-	}
+		delete(gameObject);
 }

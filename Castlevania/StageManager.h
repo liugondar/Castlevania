@@ -28,8 +28,6 @@ public:
 	void keyState(BYTE *states) const { currentStage->keyState(states); }
 
 	void add(GameObject* gameObject) const { currentStage->add(gameObject); }
-	void addItem(GameObject* item) const { currentStage->addItem(item); }
-	void removeGameObject(GameObject* gameObject)const { currentStage->removeGameObject(gameObject); }
-	void removeItem(GameObject* item) const { currentStage->removeItem(item); }
+	void remove(GameObject* gameObject)const { currentStage->remove(gameObject); }
 };
 

@@ -15,7 +15,7 @@ BurnEffect::~BurnEffect()
 void BurnEffect::render()
 {
 	if (animations[ANIM_BURN_EFFECT]) {
-		if (animations[ANIM_BURN_EFFECT]->isDone()) StageManager::getInstance()->removeGameObject(this);
+		if (animations[ANIM_BURN_EFFECT]->isDone()) StageManager::getInstance()->remove(this);
 		else animations[ANIM_BURN_EFFECT]->render(x, y);
 	}
 }

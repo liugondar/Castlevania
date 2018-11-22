@@ -11,6 +11,7 @@ GameObject::GameObject()
 	previousAnimIsOneTimeAnim = false;
 	boundingGameX = 0;
 	boundingGameY = 0;
+	currentState = State::normal;
 }
 
 GameObject::~GameObject()

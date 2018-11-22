@@ -10,6 +10,7 @@
 BigCandle::BigCandle()
 {
 	itemContain = -1;
+	type = GameObjectType::canHitObject;
 	initAnim();
 }
 
@@ -37,23 +38,20 @@ void BigCandle::render()
 		}
 		if (itemContain == ItemBigCandleContain::heart) {
 			item = new HeartItem();
-			item->setType(ItemType::heartItem);
 		}
 		else if (itemContain == ItemBigCandleContain::whipUpgrade) {
 			item = new WhipItem();
-			item->setType(ItemType::whipItem);
 		}
 		else if (itemContain == ItemBigCandleContain::dagger)
 		{
 			item = new DaggerItem();
-			item->setType(ItemType::daggerItem);
 		}
 
 		if (item ) {
 			item->setPosition(x, y);
-			stageManager->addItem(item);
+			stageManager->add(item);
 		}
-		stageManager->removeGameObject(this);
+		stageManager->remove(this);
 	}
 }
 

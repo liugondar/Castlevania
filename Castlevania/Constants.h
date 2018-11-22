@@ -109,6 +109,7 @@ constexpr auto ID_TEX_BURN_EFFECT = 801;
 constexpr auto ID_TEX_COLLISION_EFFECT = 802;
 
 constexpr auto ID_TEX_BACKGROUND_LV1 = 1;		//
+constexpr auto ID_TEX_MAP_LV1= 10000;		//
 constexpr auto ID_TEX_ENTRANCE_BACKGROUND = 2;		//
 
 

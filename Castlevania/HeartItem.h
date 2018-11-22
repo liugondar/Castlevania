@@ -4,7 +4,7 @@
 class HeartItem: public Item
 {
 public:
-	HeartItem();
+	HeartItem();;
 	~HeartItem();
 	void update(DWORD dt, vector<LPGameObject>* bricks) override;
 	void render() override;

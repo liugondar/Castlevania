@@ -1,7 +1,6 @@
 #include "Whip.h"
 
 
-
 Whip::Whip()
 {
 	lv = 1;

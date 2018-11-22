@@ -1,15 +1,10 @@
 #include "WhipItem.h"
 #include "StageManager.h"
 
-WhipItem::WhipItem()
+WhipItem::WhipItem(): Item()
 {
+	itemType = ItemType::whipItem;
 }
-
-
-WhipItem::~WhipItem()
-{
-}
-
 
 void WhipItem::update(DWORD dt, vector<LPGameObject>* bricks)
 {
@@ -21,7 +16,7 @@ void WhipItem::render()
 	if (currentState != State::dead)animations[ANIM_WHIP_ITEM_IDLE]->render(x, y);
 	else
 	{
-		StageManager::getInstance()->removeGameObject(this);
+		StageManager::getInstance()->remove(this);
 	}
 }
 

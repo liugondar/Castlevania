@@ -3,6 +3,7 @@
 
 Item::Item()
 {
+	type = GameObjectType::item;
 	Item::initAnim();
 }
 
@@ -11,7 +12,7 @@ Item::~Item()
 {
 }
 
-void Item::checkCollisionWithGround(DWORD dt, vector<LPGameObject>* bricks)
+void Item::checkCollision(DWORD dt, vector<LPGameObject>* bricks)
 {
 	vector<LPCollisionEvent> coEvents;
 	vector<LPCollisionEvent> coEventsResult;
@@ -42,7 +43,7 @@ void Item::checkCollisionWithGround(DWORD dt, vector<LPGameObject>* bricks)
 void Item::update(DWORD dt, vector<LPGameObject>* bricks)
 {
 	GameObject::update(dt);
-	checkCollisionWithGround(dt,bricks);
+	checkCollision(dt,bricks);
 	vy += 0.002f* dt;
 }
 

@@ -14,7 +14,7 @@ CollisionEffect::~CollisionEffect()
 void CollisionEffect::render()
 {
 	if (animations[ANIM_COLLISION_EFFECT]) {
-		if (animations[ANIM_COLLISION_EFFECT]->isDone()) StageManager::getInstance()->removeGameObject(this);
+		if (animations[ANIM_COLLISION_EFFECT]->isDone()) StageManager::getInstance()->remove(this);
 		else animations[ANIM_COLLISION_EFFECT]->render(x, y);
 	}
 }

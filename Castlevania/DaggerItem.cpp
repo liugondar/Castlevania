@@ -3,10 +3,10 @@
 #include "StageManager.h"
 
 
-DaggerItem::DaggerItem()
+DaggerItem::DaggerItem(): Item()
 {
+	itemType = ItemType::daggerItem;
 }
-
 
 DaggerItem::~DaggerItem()
 {
@@ -17,7 +17,7 @@ void DaggerItem::render()
 	if (currentState != State::dead)animations[ANIM_DAGGER_ITEM_IDLE]->render(x, y );
 	else
 	{
-		StageManager::getInstance()->removeGameObject(this);
+		StageManager::getInstance()->remove(this);
 	}
 }
 

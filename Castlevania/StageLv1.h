@@ -1,16 +1,19 @@
 #pragma once
 #include "Stage.h"
 #include "Game.h"
-#include "Brick.h"
+#include "GameObject.h"
 #include "Simon.h"
 
-
+constexpr auto SCENE_WIDTH = 1536;
+constexpr auto SCENE_HEIGHT = 384;
 
 class StageLv1: public Stage
 {
 	Simon* simon{};
 	vector<GameObject *> bricks;
 	vector <GameObject*> gameObjects;
+	vector <GameObject* > canHitObjects;
+	vector <GameObject* > coObjects;
 	vector <GameObject*> items;
 public:
 public:
@@ -31,13 +34,8 @@ public:
 	// manager objects methods
 
 	void add(GameObject* gameObject) override;
-	void addBrick(Brick* brick);
-	void addItem(GameObject* item) override;
+	void addCanHitObject(GameObject* ob) { canHitObjects.push_back(ob); }
 	void addSimon(Simon* simon);
-	void removeGameObject(int id);
-	void removeGameObject(GameObject* gameObject) override;
-	void removeItem(GameObject* item) override;
-
-	vector<GameObject*> getBricks() const { return bricks; }
+	void remove(GameObject* gameObject) override;
 };
 

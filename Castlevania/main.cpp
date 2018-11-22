@@ -155,6 +155,8 @@ void loadTextures()
 	textureManager->add(ID_TEX_EMPTY, TEXTURE_EMPTY_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_WHIP, TEXTURE_WHIP_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_DAGGER, TEXTURE_DAGGER_PATH, D3DCOLOR_XRGB(255, 0, 255));
+	textureManager->add(ID_TEX_MAP_LV1, L"Resources\\sprites\\background\\map1.png", D3DCOLOR_XRGB(255, 0, 255));
+
 
 	textureManager->add(ID_TEX_BIG_CANDLE, TEXTURE_BIG_CANDLE_PATH, D3DCOLOR_XRGB(255, 0, 255));
 	textureManager->add(ID_TEX_BRICK_2, ENTRANCE_GROUND_BRICK_SCREEN_2);
@@ -203,7 +205,7 @@ void loadTextures()
 	spriteManager->add(SPRITE_BRICK_2, 0, 0, BRICK_2_SIZE, BRICK_2_SIZE, texBrick2);
 
 	const auto texWhip = textureManager->get(ID_TEX_WHIP);
-	
+
 	spriteManager->add(SPRITE_WHIP_LV1_L1, 24, 2, 24 + 99, 2 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV1_L2, 179, 2, 179 + 63, 2 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV1_L3, 282 + WHIP_LV1_HITTING_W, 2, 282, 2 + SIM_HIT_H, texWhip);
@@ -220,15 +222,15 @@ void loadTextures()
 
 
 	spriteManager->add(SPRITE_WHIP_LV3_L1, 24, 138, 24 + 99, 138 + SIM_HIT_H, texWhip);
-	spriteManager->add(SPRITE_WHIP_LV3_L2, 179, 138, 179 + 63, 138  + SIM_HIT_H, texWhip);
-	spriteManager->add(SPRITE_WHIP_LV3_L3, 250+ WHIP_LV3_HITTING_W, 138, 250, 138 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV3_L2, 179, 138, 179 + 63, 138 + SIM_HIT_H, texWhip);
+	spriteManager->add(SPRITE_WHIP_LV3_L3, 250 + WHIP_LV3_HITTING_W, 138, 250, 138 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV3_R1, 734, 138, 734 - WHIP_LV3_READY_W, 138 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV3_R2, 589, 138, 589 - WHIP_LV3_START_HIT_W, 138 + SIM_HIT_H, texWhip);
 	spriteManager->add(SPRITE_WHIP_LV3_R3, 430, 138, 430 + 120, 138 + SIM_HIT_H, texWhip);
 
 	const auto texDagger = textureManager->get(ID_TEX_DAGGER);
-	spriteManager->add(SPRITE_DAGGER_L, 0, 0, 32,18, texDagger);
-	spriteManager->add(SPRITE_DAGGER_R, 32, 0, 64,18, texDagger);
+	spriteManager->add(SPRITE_DAGGER_L, 0, 0, 32, 18, texDagger);
+	spriteManager->add(SPRITE_DAGGER_R, 32, 0, 64, 18, texDagger);
 
 	const auto texEmpty = textureManager->get(ID_TEX_EMPTY);
 	spriteManager->add(SPRITE_EMPTY, 0, 0, 10, 10, texEmpty);
@@ -253,7 +255,8 @@ void loadTextures()
 
 	const auto texCollisionEffect = textureManager->get(ID_TEX_COLLISION_EFFECT);
 	spriteManager->add(SPRITE_COLLISION_EFFECT, 0, 0, 16, 20, texCollisionEffect);
-	}
+
+}
 
 void loadAnimations()
 {
@@ -472,6 +475,8 @@ void render() {
 		// Clear back buffer with a color
 		d3ddv->ColorFill(bb, NULL, BACKGROUND_COLOR);
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+		float x, y;
+		Game::getInstance()->getCameraPosition(x, y);
 		StageManager::getInstance()->render();
 		spriteHandler->End();
 		d3ddv->EndScene();

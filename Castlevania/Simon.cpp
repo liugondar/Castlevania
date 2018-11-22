@@ -185,14 +185,14 @@ void Simon::resetState()
 	isThrowing = false;
 }
 
-void Simon::update(DWORD dt, vector<LPGameObject>* bricks, vector<LPGameObject>* gameObjects, vector<GameObject*>* items)
+void Simon::update(DWORD dt, vector<LPGameObject>* coObjects,
+	vector<LPGameObject>* canHitObjects)
 {
 	GameObject::update(dt);
-	whip->update(dt, x, y, gameObjects);
-	if (subWeapon) subWeapon->update(dt, gameObjects);
+	whip->update(dt, x, y, canHitObjects);
+	if (subWeapon) subWeapon->update(dt, canHitObjects);
 
-	checkCollisionWithItems(items);
-	checkCollisionWithGround(dt, bricks);
+	checkCollision(dt, coObjects);
 	auto newPositionX = x + dx;
 	if (newPositionX >= 0 && newPositionX + SIM_MOVE_W <= boundingGameX) {
 		x = newPositionX;
@@ -201,6 +201,78 @@ void Simon::update(DWORD dt, vector<LPGameObject>* bricks, vector<LPGameObject>*
 	// simple fall down
 	vy += dt * SIMON_GRAVITY;
 }
+
+
+void Simon::checkCollision(DWORD dt, vector<LPGameObject>* coObject)
+{
+	vector<LPCollisionEvent> coEvents;
+	vector<LPCollisionEvent> coEventsResult;
+	coEvents.clear();
+
+	calcPotentialCollisions(coObject, coEvents);
+
+	// no collison
+	if (coEvents.empty()) {
+		y += dy;
+	}
+	else {
+		float minTx;
+		float minTy;
+		float nx = 0;
+		float ny;
+		filterCollision(coEvents, coEventsResult, minTx, minTy, nx, ny);
+
+		for (auto& i : coEventsResult)
+		{
+			const auto object = (i->obj);
+			if (object->getType() == GameObjectType::item)
+			{
+				processCollisionWithItem(dynamic_cast<Item*> (object));
+				return;
+			}
+			else if(object->getType()== GameObjectType::brick)
+			{
+				processCollisionWithGround(minTy, ny);
+			}
+			else
+			{
+				y += minTy * dy + ny * 0.4f;
+				x += minTx * dx + nx * 0.4;
+			}
+		}
+
+	
+	}
+
+	for (auto& coEvent : coEvents) delete coEvent;
+}
+
+void Simon::processCollisionWithItem(Item* item)
+{
+	if (item->getItemType() == ItemType::heartItem) {
+	}
+	else if (item->getItemType() == ItemType::whipItem) {
+		if (whip)whip->upgradeWhipLv();
+	}
+	else if (item->getItemType() == ItemType::daggerItem) {
+		subWeapon = new DaggerSubWeapon();
+	}
+	item->setState(State::dead);
+}
+
+void Simon::processCollisionWithGround(float minTy, float ny)
+{
+	y += minTy * dy + ny * 0.4f;
+
+	if (ny != 0) {
+		vy = 0;
+		isInGround = true;
+		if (currentState == SimonState::jumping)
+			standUp();
+	}
+}
+
+
 
 void Simon::checkCollisionWithItems(vector<GameObject*>* items)
 {
@@ -215,8 +287,8 @@ void Simon::checkCollisionWithItems(vector<GameObject*>* items)
 		filterCollision(coEvents, coEventsResult, minTx, minTy, nx, ny);
 		for (auto& i : coEventsResult)
 		{
-			const auto item = i->obj;
-			if (item->getType() == ItemType::heartItem) {
+			const auto item = dynamic_cast<Item*>(i->obj);
+			if (item->getItemType() == ItemType::heartItem) {
 			}
 			else if (item->getType() == ItemType::whipItem) {
 				if (whip)whip->upgradeWhipLv();
@@ -229,6 +301,37 @@ void Simon::checkCollisionWithItems(vector<GameObject*>* items)
 	}
 	for (auto& coEvent : coEvents) delete coEvent;
 }
+
+
+void Simon::checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks)
+{
+	vector<LPCollisionEvent> coEvents;
+	vector<LPCollisionEvent> coEventsResult;
+	coEvents.clear();
+
+	calcPotentialCollisions(bricks, coEvents);
+
+	// no collison
+	if (coEvents.empty()) {
+		y += dy;
+	}
+	else {
+		float min_tx, min_ty, nx = 0, ny;
+		filterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		// block 
+		y += min_ty * dy + ny * 0.4f;
+
+		if (ny != 0) {
+			vy = 0;
+			isInGround = true;
+			if (currentState == SimonState::jumping)
+				standUp();
+		}
+	}
+
+	for (auto& coEvent : coEvents) delete coEvent;
+}
+
 
 void Simon::render()
 {
@@ -386,33 +489,4 @@ void Simon::initAnim()
 	addAnimation(ANIM_SIM_IDLE_R);
 	addAnimation(ANIM_SIM_SITTING_L);
 	addAnimation(ANIM_SIM_SITTING_R);
-}
-
-void Simon::checkCollisionWithGround(DWORD dt, vector<LPGameObject> *bricks)
-{
-	vector<LPCollisionEvent> coEvents;
-	vector<LPCollisionEvent> coEventsResult;
-	coEvents.clear();
-
-	calcPotentialCollisions(bricks, coEvents);
-
-	// no collison
-	if (coEvents.empty()) {
-		y += dy;
-	}
-	else {
-		float min_tx, min_ty, nx = 0, ny;
-		filterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-		// block 
-		y += min_ty * dy + ny * 0.4f;
-
-		if (ny != 0) {
-			vy = 0;
-			isInGround = true;
-			if (currentState == SimonState::jumping)
-				standUp();
-		}
-	}
-
-	for (auto& coEvent : coEvents) delete coEvent;
 }

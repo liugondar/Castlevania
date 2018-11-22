@@ -2,10 +2,10 @@
 #include "StageManager.h"
 
 
-HeartItem::HeartItem()
+HeartItem::HeartItem(): Item()
 {
+	itemType = ItemType::heartItem;
 }
-
 
 HeartItem::~HeartItem()
 {
@@ -20,7 +20,7 @@ void HeartItem::render()
 {
 	if(currentState!=State::dead)animations[ANIM_HEART_ITEM_IDLE]->render(x, y);
 	else {
-		StageManager::getInstance()->removeGameObject(this);
+		StageManager::getInstance()->remove(this);
 	}
 }
 
