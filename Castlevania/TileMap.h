@@ -21,7 +21,7 @@ class TileMap
 public:
 	TileMap(LPCWSTR filePathData, int mapWidth, int mapHeight, int tileWidth, int tileHeight);
 	void loadTileMap(LPDIRECT3DTEXTURE9 texTileMap);
-	void draw(float x,float y);
+	void draw();
 
 
 	~TileMap();

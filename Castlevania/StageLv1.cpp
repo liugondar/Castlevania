@@ -19,11 +19,7 @@ StageLv1::~StageLv1()
 
 void StageLv1::render()
 {
-	auto game = Game::getInstance();
-	float camX, camY;
-	game->getCameraPosition(camX, camY);
-
-	tileMap->draw(camX, camY + 60);
+	tileMap->draw();
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
@@ -59,7 +55,6 @@ void StageLv1::update(DWORD dt)
 	float simX, simY;
 	simon->getPosition(simX, simY);
 	if (simX > 1500) {
-		delete simon;
 		StageManager::getInstance()->setStage(new StageLv2());
 	}
 }

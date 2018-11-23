@@ -72,8 +72,11 @@ void TileMap::loadTileMap(LPDIRECT3DTEXTURE9 texTileMap)
 }
 
 
-void TileMap::draw(float xCam, float yCam)
+void TileMap::draw()
 {
+	float xCam, yCam;
+	Game::getInstance()->getCameraPosition(xCam, yCam);
+
 	auto startColToDraw = static_cast<int>(xCam) / 32;
 	auto endColToDraw = static_cast<int>(xCam + SCREEN_WIDTH) / 32;
 	if (endColToDraw >= totalCol) endColToDraw = totalCol-1;
@@ -86,7 +89,7 @@ void TileMap::draw(float xCam, float yCam)
 			// get position x,y to draw sprite ( depend on camera  x and y )
 			// TODO: get position x  depend on yCam
 			const auto x = tileWidth * (j - startColToDraw) + xCam - static_cast<int>(xCam) % 32;
-			const auto y = tileHeight * i + yCam;
+			const auto y = tileHeight * i + yCam +60;
 
 			sprites->get(matrix[i][j])->draw(x, y);
 		}
