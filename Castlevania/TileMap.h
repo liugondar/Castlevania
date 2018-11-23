@@ -16,11 +16,11 @@ class TileMap
 	int tileWidth;
 	int tileHeight;
 	LPCWSTR dataPath;
-public:
 	vector<vector<int>> matrix;
 	SpriteManager * sprites;
+public:
 	TileMap(LPCWSTR filePathData, int mapWidth, int mapHeight, int tileWidth, int tileHeight);
-	void loadResources(LPDIRECT3DTEXTURE9 texTileMap);
+	void loadTileMap(LPDIRECT3DTEXTURE9 texTileMap);
 	void draw(float x,float y);
 
 

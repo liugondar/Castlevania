@@ -110,7 +110,7 @@ void StageLv1::loadContent()
 	const auto texMap = TextureManager::getInstance()->get(ID_TEX_BACKGROUND_LV1);
 
 	tileMap = new TileMap(MATRIX_LV1_FILE_PATH, 1536, 384, 32, 32);
-	tileMap->loadResources(texMap);
+	tileMap->loadTileMap(texMap);
 }
 
 void StageLv1::onKeyDown(int keyCode)

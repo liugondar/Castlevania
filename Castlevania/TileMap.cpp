@@ -21,7 +21,7 @@ TileMap::TileMap(const LPCWSTR filePathData,
 	totalCol = mapWidth / tileWidth;
 }
 
-void TileMap::loadResources(LPDIRECT3DTEXTURE9 texTileMap)
+void TileMap::loadTileMap(LPDIRECT3DTEXTURE9 texTileMap)
 {
 
 	D3DSURFACE_DESC surfaceDesc;
