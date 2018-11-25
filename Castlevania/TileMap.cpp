@@ -28,14 +28,14 @@ void TileMap::loadTileMap(LPDIRECT3DTEXTURE9 texTileMap)
 	const auto level = 0;
 	texTileMap->GetLevelDesc(level, &surfaceDesc);
 
-	const int totalRow = surfaceDesc.Height / tileHeight;
-	const int totalCol = surfaceDesc.Width / tileWidth;
+	const int totalTextureRow = surfaceDesc.Height / tileHeight;
+	const int totalTextureCol = surfaceDesc.Width / tileWidth;
 
 	auto idSprite = 1;
 
-	for (auto i = 0; i < totalRow; i++)
+	for (auto i = 0; i < totalTextureRow; i++)
 	{
-		for (auto j = 0; j < totalCol; j++)
+		for (auto j = 0; j < totalTextureCol; j++)
 		{
 			sprites->add(idSprite, tileWidth * j, tileHeight * i, tileWidth * (j + 1), 
 				tileHeight * (i + 1), texTileMap);
